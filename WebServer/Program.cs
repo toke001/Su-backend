@@ -73,6 +73,7 @@ namespace WebServer
             builder.Services.AddScoped(typeof(Interfaces.IRefs), typeof(Reposotory.RefsRepository));
             builder.Services.AddScoped(typeof(Interfaces.IReport), typeof(Reposotory.ReportRepository));
             builder.Services.AddScoped(typeof(Interfaces.IData), typeof(Reposotory.DataRepository));
+            builder.Services.AddScoped(typeof(Interfaces.ISeloForms), typeof(Reposotory.SeloFormsRepository));
             #endregion
             #region Swagger
             builder.Services.AddSwaggerGen(sw =>

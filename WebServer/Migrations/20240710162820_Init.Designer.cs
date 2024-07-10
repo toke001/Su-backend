@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebServer.Data;
@@ -11,9 +12,11 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    partial class WaterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240710162820_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -899,42 +902,6 @@ namespace WebServer.Migrations
                     b.ToTable("Report_Forms");
                 });
 
-            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("KodNaselPunk")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("KodOblast")
-                        .HasColumnType("text");
-
-                    b.Property<string>("KodRaiona")
-                        .HasColumnType("text");
-
-                    b.Property<string>("NameNaselPunk")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("SeloFormId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SeloFormId");
-
-                    b.ToTable("SeloDocuments");
-                });
-
             modelBuilder.Entity("WebServer.Models.SeloForms", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1599,15 +1566,6 @@ namespace WebServer.Migrations
                     b.Navigation("RefKato");
 
                     b.Navigation("RefStatus");
-                });
-
-            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
-                {
-                    b.HasOne("WebServer.Models.SeloForms", "SeloForm")
-                        .WithMany()
-                        .HasForeignKey("SeloFormId");
-
-                    b.Navigation("SeloForm");
                 });
 
             modelBuilder.Entity("WebServer.Models.Supplier", b =>

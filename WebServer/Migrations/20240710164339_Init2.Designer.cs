@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebServer.Data;
@@ -11,9 +12,11 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    partial class WaterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240710164339_Init2")]
+    partial class Init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -899,7 +902,7 @@ namespace WebServer.Migrations
                     b.ToTable("Report_Forms");
                 });
 
-            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
+            modelBuilder.Entity("WebServer.Models.SeloDoument", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -932,7 +935,7 @@ namespace WebServer.Migrations
 
                     b.HasIndex("SeloFormId");
 
-                    b.ToTable("SeloDocuments");
+                    b.ToTable("SeloDouments");
                 });
 
             modelBuilder.Entity("WebServer.Models.SeloForms", b =>
@@ -1601,7 +1604,7 @@ namespace WebServer.Migrations
                     b.Navigation("RefStatus");
                 });
 
-            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
+            modelBuilder.Entity("WebServer.Models.SeloDoument", b =>
                 {
                     b.HasOne("WebServer.Models.SeloForms", "SeloForm")
                         .WithMany()

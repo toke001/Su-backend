@@ -1,10 +1,10 @@
 ﻿namespace WebServer.Models
 {
-    public class SeloDoument
+    public class SeloDocument
     {
         public Guid Id { get; set; }
         public Guid? SeloFormId { get; set; }
-        public virtual SeloForms SeloForm { get; set; }
+        public virtual SeloForms? SeloForm { get; set; }
         public required string KodNaselPunk { get; set; }
         public string NameNaselPunk { get; set; }
         public string? KodOblast { get; set; }

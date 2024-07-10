@@ -8,8 +8,8 @@ namespace WebServer.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<SeloDoument, SeloDocumentDto>();
-            CreateMap<SeloDocumentDto, SeloDoument>();
+            CreateMap<SeloDocument, SeloDocumentDto>();
+            CreateMap<SeloDocumentDto, SeloDocument>();
 
             CreateMap<SeloForms, SeloFormsDto>();
             CreateMap<SeloFormsDto, SeloForms>();

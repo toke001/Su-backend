@@ -12,8 +12,8 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    [Migration("20240707114318_Init")]
-    partial class Init
+    [Migration("20240710164631_Init3")]
+    partial class Init3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -404,6 +404,68 @@ namespace WebServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Data");
+                });
+
+            modelBuilder.Entity("WebServer.Models.NetworkLengthInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdForm")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal?>("ProtyzhKanalSeteyIznos")
+                        .HasColumnType("numeric")
+                        .HasComment("Протяженность канализационных сетей, км (по состоянию на конец отчетного года) Износ, % гр.83/гр.82");
+
+                    b.Property<int?>("ProtyzhKanalSeteyObsh")
+                        .HasColumnType("integer")
+                        .HasComment("Протяженность канализационных сетей, км (по состоянию на конец отчетного года) общая, км");
+
+                    b.Property<int?>("ProtyzhKanalSeteyVtomIznos")
+                        .HasColumnType("integer")
+                        .HasComment("Протяженность канализационных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км");
+
+                    b.Property<int?>("ProtyzhNewSeteyVodoOtved")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км");
+
+                    b.Property<int?>("ProtyzhNewSeteyVodoSnab")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км");
+
+                    b.Property<int?>("ProtyzhRekonSeteyVodoOtved")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км");
+
+                    b.Property<int?>("ProtyzhRekonSeteyVodoSnab")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км");
+
+                    b.Property<int?>("ProtyzhRemontSeteyVodoOtved")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км");
+
+                    b.Property<int?>("ProtyzhRemontSeteyVodoSnab")
+                        .HasColumnType("integer")
+                        .HasComment("Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км");
+
+                    b.Property<decimal?>("ProtyzhVodoSeteyIznos")
+                        .HasColumnType("numeric")
+                        .HasComment("Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) Износ, % гр.80/гр.79");
+
+                    b.Property<int?>("ProtyzhVodoSeteyObsh")
+                        .HasColumnType("integer")
+                        .HasComment("Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) общая, км");
+
+                    b.Property<int?>("ProtyzhVodoSeteyVtomIznos")
+                        .HasColumnType("integer")
+                        .HasComment("Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NetworkLengthInfos");
                 });
 
             modelBuilder.Entity("WebServer.Models.Pipeline", b =>
@@ -840,6 +902,93 @@ namespace WebServer.Migrations
                     b.ToTable("Report_Forms");
                 });
 
+            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("KodNaselPunk")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("KodOblast")
+                        .HasColumnType("text");
+
+                    b.Property<string>("KodRaiona")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameNaselPunk")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("SeloFormId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeloFormId");
+
+                    b.ToTable("SeloDocuments");
+                });
+
+            modelBuilder.Entity("WebServer.Models.SeloForms", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("ObshKolChelNasPun")
+                        .HasColumnType("integer")
+                        .HasComment("Общая численность населения в сельских населенных пунктах (человек)");
+
+                    b.Property<int?>("ObshKolDomHoz")
+                        .HasColumnType("integer")
+                        .HasComment("Общее количество домохозяйств (квартир, ИЖД)");
+
+                    b.Property<int?>("ObshKolSelNasPun")
+                        .HasColumnType("integer")
+                        .HasComment("Общее количество сельских населенных пунктов в области(единиц)");
+
+                    b.Property<Guid?>("ObslPredpId")
+                        .HasColumnType("uuid")
+                        .HasComment("Обслуживающее предприятие");
+
+                    b.Property<Guid?>("SobstId")
+                        .HasColumnType("uuid")
+                        .HasComment("в чьей собственности находится");
+
+                    b.Property<bool?>("StatusOpor")
+                        .HasColumnType("boolean")
+                        .HasComment("Статус села опорное");
+
+                    b.Property<bool?>("StatusPrigran")
+                        .HasColumnType("boolean")
+                        .HasComment("Статус села приграничные");
+
+                    b.Property<string>("StatusProch")
+                        .HasColumnType("text")
+                        .HasComment("Статус села прочие");
+
+                    b.Property<bool?>("StatusSput")
+                        .HasColumnType("boolean")
+                        .HasComment("Статус села спутниковое");
+
+                    b.Property<DateTime?>("YearSystVodoSnab")
+                        .HasColumnType("timestamp with time zone")
+                        .HasComment("Год постройки системы водоснабжения");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SeloForms");
+                });
+
             modelBuilder.Entity("WebServer.Models.SettingsValue", b =>
                 {
                     b.Property<int>("Id")
@@ -883,6 +1032,52 @@ namespace WebServer.Migrations
                     b.HasIndex("KatoId");
 
                     b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("WebServer.Models.TariffInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdForm")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("TarifVodoOtvedBudzh")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоотведение бюджетным организациям, тенге/м3");
+
+                    b.Property<int?>("TarifVodoOtvedFizL")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоотведение физическим лицам/населению, тенге/м3");
+
+                    b.Property<int?>("TarifVodoOtvedUsred")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоотведение усредненный, тенге/м3");
+
+                    b.Property<int?>("TarifVodoOtvedYriL")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоотведение юридическим лицам, тенге/м3");
+
+                    b.Property<int?>("TarifVodoSnabBudzh")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоснабжение бюджетным организациям, тенге/м3");
+
+                    b.Property<int?>("TarifVodoSnabFizL")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоснабжение физическим лицам/населению, тенге/м3");
+
+                    b.Property<int?>("TarifVodoSnabUsred")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоснабжение усредненный, тенге/м3");
+
+                    b.Property<int?>("TarifVodoSnabYriL")
+                        .HasColumnType("integer")
+                        .HasComment("Уровень тарифов водоснабжение юридическим лицам, тенге/м3");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TariffInfos");
                 });
 
             modelBuilder.Entity("WebServer.Models.Tariff_Level", b =>
@@ -981,6 +1176,254 @@ namespace WebServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Universal_Refferences");
+                });
+
+            modelBuilder.Entity("WebServer.Models.WaterDisposalInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("CentrVodOtvedBydzhOrg")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение в том числе бюджетных организаций (единиц)");
+
+                    b.Property<decimal?>("CentrVodOtvedDostypKolChel")
+                        .HasColumnType("numeric")
+                        .HasComment("Централизованное водоотведение Доступ к централизованному водоотведению по численности населения, в % гр.48/гр.9 *100");
+
+                    b.Property<decimal?>("CentrVodOtvedDostypKolNasPunk")
+                        .HasColumnType("numeric")
+                        .HasComment("Централизованное водоотведение Доступ к централизованному водоотведению по количеству сельских населенных пунктов, в % гр.47/гр.8 *100");
+
+                    b.Property<int?>("CentrVodOtvedFactPostypStochVod")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedFactPostypStochVod1")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение В том числе За I квартал (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedFactPostypStochVod2")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение В том числе За II квартал (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedFactPostypStochVod3")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение В том числе За III квартал (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedFactPostypStochVod4")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение В том числе За IV квартал (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedFizLic")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение в том числе физических лиц/население (единиц)");
+
+                    b.Property<decimal?>("CentrVodOtvedIznos")
+                        .HasColumnType("numeric")
+                        .HasComment("Централизованное водоотведение Износ канализационно- очистных сооружений, в %");
+
+                    b.Property<int?>("CentrVodOtvedKolAbonent")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Кол-во абонентов, проживающих в данных сельских населенных пунктах (единиц)");
+
+                    b.Property<int?>("CentrVodOtvedKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)");
+
+                    b.Property<int?>("CentrVodOtvedKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Кол-во сельских населенных пунктов (единиц)");
+
+                    b.Property<int?>("CentrVodOtvedNalich")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Наличие канализационно- очистных сооружений (единиц)");
+
+                    b.Property<int?>("CentrVodOtvedNalichMechan")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение в том числе только с механичес-кой очисткой (еди-ниц)");
+
+                    b.Property<int?>("CentrVodOtvedNalichMechanBiolog")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение в том числе с механической и биологической очист-кой (еди-ниц)");
+
+                    b.Property<int?>("CentrVodOtvedObiemStochVod")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Объем сточных вод, соответствующей нормативной очистке по собственному лабораторному мониторингу за отчетный период (тыс.м3)");
+
+                    b.Property<int?>("CentrVodOtvedOhvatKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Числен-ность населе-ния, охваченного действующими канализационно- очистными сооружениями (человек)");
+
+                    b.Property<decimal?>("CentrVodOtvedOhvatNasel")
+                        .HasColumnType("numeric")
+                        .HasComment("Централизованное водоотведение Охват населения очисткой сточных вод, в % гр.60/гр.9*100");
+
+                    b.Property<int?>("CentrVodOtvedProizvod")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение Производительность канализационно-очистных сооружений (проектная)");
+
+                    b.Property<decimal?>("CentrVodOtvedUrovenNorm")
+                        .HasColumnType("numeric")
+                        .HasComment("Централизованное водоотведение Уровень нормативно- очищенной воды, % гр.67/гр.62 * 100");
+
+                    b.Property<int?>("CentrVodOtvedYriLic")
+                        .HasColumnType("integer")
+                        .HasComment("Централизованное водоотведение в том числе юридических лиц (единиц)");
+
+                    b.Property<int?>("DecentrVodoOtvedKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Децентрализованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)");
+
+                    b.Property<int?>("DecentrVodoOtvedKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Децентрализованное водоотведение Кол-во сельских населенных пунктов (единиц)");
+
+                    b.Property<Guid>("IdForm")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WaterDisposalInfos");
+                });
+
+            modelBuilder.Entity("WebServer.Models.WaterSupplyInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("CentrVodoIndivPriborUchVodyASYE")
+                        .HasColumnType("integer")
+                        .HasComment("в том числе с дистанционной передачей данных в АСУЭ обслуживающего предприятия (единиц)");
+
+                    b.Property<decimal?>("CentrVodoIndivPriborUchVodyOhvat")
+                        .HasColumnType("numeric")
+                        .HasComment("Охват индивидуальными приборами учета воды, % гр.27/гр. 23*100");
+
+                    b.Property<int?>("CentrVodoIndivPriborUchVodyVsego")
+                        .HasColumnType("integer")
+                        .HasComment("Всего установлено индивидуальных приборов учета воды по состоянию на конец отчетного года (единиц)");
+
+                    b.Property<int?>("CentrVodoSnabBudzhOrg")
+                        .HasColumnType("integer")
+                        .HasComment("в том числе бюджетных организаций (единиц)");
+
+                    b.Property<int?>("CentrVodoSnabFizLic")
+                        .HasColumnType("integer")
+                        .HasComment("в том числе физических лиц/население (единиц)");
+
+                    b.Property<int?>("CentrVodoSnabKolAbon")
+                        .HasColumnType("integer")
+                        .HasComment("Кол-во абонентов, охваченных централизованным водоснабжением (единиц)");
+
+                    b.Property<int?>("CentrVodoSnabKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Численность населения, проживающего в данных сельских населенных пунктах (человек)");
+
+                    b.Property<int?>("CentrVodoSnabKolNasPun")
+                        .HasColumnType("integer")
+                        .HasComment("Кол-во сельских населенных пунктов (единиц)");
+
+                    b.Property<decimal?>("CentrVodoSnabObesKolChel")
+                        .HasColumnType("numeric")
+                        .HasComment("Обеспеченность централизованным водоснабжением по численности населения, % гр.20/гр.9 *100");
+
+                    b.Property<decimal?>("CentrVodoSnabObesKolNasPunk")
+                        .HasColumnType("numeric")
+                        .HasComment("Обеспеченность централизованным водоснабжением по количеству сельских населенных пунктов, % гр.19/гр.8 *100");
+
+                    b.Property<int?>("CentrVodoSnabYriLic")
+                        .HasColumnType("integer")
+                        .HasComment("в том числе юридических лиц (единиц)");
+
+                    b.Property<int?>("DosVodoSnabKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Доступ населения к услугам водоснабжения Численность населения, проживающего в данных сельских населенных пунктах (человек)");
+
+                    b.Property<int?>("DosVodoSnabKolPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Доступ населения к услугам водоснабжения Количество сельских населенных пунктов (единиц)");
+
+                    b.Property<decimal?>("DosVodoSnabPercent")
+                        .HasColumnType("numeric")
+                        .HasComment("Доступ населения к услугам водоснабжения, %");
+
+                    b.Property<Guid>("IdForm")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("KbmKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение КБМ Численность населения, проживающего в сельских населенных пунктах, где установлены КБМ (человек)");
+
+                    b.Property<int?>("KbmKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение КБМ Количество сельских населенных пунктов, где установлено КБМ");
+
+                    b.Property<decimal?>("KbmObespNasel")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение КБМ Обеспеченность населения услугами КБМ, % гр.32/гр.9*100");
+
+                    b.Property<int?>("NeCtentrVodoKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Количество сельских населенных пунктов (единиц)");
+
+                    b.Property<int?>("PrivVodaKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Привозная вода Численность населения, проживающего в сельских населенных пунктах, где используют привозную воду");
+
+                    b.Property<int?>("PrivVodaKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Привозная вода Количество сельских населенных пунктов, жители которых используют привозную воду");
+
+                    b.Property<decimal?>("PrivVodaObespNasel")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение Привозная вода Обеспеченность населения привозной водой, % гр.38/гр.9*100");
+
+                    b.Property<int?>("PrvKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение ПРВ Численность населения, проживающего в сельских населенных пунктах, где установлены ПРВ (человек)");
+
+                    b.Property<int?>("PrvKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение ПРВ Количество сельских населенных пунктов, где установлено ПРВ");
+
+                    b.Property<decimal?>("PrvObespNasel")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение ПРВ Обеспеченность населения услугами  ПРВ, % гр.35/гр.9*100");
+
+                    b.Property<decimal?>("SkvazhDolyaNaselOtkaz")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Доля населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа), гр.44/гр.9*100");
+
+                    b.Property<decimal?>("SkvazhDolyaSelOtkaz")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Доля сел, жители которых отказались от  строительства ЦВ, установки КБМ и ПРВ, %, гр.43/гр.8*100");
+
+                    b.Property<int?>("SkvazhKolChel")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Численность населения, проживающего в сельских населенных пунктах, где используют  воду из скважин и колодцев");
+
+                    b.Property<int?>("SkvazhKolChelOtkaz")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Численность населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)");
+
+                    b.Property<int?>("SkvazhKolSelsNasPunk")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых используют воду из скважин и колодцов");
+
+                    b.Property<int?>("SkvazhKolSelsNasPunkOtkaz")
+                        .HasColumnType("integer")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)");
+
+                    b.Property<decimal?>("SkvazhObespNasel")
+                        .HasColumnType("numeric")
+                        .HasComment("Нецентрализованное водоснабжение Скважины, колодцы Обеспеченность  привозной водой, % гр.41/гр.9*100");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WaterSupplyInfos");
                 });
 
             modelBuilder.Entity("Business.Entities.Consumers", b =>
@@ -1159,6 +1602,15 @@ namespace WebServer.Migrations
                     b.Navigation("RefKato");
 
                     b.Navigation("RefStatus");
+                });
+
+            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
+                {
+                    b.HasOne("WebServer.Models.SeloForms", "SeloForm")
+                        .WithMany()
+                        .HasForeignKey("SeloFormId");
+
+                    b.Navigation("SeloForm");
                 });
 
             modelBuilder.Entity("WebServer.Models.Supplier", b =>

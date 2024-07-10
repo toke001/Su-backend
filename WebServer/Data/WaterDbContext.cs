@@ -34,5 +34,11 @@ namespace WebServer.Data
         public DbSet<Models.Data> Data { get; set; }
         public DbSet<Models.ColumnLayout> ColumnLayouts { get; set; }
         public DbSet<Models.ReportSupplier> ReportSuppliers { get; set; }
+        public DbSet<SeloDocument> SeloDocuments { get; set; }
+        public DbSet<SeloForms> SeloForms { get; set; }
+        public DbSet<WaterSupplyInfo> WaterSupplyInfos { get; set; }
+        public DbSet<WaterDisposalInfo> WaterDisposalInfos { get; set; }
+        public DbSet<TariffInfo> TariffInfos { get; set; }
+        public DbSet<NetworkLengthInfo> NetworkLengthInfos { get; set; }
     }
 }
