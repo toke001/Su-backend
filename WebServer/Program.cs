@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using WebServer.Data;
@@ -102,6 +103,9 @@ namespace WebServer
                         new string[]{ }
                     }
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                sw.IncludeXmlComments(xmlPath);
             });
             #endregion
             var app = builder.Build();

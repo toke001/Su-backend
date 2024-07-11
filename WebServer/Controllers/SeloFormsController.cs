@@ -1,5 +1,7 @@
-﻿using Humanizer;
+﻿using AutoMapper;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
+using WebServer.Dtos;
 using WebServer.Interfaces;
 using WebServer.Models;
 
@@ -10,14 +12,20 @@ namespace WebServer.Controllers
     public class SeloFormsController : ControllerBase
     {
         private readonly ISeloForms _repo;
-        public SeloFormsController(ISeloForms repo)
+        private readonly IMapper _mapper;
+        public SeloFormsController(ISeloForms repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-
+        /// <summary>
+        /// Документ по селу
+        /// </summary>
+        /// <param name="katoKod"></param>
+        /// <returns>Документ по селу</returns>
         [HttpGet("GetSeloDocument")]
-        public async Task<ActionResult> GetSeloDocument(string katoKod)
+        public async Task<ActionResult<List<SeloDocument>>> GetSeloDocument(string katoKod)
         {
             try
             {
@@ -26,21 +34,27 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                //var dto = _mapper.Map<YourDto>(entity);
-                return Ok(entity);
+                var dtos = _mapper.Map<IEnumerable<SeloDocument>>(entity);
+                return Ok(dtos);
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }            
         }
 
+        /// <summary>
+        /// Добавление документа по селу
+        /// </summary>
+        /// <param name="seloDocumentDto"></param>
+        /// <returns></returns>
         [HttpPost("AddSeloDocument")]
-        public async Task<ActionResult> AddSeloDocument(SeloDocument seloDoument)
+        public async Task<ActionResult> AddSeloDocument(SeloDocumentDto seloDocumentDto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddSeloDocument(seloDoument)); 
+                var entity = _mapper.Map<SeloDocument>(seloDocumentDto);
+                var dto = _mapper.Map<SeloDocumentDto>(await _repo.AddSeloDocument(entity));
+                return Ok(dto); 
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch(Exception ex)
@@ -49,6 +63,12 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Получение Формы по коду КАТО и году
+        /// </summary>
+        /// <param name="kodNaselPunk"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         [HttpGet("GetSeloFormsByKodYear")]
         public async Task<ActionResult> GetSeloFormsByKodYear(string kodNaselPunk, int year)
         {
@@ -59,8 +79,8 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                //var dto = _mapper.Map<YourDto>(entity);
-                return Ok(entity);
+                var dto = _mapper.Map<SeloFormsDto>(entity);
+                return Ok(dto);
             }
             catch (Exception ex)
             {
@@ -68,13 +88,19 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Добавление формы 
+        /// </summary>
+        /// <param name="idDoc"></param>
+        /// <param name="seloFormsDto"></param>
+        /// <returns></returns>
         [HttpPost("AddSeloForms")]
-        public async Task<ActionResult> AddSeloForms(Guid idDoc, SeloForms seloForms)
+        public async Task<ActionResult> AddSeloForms(Guid idDoc, SeloFormsDto seloFormsDto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddSeloForms(idDoc, seloForms));
+                var entity = _mapper.Map<SeloForms>(seloFormsDto);
+                return Ok(await _repo.AddSeloForms(idDoc, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -83,6 +109,11 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Получение водоснабжения
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <returns></returns>
         [HttpGet("GetWaterSupply")]
         public async Task<ActionResult> GetWaterSupply(Guid idForm)
         {
@@ -93,8 +124,8 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                //var dto = _mapper.Map<YourDto>(entity);
-                return Ok(entity);
+                var dto = _mapper.Map<WaterSupplyInfoDto>(entity);
+                return Ok(dto);
             }
             catch (Exception ex)
             {
@@ -102,13 +133,19 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Добавление водоснабжения
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("AddWaterSupply")]
-        public async Task<ActionResult> AddWaterSupply(Guid idForm, WaterSupplyInfo waterSupplyInfo)
+        public async Task<ActionResult> AddWaterSupply(Guid idForm, WaterSupplyInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddWaterSupply(idForm, waterSupplyInfo));
+                var entity = _mapper.Map<WaterSupplyInfo>(dto);
+                return Ok(await _repo.AddWaterSupply(idForm, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -117,13 +154,18 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Обновление водоснабжения
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("UpdateWaterSupply")]
-        public async Task<ActionResult> UpdateWaterSupply(WaterSupplyInfo waterSupplyInfo)
+        public async Task<ActionResult> UpdateWaterSupply(WaterSupplyInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.UpdateWaterSupply(waterSupplyInfo));
+                var entity = _mapper.Map<WaterSupplyInfo>(dto);
+                return Ok(await _repo.UpdateWaterSupply(entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -132,6 +174,11 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Получение Водоотведения
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <returns></returns>
         [HttpGet("GetWaterDisposal")]
         public async Task<ActionResult> GetWaterDisposal(Guid idForm)
         {
@@ -142,8 +189,8 @@ namespace WebServer.Controllers
                 {
                     return NotFound();
                 }
-                //var dto = _mapper.Map<YourDto>(entity);
-                return Ok(entity);
+                var dto = _mapper.Map<WaterDisposalInfoDto>(entity);
+                return Ok(dto);
             }
             catch (Exception ex)
             {
@@ -151,13 +198,19 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Добавление водоотведения
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("AddWaterDisposal")]
-        public async Task<ActionResult> AddWaterDisposal(Guid idForm, WaterDisposalInfo waterDisposalInfo)
+        public async Task<ActionResult> AddWaterDisposal(Guid idForm, WaterDisposalInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddWaterDisposal(idForm, waterDisposalInfo));
+                var entity = _mapper.Map<WaterDisposalInfo>(dto);
+                return Ok(await _repo.AddWaterDisposal(idForm, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -166,13 +219,18 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Обновление водоотведения
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("UpdateWaterDisposal")]
-        public async Task<ActionResult> UpdateWaterDisposal(WaterDisposalInfo waterDisposalInfo)
+        public async Task<ActionResult> UpdateWaterDisposal(WaterDisposalInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.UpdateWaterDisposal(waterDisposalInfo));
+                var entity = _mapper.Map<WaterDisposalInfo>(dto);
+                return Ok(await _repo.UpdateWaterDisposal(entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -181,6 +239,11 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Получение тарифа
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <returns></returns>
         [HttpGet("GetTarifInfo")]
         public async Task<ActionResult> GetTarifInfo(Guid idForm)
         {
@@ -199,14 +262,19 @@ namespace WebServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Добавление тарифа
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("AddTarifInfo")]
-        public async Task<ActionResult> AddTarifInfo(Guid idForm, TariffInfo tariffInfo)
+        public async Task<ActionResult> AddTarifInfo(Guid idForm, TariffInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddTarifInfo(idForm, tariffInfo));
+                var entity = _mapper.Map<TariffInfo>(dto);
+                return Ok(await _repo.AddTarifInfo(idForm, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -215,13 +283,18 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Обновление тарифа
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("UpdateTariffInfo")]
-        public async Task<ActionResult> UpdateTariffInfo(TariffInfo tariffInfo)
+        public async Task<ActionResult> UpdateTariffInfo(TariffInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.UpdateTariffInfo(tariffInfo));
+                var entity = _mapper.Map<TariffInfo>(dto);
+                return Ok(await _repo.UpdateTariffInfo(entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -230,6 +303,11 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Получение Протяженность сетей
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <returns></returns>
         [HttpGet("GetNetworkLength")]
         public async Task<ActionResult> GetNetworkLength(Guid idForm)
         {
@@ -249,13 +327,19 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Добавление Протяженность сетей
+        /// </summary>
+        /// <param name="idForm"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("AddNetworkLength")]
-        public async Task<ActionResult> AddNetworkLength(Guid idForm, NetworkLengthInfo networkLengthInfo)
+        public async Task<ActionResult> AddNetworkLength(Guid idForm, NetworkLengthInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.AddNetworkLength(idForm, networkLengthInfo));
+                var entity = _mapper.Map<NetworkLengthInfo>(dto);
+                return Ok(await _repo.AddNetworkLength(idForm, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -264,13 +348,18 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Обновление Протяженность сетей
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost("UpdateNetworkLength")]
-        public async Task<ActionResult> UpdateNetworkLength(NetworkLengthInfo networkLengthInfo)
+        public async Task<ActionResult> UpdateNetworkLength(NetworkLengthInfoDto dto)
         {
             try
             {
-                //var entity = _mapper.Map<YourEntity>(dto);
-                return Ok(await _repo.UpdateNetworkLength(networkLengthInfo));
+                var entity = _mapper.Map<NetworkLengthInfo>(dto);
+                return Ok(await _repo.UpdateNetworkLength(entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)

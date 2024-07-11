@@ -26,9 +26,9 @@ namespace WebServer.Reposotory
             _dbSetNetwork = _context.Set<NetworkLengthInfo>();
         }
 
-        public async Task<SeloDocument> GetSeloDocument(string katoKod)
+        public async Task<List<SeloDocument>> GetSeloDocument(string katoKod)
         {
-            return await _dbSetDoc.FirstOrDefaultAsync(x => x.KodNaselPunk == katoKod);
+            return await _dbSetDoc.Where(x => x.KodNaselPunk == katoKod).ToListAsync();
         }
 
         public async Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument)

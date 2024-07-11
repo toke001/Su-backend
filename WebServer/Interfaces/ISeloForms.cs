@@ -4,7 +4,7 @@ namespace WebServer.Interfaces
 {
     public interface ISeloForms
     {
-        Task<SeloDocument> GetSeloDocument(string katoKod);
+        Task<List<SeloDocument>> GetSeloDocument(string katoKod);
         Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument);
         Task<SeloForms> GetSeloFormsByKodYear(string kodNaselPunk, int year);
         Task<SeloForms> AddSeloForms(Guid idDoc, SeloForms seloForms);
