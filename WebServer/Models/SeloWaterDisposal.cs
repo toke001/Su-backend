@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebServer.Models
 {
     // Водоотведение
-    public class WaterDisposalInfo
+    public class SeloWaterDisposal
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

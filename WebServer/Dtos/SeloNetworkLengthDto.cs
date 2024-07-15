@@ -1,6 +1,6 @@
 ﻿namespace WebServer.Dtos
 {
-    public class NetworkLengthInfoDto
+    public class SeloNetworkLengthDto
     {
         public Guid Id { get; set; }
         public Guid IdForm { get; set; }

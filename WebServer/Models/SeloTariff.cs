@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebServer.Models
 {
     // Тарифы
-    public class TariffInfo
+    public class SeloTariff
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

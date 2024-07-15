@@ -7,7 +7,6 @@ namespace WebServer.Dtos
         public Guid Id { get; set; }
         public Guid? SeloFormId { get; set; }
         public required string KodNaselPunk { get; set; }
-        public string NameNaselPunk { get; set; }
         public string? KodOblastPunk { get; set; }
         public string? KodRaiona { get; set; }
         public int? UserId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace WebServer.Dtos
 {
-    public class WaterSupplyInfoDto
+    public class SeloWaterSupplyDto
     {
         /// <summary>
         /// ИД Формы WaterSupplyFormID

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OfficeOpenXml;
 using System.Reflection;
 using System.Security.Principal;
 using System.Text;
@@ -19,6 +20,8 @@ namespace WebServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            // Установка лицензионного контекста для EPPlus
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             var configuration = builder.Configuration;
             var environment = builder.Environment;
@@ -75,6 +78,8 @@ namespace WebServer
             builder.Services.AddScoped(typeof(Interfaces.IReport), typeof(Reposotory.ReportRepository));
             builder.Services.AddScoped(typeof(Interfaces.IData), typeof(Reposotory.DataRepository));
             builder.Services.AddScoped(typeof(Interfaces.ISeloForms), typeof(Reposotory.SeloFormsRepository));
+            builder.Services.AddScoped(typeof(Interfaces.ICityForms), typeof(Reposotory.CityFormsRepository));
+            builder.Services.AddScoped(typeof(Interfaces.ISeloExportImport), typeof(Reposotory.SeloExportImportRepository));
             #endregion
             #region Swagger
             builder.Services.AddSwaggerGen(sw =>

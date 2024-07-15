@@ -8,23 +8,33 @@ namespace WebServer.Profiles
     {
         public MappingProfile()
         {
+            //Selo
             CreateMap<SeloDocument, SeloDocumentDto>();
             CreateMap<SeloDocumentDto, SeloDocument>();
 
             CreateMap<SeloForms, SeloFormsDto>();
             CreateMap<SeloFormsDto, SeloForms>();
 
-            CreateMap<WaterSupplyInfo, WaterSupplyInfoDto>();
-            CreateMap<WaterSupplyInfoDto, WaterSupplyInfo>();
+            CreateMap<SeloWaterSupply, SeloWaterSupplyDto>();
+            CreateMap<SeloWaterSupplyDto, SeloWaterSupply>();
 
-            CreateMap<WaterDisposalInfo, WaterDisposalInfoDto>();
-            CreateMap<WaterDisposalInfoDto, WaterDisposalInfo>();
+            CreateMap<SeloWaterDisposal, SeloWaterDisposalDto>();
+            CreateMap<SeloWaterDisposalDto, SeloWaterDisposal>();
 
-            CreateMap<TariffInfo, TariffInfoDto>();
-            CreateMap<TariffInfoDto, TariffInfo>();
+            CreateMap<SeloTariff, SeloTariffDto>();
+            CreateMap<SeloTariffDto, SeloTariff>();
 
-            CreateMap<NetworkLengthInfo, NetworkLengthInfoDto>();
-            CreateMap<NetworkLengthInfoDto, NetworkLengthInfo>();
+            CreateMap<SeloNetworkLength, SeloNetworkLengthDto>();
+            CreateMap<SeloNetworkLengthDto, SeloNetworkLength>();
+
+            //City
+            CreateMap<CityDocumentDto, CityDocument>();
+            CreateMap<CityFormsDto, CityForms>();
+            CreateMap<CityForms, CityFormsDto>();
+            CreateMap<CityWaterDisposalDto, CityWaterDisposal>();
+            CreateMap<CityWaterSupplyDto, CityWaterSupply>();
+            CreateMap<CityTarifDto, CityTarif>();
+            CreateMap<CityNetworkLengthDto, CityNetworkLength>();
         }
     }
 }

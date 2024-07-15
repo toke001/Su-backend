@@ -74,6 +74,130 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CityForms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    TotalCountCityOblast = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество - городов в области (единиц)"),
+                    TotalCountDomHoz = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество - домохозяйств (кв, ИЖД)"),
+                    TotalCountChel = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество - проживающих в городских населенных пунктах (человек)"),
+                    ObslPredpId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Обслуживающее предприятие")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityForms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityNetworkLengths",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
+                    VodoProvodLengthTotal = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) - общая, км"),
+                    VodoProvodLengthIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) - в том числе изношенных, км"),
+                    VodoProvodIznosPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) - Износ, % гр.59/гр.58"),
+                    KanalizLengthTotal = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) - общая, км"),
+                    KanalizLengthIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) - в том числе изношенных, км"),
+                    KanalizIznosPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) - Износ, % гр.62/гр.61"),
+                    ObshNewSetiVodo = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км"),
+                    ObshNewSetiKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км"),
+                    ObshZamenSetiVodo = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км"),
+                    ObshZamenSetiKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км"),
+                    ObshRemontSetiVodo = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км"),
+                    ObshRemontSetiKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityNetworkLengths", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityTarifs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
+                    VodoSnabUsrednen = table.Column<int>(type: "integer", nullable: true, comment: "водоснабжение усредненный, тенге/м3"),
+                    VodoSnabFizLic = table.Column<int>(type: "integer", nullable: true, comment: "водоснабжение физическим лицам/населению, тенге/м3"),
+                    VodoSnabYriLic = table.Column<int>(type: "integer", nullable: true, comment: "водоснабжение юридическим лицам, тенге/м3"),
+                    VodoSnabBydzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "водоснабжение бюджетным организациям, тенге/м3"),
+                    VodoOtvedUsred = table.Column<int>(type: "integer", nullable: true, comment: "водоотведение - усредненный, тенге/м3"),
+                    VodoOtvedFizLic = table.Column<int>(type: "integer", nullable: true, comment: "водоотведение - физическим лицам/населению, тенге/м3"),
+                    VodoOtvedYriLic = table.Column<int>(type: "integer", nullable: true, comment: "водоотведение - юридическим лицам, тенге/м3"),
+                    VodoOtvedBydzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "водоотведение - бюджетным организациям, тенге/м3")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityTarifs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityWaterDisposals",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
+                    KolAbonent = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоотведением (единиц)"),
+                    KolFizLic = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоотведением (единиц) - физических лиц/население (единиц)"),
+                    KolYriLic = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоотведением (единиц) - юридических лиц (единиц)"),
+                    KolBydzhetOrg = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоотведением (единиц) - бюджетных организаций (единиц)"),
+                    KolChelOhvatCentrVodo = table.Column<int>(type: "integer", nullable: true, comment: "Численность населения, охваченного централизованным водоотведением, (человек)"),
+                    DostypCentrVodo = table.Column<decimal>(type: "numeric", nullable: true, comment: "Доступ к централизованному водоотведению, в % гр.31/гр.6*100"),
+                    KolichKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Наличие канализационно-очистных сооружений, (единиц)"),
+                    KolichKanalizMechan = table.Column<int>(type: "integer", nullable: true, comment: "Наличие канализационно-очистных сооружений, (единиц) - только с механичес-кой очисткой (еди-ниц)"),
+                    KolichKanalizMechanBiolog = table.Column<int>(type: "integer", nullable: true, comment: "Наличие канализационно-очистных сооружений, (единиц) - с механической и биологической очист-кой (еди-ниц)"),
+                    ProizvodKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Производительность канализационно-очистных сооружений (проектная)"),
+                    IznosKanaliz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Износ канализационно-очистных сооружений, в %"),
+                    KolChelKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Численность населения, охваченного действующими канализационно-очистными сооружениями, (человек)"),
+                    OhvatChelKanaliz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Охват населения очисткой сточных вод, в % гр.38/гр.6*100"),
+                    FactPostypKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3)"),
+                    FactPostypKanaliz1kv = table.Column<int>(type: "integer", nullable: true, comment: "Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3) - За I квартал (тыс.м3)"),
+                    FactPostypKanaliz2kv = table.Column<int>(type: "integer", nullable: true, comment: "Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3) - За II квартал (тыс.м3)"),
+                    FactPostypKanaliz3kv = table.Column<int>(type: "integer", nullable: true, comment: "Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3) - За III квартал (тыс.м3)"),
+                    FactPostypKanaliz4kv = table.Column<int>(type: "integer", nullable: true, comment: "Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3) - За IV квартал (тыс.м3)"),
+                    ObiemKanalizNormOchist = table.Column<int>(type: "integer", nullable: true, comment: "Объем сточных вод, соответствующей нормативной очистке по собственному лабораторному мониторингу за отчетный период (тыс.м3)"),
+                    UrovenNormOchishVody = table.Column<int>(type: "integer", nullable: true, comment: "Уровень нормативно- очищенной воды, % гр.45/гр.40 * 100"),
+                    AutoProccesSetKanaliz = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоотведения и наличие централизованной системы контроля и управления (SCADA) - Сети канализации (0 или 1)"),
+                    AutoProccesKanalizNasos = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоотведения и наличие централизованной системы контроля и управления (SCADA) - Канализационные насосные станции (0 или 1)"),
+                    AutoProccesKanalizSooruzh = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоотведения и наличие централизованной системы контроля и управления (SCADA) - Канализационно-очистные сооружения (0 или 1)")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityWaterDisposals", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityWaterSupplies",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
+                    KolichAbonent = table.Column<int>(type: "integer", nullable: true, comment: "Количество абонентов, охваченных централизованным водоснабжением (единиц)"),
+                    KolFizLic = table.Column<int>(type: "integer", nullable: true, comment: "физических лиц/население (единиц)"),
+                    KolYriLic = table.Column<int>(type: "integer", nullable: true, comment: "юридических лиц (единиц)"),
+                    KolBydzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "бюджетных организаций (единиц)"),
+                    KolChelDostyp = table.Column<int>(type: "integer", nullable: true, comment: "Количество населения имеющих доступ к  централизованному водоснабжению (человек)"),
+                    ObespechCentrlVodo = table.Column<decimal>(type: "numeric", nullable: true, comment: "Обеспеченность централизованным водоснабжением, в % гр.13/гр.6 *100"),
+                    IndivUchetVodyVsego = table.Column<int>(type: "integer", nullable: true, comment: "Охват индивидуальными приборами учета воды по состоянию на конец отчетного года - всего с нарастающим (единиц)"),
+                    IndivUchetVodyDistance = table.Column<int>(type: "integer", nullable: true, comment: "Охват индивидуальными приборами учета воды по состоянию на конец отчетного года - в том числе с дистанционной передачей данных в АСУЭ обслуживающего предприятия (единиц)"),
+                    IndivUchetVodyPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Охват индивидуальными приборами учета воды по состоянию на конец отчетного года - охват в %, гр.15/гр. 9*100"),
+                    ObshePodlezhashKolZdan = table.Column<int>(type: "integer", nullable: true, comment: "Охват общедомовыми приборами учета воды по состоянию на конец отчетного года - Количество зданий и сооружений, подлежащих к установке общедомовых приборов учета (единиц)"),
+                    ObsheUstanKolZdan = table.Column<int>(type: "integer", nullable: true, comment: "Охват общедомовыми приборами учета воды по состоянию на конец отчетного года - Количество зданий и сооружений с установленными общедомовыми приборами учета (единиц)"),
+                    ObsheUstanPriborKol = table.Column<int>(type: "integer", nullable: true, comment: "Охват общедомовыми приборами учета воды по состоянию на конец отчетного года - Количество установленных общедомовых приборов учета (единиц)"),
+                    ObsheUstanDistanceKol = table.Column<int>(type: "integer", nullable: true, comment: "Охват общедомовыми приборами учета воды по состоянию на конец отчетного года - в том числе с дистанционной передачей данных в АСУЭ обслуживающего предприятия (единиц)"),
+                    ObsheOhvatPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Охват общедомовыми приборами учета воды по состоянию на конец отчетного года - охват в %, гр.19/гр. 18*100"),
+                    AutoProccesVodoZabor = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоснабжения и наличие централизованной системы контроля и управления (SCADA) - Водозабор (0 или 1)"),
+                    AutoProccesVodoPodgot = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоснабжения и наличие централизованной системы контроля и управления (SCADA) - Водоподготовка (0 или 1)"),
+                    AutoProccesNasosStanc = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоснабжения и наличие централизованной системы контроля и управления (SCADA) - Насосные станции (0 или 1)"),
+                    AutoProccesSetVodosnab = table.Column<int>(type: "integer", nullable: true, comment: "Автоматизация производственных процессов водоснабжения и наличие централизованной системы контроля и управления (SCADA) - Сети водоснабжения (0 или 1)")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityWaterSupplies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Data",
                 columns: table => new
                 {
@@ -93,30 +217,6 @@ namespace WebServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Data", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NetworkLengthInfos",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProtyzhVodoSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) общая, км"),
-                    ProtyzhVodoSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
-                    ProtyzhVodoSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) Износ, % гр.80/гр.79"),
-                    ProtyzhKanalSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) общая, км"),
-                    ProtyzhKanalSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
-                    ProtyzhKanalSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) Износ, % гр.83/гр.82"),
-                    ProtyzhNewSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhNewSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км"),
-                    ProtyzhRekonSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhRekonSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км"),
-                    ProtyzhRemontSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhRemontSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NetworkLengthInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,6 +298,22 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ResponseCodes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NameCode = table.Column<string>(type: "text", nullable: false),
+                    DescriptionCode = table.Column<string>(type: "text", nullable: false),
+                    BeginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResponseCodes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SeloForms",
                 columns: table => new
                 {
@@ -219,21 +335,31 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SettingsValues",
+                name: "SeloNetworkLengths",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Key = table.Column<string>(type: "text", nullable: false),
-                    Value = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdForm = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProtyzhVodoSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) общая, км"),
+                    ProtyzhVodoSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
+                    ProtyzhVodoSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) Износ, % гр.80/гр.79"),
+                    ProtyzhKanalSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) общая, км"),
+                    ProtyzhKanalSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
+                    ProtyzhKanalSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) Износ, % гр.83/гр.82"),
+                    ProtyzhNewSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhNewSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км"),
+                    ProtyzhRekonSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhRekonSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км"),
+                    ProtyzhRemontSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhRemontSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SettingsValues", x => x.Id);
+                    table.PrimaryKey("PK_SeloNetworkLengths", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TariffInfos",
+                name: "SeloTariffs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -249,31 +375,11 @@ namespace WebServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TariffInfos", x => x.Id);
+                    table.PrimaryKey("PK_SeloTariffs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Universal_Refferences",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ParentId = table.Column<Guid>(type: "uuid", nullable: true, comment: "ключ на ИД (своего типа или стороннего)"),
-                    Code = table.Column<string>(type: "text", nullable: false, comment: "Код*"),
-                    Type = table.Column<string>(type: "text", nullable: false, comment: "Тип*"),
-                    BusinessDecription = table.Column<string>(type: "text", nullable: true, comment: "Бизнес описание"),
-                    NameKk = table.Column<string>(type: "text", nullable: true, comment: "Наименование на каз"),
-                    NameRu = table.Column<string>(type: "text", nullable: true, comment: "Наименование на рус"),
-                    DescriptionKk = table.Column<string>(type: "text", nullable: true, comment: "Пояснение на каз"),
-                    DescriptionRu = table.Column<string>(type: "text", nullable: true, comment: "Пояснение на рус"),
-                    IsDel = table.Column<bool>(type: "boolean", nullable: false, comment: "Удален")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Universal_Refferences", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WaterDisposalInfos",
+                name: "SeloWaterDisposals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -305,11 +411,11 @@ namespace WebServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WaterDisposalInfos", x => x.Id);
+                    table.PrimaryKey("PK_SeloWaterDisposals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WaterSupplyInfos",
+                name: "SeloWaterSupplies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -348,7 +454,41 @@ namespace WebServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WaterSupplyInfos", x => x.Id);
+                    table.PrimaryKey("PK_SeloWaterSupplies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SettingsValues",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Key = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SettingsValues", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Universal_Refferences",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ParentId = table.Column<Guid>(type: "uuid", nullable: true, comment: "ключ на ИД (своего типа или стороннего)"),
+                    Code = table.Column<string>(type: "text", nullable: false, comment: "Код*"),
+                    Type = table.Column<string>(type: "text", nullable: false, comment: "Тип*"),
+                    BusinessDecription = table.Column<string>(type: "text", nullable: true, comment: "Бизнес описание"),
+                    NameKk = table.Column<string>(type: "text", nullable: true, comment: "Наименование на каз"),
+                    NameRu = table.Column<string>(type: "text", nullable: true, comment: "Наименование на рус"),
+                    DescriptionKk = table.Column<string>(type: "text", nullable: true, comment: "Пояснение на каз"),
+                    DescriptionRu = table.Column<string>(type: "text", nullable: true, comment: "Пояснение на рус"),
+                    IsDel = table.Column<bool>(type: "boolean", nullable: false, comment: "Удален")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Universal_Refferences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -395,6 +535,29 @@ namespace WebServer.Migrations
                         principalTable: "ApprovedForms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityDocuments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CityFormId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Главная форма город"),
+                    KodNaselPunk = table.Column<string>(type: "text", nullable: false, comment: "Код населенного пункта (КАТО)"),
+                    NameNaselPunk = table.Column<string>(type: "text", nullable: true, comment: "Наименование населенного пункта"),
+                    KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
+                    KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityDocuments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CityDocuments_CityForms_CityFormId",
+                        column: x => x.CityFormId,
+                        principalTable: "CityForms",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -538,6 +701,28 @@ namespace WebServer.Migrations
                         principalTable: "Ref_Statuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeloDocuments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SeloFormId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Главная форма город"),
+                    KodNaselPunk = table.Column<string>(type: "text", nullable: false, comment: "Код населенного пункта (КАТО)"),
+                    KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
+                    KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
+                    Login = table.Column<string>(type: "text", nullable: true),
+                    Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeloDocuments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SeloDocuments_SeloForms_SeloFormId",
+                        column: x => x.SeloFormId,
+                        principalTable: "SeloForms",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -752,6 +937,11 @@ namespace WebServer.Migrations
                 column: "ApprovedFormId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CityDocuments_CityFormId",
+                table: "CityDocuments",
+                column: "CityFormId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ColumnLayouts_ApprovedFormItemColumnId",
                 table: "ColumnLayouts",
                 column: "ApprovedFormItemColumnId");
@@ -817,6 +1007,11 @@ namespace WebServer.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SeloDocuments_SeloFormId",
+                table: "SeloDocuments",
+                column: "SeloFormId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Suppliers_KatoId",
                 table: "Suppliers",
                 column: "KatoId");
@@ -840,6 +1035,21 @@ namespace WebServer.Migrations
                 name: "Business_Dictionary");
 
             migrationBuilder.DropTable(
+                name: "CityDocuments");
+
+            migrationBuilder.DropTable(
+                name: "CityNetworkLengths");
+
+            migrationBuilder.DropTable(
+                name: "CityTarifs");
+
+            migrationBuilder.DropTable(
+                name: "CityWaterDisposals");
+
+            migrationBuilder.DropTable(
+                name: "CityWaterSupplies");
+
+            migrationBuilder.DropTable(
                 name: "ColumnLayouts");
 
             migrationBuilder.DropTable(
@@ -847,9 +1057,6 @@ namespace WebServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Data");
-
-            migrationBuilder.DropTable(
-                name: "NetworkLengthInfos");
 
             migrationBuilder.DropTable(
                 name: "Pipelines");
@@ -864,7 +1071,22 @@ namespace WebServer.Migrations
                 name: "ReportSuppliers");
 
             migrationBuilder.DropTable(
-                name: "SeloForms");
+                name: "ResponseCodes");
+
+            migrationBuilder.DropTable(
+                name: "SeloDocuments");
+
+            migrationBuilder.DropTable(
+                name: "SeloNetworkLengths");
+
+            migrationBuilder.DropTable(
+                name: "SeloTariffs");
+
+            migrationBuilder.DropTable(
+                name: "SeloWaterDisposals");
+
+            migrationBuilder.DropTable(
+                name: "SeloWaterSupplies");
 
             migrationBuilder.DropTable(
                 name: "SettingsValues");
@@ -873,19 +1095,13 @@ namespace WebServer.Migrations
                 name: "Tariff_Level");
 
             migrationBuilder.DropTable(
-                name: "TariffInfos");
-
-            migrationBuilder.DropTable(
                 name: "Universal_Refferences");
 
             migrationBuilder.DropTable(
-                name: "WaterDisposalInfos");
-
-            migrationBuilder.DropTable(
-                name: "WaterSupplyInfos");
-
-            migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "CityForms");
 
             migrationBuilder.DropTable(
                 name: "ApprovedFormItemColumns");
@@ -901,6 +1117,9 @@ namespace WebServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "SeloForms");
 
             migrationBuilder.DropTable(
                 name: "Report_Forms");

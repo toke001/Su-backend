@@ -10,24 +10,31 @@ namespace WebServer.Reposotory
         private readonly WaterDbContext _context;
         private readonly DbSet<SeloForms> _dbSetForm;
         private readonly DbSet<SeloDocument> _dbSetDoc;
-        private readonly DbSet<WaterDisposalInfo> _dbSetDisposal;
-        private readonly DbSet<WaterSupplyInfo> _dbSetSupply;
-        private readonly DbSet<TariffInfo> _dbSetTarif;
-        private readonly DbSet<NetworkLengthInfo> _dbSetNetwork;
+        private readonly DbSet<SeloWaterDisposal> _dbSetDisposal;
+        private readonly DbSet<SeloWaterSupply> _dbSetSupply;
+        private readonly DbSet<SeloTariff> _dbSetTarif;
+        private readonly DbSet<SeloNetworkLength> _dbSetNetwork;
+        private readonly DbSet<Ref_Kato> _dbSetKato;
+        //private readonly DbSet<ResponseCode> _dbSetResponse;
 
         public SeloFormsRepository(WaterDbContext context)
         {
             _context = context;
             _dbSetForm = _context.Set<SeloForms>();
             _dbSetDoc = _context.Set<SeloDocument>();
-            _dbSetDisposal = _context.Set<WaterDisposalInfo>();
-            _dbSetSupply = _context.Set<WaterSupplyInfo>();
-            _dbSetTarif = _context.Set<TariffInfo>();
-            _dbSetNetwork = _context.Set<NetworkLengthInfo>();
+            _dbSetDisposal = _context.Set<SeloWaterDisposal>();
+            _dbSetSupply = _context.Set<SeloWaterSupply>();
+            _dbSetTarif = _context.Set<SeloTariff>();
+            _dbSetNetwork = _context.Set<SeloNetworkLength>();
+            _dbSetKato = _context.Set<Ref_Kato>();
+            //_dbSetResponse = _context.Set<ResponseCode>();
         }
 
-        public async Task<List<SeloDocument>> GetSeloDocument(string katoKod)
+        public async Task<object> GetSeloDocument(string katoKod)
         {
+            if (!_dbSetKato.Any(x => x.Code.ToString() == katoKod)) throw new Exception("NotFound");
+            var isReportable = await _dbSetKato.Where(x => x.Code.ToString() == katoKod).Select(x=>x.IsReportable).FirstOrDefaultAsync();
+            if (!isReportable) return "NotReporting";
             return await _dbSetDoc.Where(x => x.KodNaselPunk == katoKod).ToListAsync();
         }
 
@@ -40,8 +47,12 @@ namespace WebServer.Reposotory
             return seloDoument;
         }
 
-        public async Task<SeloForms> GetSeloFormsByKodYear(string kodNaselPunk, int year)
+        public async Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year)
         {
+            if (!_dbSetKato.Any(x => x.Code.ToString() == kodNaselPunk)) throw new Exception("NotFound");
+            var isReportable = await _dbSetKato.Where(x => x.Code.ToString() == kodNaselPunk).Select(x => x.IsReportable).FirstOrDefaultAsync();
+            if (!isReportable) return "NotReporting";
+
             return await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
                 .Select(x=>x.SeloForm).FirstOrDefaultAsync();
         }
@@ -63,12 +74,12 @@ namespace WebServer.Reposotory
             return seloForms;
         }
 
-        public async Task<WaterSupplyInfo> GetWaterSupply(Guid idForm)
+        public async Task<SeloWaterSupply> GetWaterSupply(Guid idForm)
         {
             return await _dbSetSupply.FirstOrDefaultAsync(x => x.IdForm == idForm);
         }
 
-        public async Task<WaterSupplyInfo> AddWaterSupply(Guid idForm, WaterSupplyInfo waterSupplyInfo)
+        public async Task<SeloWaterSupply> AddWaterSupply(Guid idForm, SeloWaterSupply waterSupplyInfo)
         {
             var seloForm = await _dbSetForm.FindAsync(idForm);
             if (seloForm == null) throw new Exception("Форма не найдена");
@@ -78,19 +89,19 @@ namespace WebServer.Reposotory
             return waterSupplyInfo;
         }
 
-        public async Task<WaterSupplyInfo> UpdateWaterSupply(WaterSupplyInfo waterSupplyInfo)
+        public async Task<SeloWaterSupply> UpdateWaterSupply(SeloWaterSupply waterSupplyInfo)
         {
             _dbSetSupply.Update(waterSupplyInfo);
             await _context.SaveChangesAsync();
             return waterSupplyInfo;
         }
 
-        public async Task<WaterDisposalInfo> GetWaterDisposal(Guid idForm)
+        public async Task<SeloWaterDisposal> GetWaterDisposal(Guid idForm)
         {
             return await _dbSetDisposal.FirstOrDefaultAsync(x => x.IdForm == idForm);
         }
 
-        public async Task<WaterDisposalInfo> AddWaterDisposal(Guid idForm, WaterDisposalInfo waterDisposalInfo)
+        public async Task<SeloWaterDisposal> AddWaterDisposal(Guid idForm, SeloWaterDisposal waterDisposalInfo)
         {
             var seloForm = await _dbSetForm.FindAsync(idForm);
             if (seloForm == null) throw new Exception("Форма не найдена");
@@ -100,7 +111,7 @@ namespace WebServer.Reposotory
             return waterDisposalInfo;
         }
 
-        public async Task<WaterDisposalInfo> UpdateWaterDisposal(WaterDisposalInfo waterDisposalInfo)
+        public async Task<SeloWaterDisposal> UpdateWaterDisposal(SeloWaterDisposal waterDisposalInfo)
         {
             _dbSetDisposal.Update(waterDisposalInfo);
             await _context.SaveChangesAsync();
@@ -108,12 +119,12 @@ namespace WebServer.Reposotory
         }
 
 
-        public async Task<TariffInfo> GetTarifInfo(Guid idForm)
+        public async Task<SeloTariff> GetTarifInfo(Guid idForm)
         {
             return await _dbSetTarif.FirstOrDefaultAsync(x => x.IdForm == idForm);
         }
 
-        public async Task<TariffInfo> AddTarifInfo(Guid idForm, TariffInfo tariffInfo)
+        public async Task<SeloTariff> AddTarifInfo(Guid idForm, SeloTariff tariffInfo)
         {
             var seloForm = await _dbSetForm.FindAsync(idForm);
             if (seloForm == null) throw new Exception("Форма не найдена");
@@ -123,19 +134,19 @@ namespace WebServer.Reposotory
             return tariffInfo;
         }
 
-        public async Task<TariffInfo> UpdateTariffInfo(TariffInfo tariffInfo)
+        public async Task<SeloTariff> UpdateTariffInfo(SeloTariff tariffInfo)
         {
             _dbSetTarif.Update(tariffInfo);
             await _context.SaveChangesAsync();
             return tariffInfo;
         }
 
-        public async Task<NetworkLengthInfo> GetNetworkLength(Guid idForm)
+        public async Task<SeloNetworkLength> GetNetworkLength(Guid idForm)
         {
             return await _dbSetNetwork.FirstOrDefaultAsync(x => x.IdForm == idForm);
         }
 
-        public async Task<NetworkLengthInfo> AddNetworkLength(Guid idForm, NetworkLengthInfo networkLengthInfo)
+        public async Task<SeloNetworkLength> AddNetworkLength(Guid idForm, SeloNetworkLength networkLengthInfo)
         {
             var seloForm = await _dbSetForm.FindAsync(idForm);
             if (seloForm == null) throw new Exception("Форма не найдена");
@@ -145,7 +156,7 @@ namespace WebServer.Reposotory
             return networkLengthInfo;
         }
 
-        public async Task<NetworkLengthInfo> UpdateNetworkLength(NetworkLengthInfo networkLengthInfo)
+        public async Task<SeloNetworkLength> UpdateNetworkLength(SeloNetworkLength networkLengthInfo)
         {
             _dbSetNetwork.Update(networkLengthInfo);
             await _context.SaveChangesAsync();

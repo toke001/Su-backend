@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebServer.Models
 {
     // Протяженность сетей
-    public class NetworkLengthInfo
+    public class SeloNetworkLength
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

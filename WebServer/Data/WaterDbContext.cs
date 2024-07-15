@@ -36,9 +36,16 @@ namespace WebServer.Data
         public DbSet<Models.ReportSupplier> ReportSuppliers { get; set; }
         public DbSet<SeloDocument> SeloDocuments { get; set; }
         public DbSet<SeloForms> SeloForms { get; set; }
-        public DbSet<WaterSupplyInfo> WaterSupplyInfos { get; set; }
-        public DbSet<WaterDisposalInfo> WaterDisposalInfos { get; set; }
-        public DbSet<TariffInfo> TariffInfos { get; set; }
-        public DbSet<NetworkLengthInfo> NetworkLengthInfos { get; set; }
+        public DbSet<SeloWaterSupply> SeloWaterSupplies { get; set; }
+        public DbSet<SeloWaterDisposal> SeloWaterDisposals { get; set; }
+        public DbSet<SeloTariff> SeloTariffs { get; set; }
+        public DbSet<SeloNetworkLength> SeloNetworkLengths { get; set; }
+        public DbSet<CityDocument> CityDocuments { get; set; }
+        public DbSet<CityForms> CityForms { get; set; }
+        public DbSet<CityWaterSupply> CityWaterSupplies { get; set; }
+        public DbSet<CityWaterDisposal> CityWaterDisposals { get; set; }
+        public DbSet<CityTarif> CityTarifs { get; set; }
+        public DbSet<CityNetworkLength> CityNetworkLengths { get; set; }
+        public DbSet<ResponseCode> ResponseCodes { get; set; }
     }
 }
