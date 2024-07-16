@@ -9,7 +9,7 @@ namespace WebServer.Models
         [Key]
         public int Id { get; set; }
         public required string NameCode { get; set; }
-        public required string DescriptionCode { get; set; }
+        public required string DescriptionCode { get; set; }    
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
     }

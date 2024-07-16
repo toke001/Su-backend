@@ -22,7 +22,7 @@ namespace WebServer.Controllers
             {
                 var entity = await _repo.GetFormsAsync(kato, year);
                 var content = _repo.GenerateExcelFile(entity);
-                return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "MyEntities.xlsx");
+                return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"SeloForms_{year}.xlsx");
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);

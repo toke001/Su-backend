@@ -354,12 +354,8 @@ namespace WebServer.Migrations
                         .HasColumnType("text")
                         .HasComment("Код района (КАТО)");
 
-                    b.Property<string>("NameNaselPunk")
-                        .HasColumnType("text")
-                        .HasComment("Наименование населенного пункта");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Login")
+                        .HasColumnType("text");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer")
@@ -1214,14 +1210,14 @@ namespace WebServer.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BeginDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("DescriptionCode")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("NameCode")
                         .IsRequired()
@@ -1312,7 +1308,7 @@ namespace WebServer.Migrations
                         .HasComment("Статус села спутниковое");
 
                     b.Property<DateTime?>("YearSystVodoSnab")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasComment("Год постройки системы водоснабжения");
 
                     b.HasKey("Id");

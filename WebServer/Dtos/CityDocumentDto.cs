@@ -10,7 +10,7 @@ namespace WebServer.Dtos
         public required string KodNaselPunk { get; set; }
         public string? KodOblast { get; set; }
         public string? KodRaiona { get; set; }
-        public int? UserId { get; set; }
+        public string? Login { get; set; }
         public int Year { get; set; }
     }
 }

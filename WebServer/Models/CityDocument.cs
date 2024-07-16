@@ -30,7 +30,7 @@ namespace WebServer.Models
         /// </summary>
         [Comment("Код района (КАТО)")]
         public string? KodRaiona { get; set; }
-        public int? UserId { get; set; }
+        public string? Login { get; set; }
         /// <summary>
         /// За какой год данные
         /// </summary>

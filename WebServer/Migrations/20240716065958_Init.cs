@@ -305,8 +305,8 @@ namespace WebServer.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NameCode = table.Column<string>(type: "text", nullable: false),
                     DescriptionCode = table.Column<string>(type: "text", nullable: false),
-                    BeginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    BeginDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -325,7 +325,7 @@ namespace WebServer.Migrations
                     ObshKolSelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество сельских населенных пунктов в области(единиц)"),
                     ObshKolChelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общая численность населения в сельских населенных пунктах (человек)"),
                     ObshKolDomHoz = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество домохозяйств (квартир, ИЖД)"),
-                    YearSystVodoSnab = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "Год постройки системы водоснабжения"),
+                    YearSystVodoSnab = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, comment: "Год постройки системы водоснабжения"),
                     ObslPredpId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Обслуживающее предприятие"),
                     SobstId = table.Column<Guid>(type: "uuid", nullable: true, comment: "в чьей собственности находится")
                 },
@@ -544,10 +544,9 @@ namespace WebServer.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CityFormId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Главная форма город"),
                     KodNaselPunk = table.Column<string>(type: "text", nullable: false, comment: "Код населенного пункта (КАТО)"),
-                    NameNaselPunk = table.Column<string>(type: "text", nullable: true, comment: "Наименование населенного пункта"),
                     KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
                     KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    Login = table.Column<string>(type: "text", nullable: true),
                     Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
                 },
                 constraints: table =>

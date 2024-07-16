@@ -104,6 +104,25 @@ namespace WebServer.Helpers
                     }
                 }
             }
+            if (!context.ResponseCodes.Any())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        string baseDir = environment.ContentRootPath;
+                        string scriptsPath = Path.Combine(baseDir, "Scripts", "insert_responses.sql");
+                        var script = System.IO.File.ReadAllText(scriptsPath);
+                        context.Database.ExecuteSqlRaw(script);
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
         }
 
         internal void InitializeDefaultUsers(WaterDbContext context, IWebHostEnvironment environment)
