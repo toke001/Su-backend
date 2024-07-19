@@ -7,5 +7,6 @@ namespace WebServer.Interfaces
     {
         Task<List<SeloTotalFormsDto>> GetSeloTotalFormsAsync(string kato, int year);
         byte[] GenerateExcelFile(List<SeloTotalFormsDto> forms);
+        byte[] GenerateExcelTemplate();
     }
 }
