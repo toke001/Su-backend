@@ -1,10 +1,11 @@
-﻿using WebServer.Models;
+﻿using WebServer.Dtos;
+using WebServer.Models;
 
 namespace WebServer.Interfaces
 {
     public interface ISeloExportImport
     {
-        Task<SeloForms> GetFormsAsync(string kato, int year);
-        byte[] GenerateExcelFile(SeloForms form);
+        Task<List<SeloTotalFormsDto>> GetSeloTotalFormsAsync(string kato, int year);
+        byte[] GenerateExcelFile(List<SeloTotalFormsDto> forms);
     }
 }

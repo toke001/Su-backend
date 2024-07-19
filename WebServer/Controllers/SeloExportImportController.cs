@@ -20,8 +20,8 @@ namespace WebServer.Controllers
         {
             try
             {
-                var entity = await _repo.GetFormsAsync(kato, year);
-                var content = _repo.GenerateExcelFile(entity);
+                var entities = await _repo.GetSeloTotalFormsAsync(kato, year);
+                var content = _repo.GenerateExcelFile(entities);
                 return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"SeloForms_{year}.xlsx");
             }catch(Exception ex)
             {

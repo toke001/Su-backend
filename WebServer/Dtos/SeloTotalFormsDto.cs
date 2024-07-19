@@ -15,7 +15,7 @@
         public DateTime? YearSystVodoSnab { get; set; }
         public string? ObslPredpBin { get; set; }
         public string? ObslPredpName { get; set; }
-        public Guid? SobstId { get; set; }
+        public string? SobstName { get; set; }
 
         public int? DosVodoSnabKolPunk { get; set; }
         public int? DosVodoSnabKolChel { get; set; }

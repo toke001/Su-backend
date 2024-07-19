@@ -33,65 +33,140 @@ namespace WebServer.Reposotory
             _dbSetKato = _context.Set<Ref_Kato>();
         }
 
-        public async Task<List<SeloTotalFormsDto>> GetFormsAsync(string kato, int year)
+        public async Task<List<SeloTotalFormsDto>> GetSeloTotalFormsAsync(string kato, int year)
         {
             List<SeloTotalFormsDto> forms = new List<SeloTotalFormsDto>();
             var mainKato = await _dbSetKato.Where(x=>x.Code.ToString() == kato && x.IsReportable == true).FirstOrDefaultAsync();
-            if (mainKato == null) 
+            if (mainKato != null)
             {
-                var codesOfKatos = await _dbSetKato.Where(x=>x.ParentId==mainKato!.Id).Select(x=>x.Code.ToString()).ToListAsync();
-                codesOfKatos.Insert(0, mainKato!.Code.ToString());                
-                
-                foreach(var t in codesOfKatos)
+                var codesOfKatos = await _dbSetKato.Where(x=>x.ParentId==mainKato!.Id).Select(x=>x.Code.ToString()).ToListAsync();//список всех КАТО
+                codesOfKatos.Insert(0, mainKato!.Code.ToString()); //Вношу главное КАТО, которое при в параметрах
+
+                foreach (var t in codesOfKatos)
                 {
                     var formId = await _dbSetDoc.Where(x => x.KodNaselPunk == t && x.Year == year).Select(x => x.SeloFormId).FirstOrDefaultAsync();
                     //if (formId == null) throw new Exception("NotFound");
-                    var form = from f in _dbSetForm
-                               join ws in _dbSetSupply on f.Id equals ws.IdForm
-                               join wd in _dbSetDisposal on f.Id equals wd.IdForm
-                               join tr in _dbSetTarif on f.Id equals tr.IdForm
-                               join n in _dbSetNetwork on f.Id equals n.IdForm
-                               join k in _dbSetKato on t equals k.Code.ToString()
-                               where f.Id == formId
-                               select new SeloTotalFormsDto
-                               {
-                                   Id = f.Id,
-                                   NameOfPlace = k.NameRu,
-                                   KodKato = t,
-                                   StatusOpor = f.StatusOpor,
-                                   StatusSput = f.StatusSput,
-                                   StatusProch = f.StatusProch,
-                                   StatusPrigran = f.StatusPrigran,
-                                   ObshKolSelNasPun = f.ObshKolChelNasPun,
-                                   ObshKolChelNasPun = f.ObshKolChelNasPun,
-                                   ObshKolDomHoz = f.ObshKolDomHoz,
-                                   YearSystVodoSnab = f.YearSystVodoSnab,
-                                   ObslPredpBin = "",
-                                   ObslPredpName = "",
-                                   SobstId = Guid.Empty,
-                               };
+                    var form = (from f in _dbSetForm
+                                join ws in _dbSetSupply on f.Id equals ws.IdForm
+                                join wd in _dbSetDisposal on f.Id equals wd.IdForm
+                                join tr in _dbSetTarif on f.Id equals tr.IdForm
+                                join n in _dbSetNetwork on f.Id equals n.IdForm
+                                join k in _dbSetKato on t equals k.Code.ToString()
+                                where f.Id == formId
+                                select new SeloTotalFormsDto
+                                {
+                                    Id = f.Id,
+                                    NameOfPlace = k.NameRu,
+                                    KodKato = t,
+                                    StatusOpor = f.StatusOpor,
+                                    StatusSput = f.StatusSput,
+                                    StatusProch = f.StatusProch,
+                                    StatusPrigran = f.StatusPrigran,
+                                    ObshKolSelNasPun = f.ObshKolChelNasPun,
+                                    ObshKolChelNasPun = f.ObshKolChelNasPun,
+                                    ObshKolDomHoz = f.ObshKolDomHoz,
+                                    YearSystVodoSnab = f.YearSystVodoSnab,
+                                    ObslPredpBin = "",
+                                    ObslPredpName = "",
+                                    SobstName = null,
+                                    DosVodoSnabKolPunk = ws.DosVodoSnabKolPunk,
+                                    DosVodoSnabKolChel = ws.DosVodoSnabKolChel,
+                                    DosVodoSnabPercent = ws.DosVodoSnabPercent,
+                                    CentrVodoSnabKolNasPun = ws.CentrVodoSnabKolNasPun,
+                                    CentrVodoSnabKolChel = ws.CentrVodoSnabKolChel,
+                                    CentrVodoSnabObesKolNasPunk = ws.CentrVodoSnabObesKolNasPunk,
+                                    CentrVodoSnabObesKolChel = ws.CentrVodoSnabObesKolChel,
+                                    CentrVodoSnabKolAbon = ws.CentrVodoSnabKolAbon,
+                                    CentrVodoSnabFizLic = ws.CentrVodoSnabFizLic,
+                                    CentrVodoSnabYriLic = ws.CentrVodoSnabYriLic,
+                                    CentrVodoSnabBudzhOrg = ws.CentrVodoSnabBudzhOrg,
+                                    CentrVodoIndivPriborUchVodyVsego = ws.CentrVodoIndivPriborUchVodyVsego,
+                                    CentrVodoIndivPriborUchVodyASYE = ws.CentrVodoIndivPriborUchVodyASYE,
+                                    CentrVodoIndivPriborUchVodyOhvat = ws.CentrVodoIndivPriborUchVodyOhvat,
+                                    NeCtentrVodoKolSelsNasPunk = ws.NeCtentrVodoKolSelsNasPunk,
+                                    KbmKolSelsNasPunk = ws.KbmKolSelsNasPunk,
+                                    KbmKolChel = ws.KbmKolChel,
+                                    KbmObespNasel = ws.KbmObespNasel,
+                                    PrvKolSelsNasPunk = ws.PrvKolSelsNasPunk,
+                                    PrvKolChel = ws.PrvKolChel,
+                                    PrvObespNasel = ws.PrvObespNasel,
+                                    PrivVodaKolSelsNasPunk = ws.PrivVodaKolSelsNasPunk,
+                                    PrivVodaKolChel = ws.PrivVodaKolChel,
+                                    PrivVodaObespNasel = ws.PrivVodaObespNasel,
+                                    SkvazhKolSelsNasPunk = ws.SkvazhKolSelsNasPunk,
+                                    SkvazhKolChel = ws.SkvazhKolChel,
+                                    SkvazhObespNasel = ws.SkvazhObespNasel,
+                                    SkvazhKolSelsNasPunkOtkaz = ws.SkvazhKolSelsNasPunkOtkaz,
+                                    SkvazhKolChelOtkaz = ws.SkvazhKolChelOtkaz,
+                                    SkvazhDolyaNaselOtkaz = ws.SkvazhDolyaNaselOtkaz,
+                                    SkvazhDolyaSelOtkaz = ws.SkvazhDolyaSelOtkaz,
+                                    CentrVodOtvedKolSelsNasPunk = wd.CentrVodOtvedKolSelsNasPunk,
+                                    CentrVodOtvedKolChel = wd.CentrVodOtvedKolChel,
+                                    CentrVodOtvedKolAbonent = wd.CentrVodOtvedKolAbonent,
+                                    CentrVodOtvedFizLic = wd.CentrVodOtvedFizLic,
+                                    CentrVodOtvedYriLic = wd.CentrVodOtvedYriLic,
+                                    CentrVodOtvedBydzhOrg = wd.CentrVodOtvedBydzhOrg,
+                                    CentrVodOtvedDostypKolNasPunk = wd.CentrVodOtvedDostypKolNasPunk,
+                                    CentrVodOtvedDostypKolChel = wd.CentrVodOtvedDostypKolChel,
+                                    CentrVodOtvedNalich = wd.CentrVodOtvedNalich,
+                                    CentrVodOtvedNalichMechan = wd.CentrVodOtvedNalichMechan,
+                                    CentrVodOtvedNalichMechanBiolog = wd.CentrVodOtvedNalichMechanBiolog,
+                                    CentrVodOtvedProizvod = wd.CentrVodOtvedProizvod,
+                                    CentrVodOtvedIznos = wd.CentrVodOtvedIznos,
+                                    CentrVodOtvedOhvatKolChel = wd.CentrVodOtvedOhvatKolChel,
+                                    CentrVodOtvedOhvatNasel = wd.CentrVodOtvedOhvatNasel,
+                                    CentrVodOtvedFactPostypStochVod = wd.CentrVodOtvedFactPostypStochVod,
+                                    CentrVodOtvedFactPostypStochVod1 = wd.CentrVodOtvedFactPostypStochVod1,
+                                    CentrVodOtvedFactPostypStochVod2 = wd.CentrVodOtvedFactPostypStochVod2,
+                                    CentrVodOtvedFactPostypStochVod3 = wd.CentrVodOtvedFactPostypStochVod3,
+                                    CentrVodOtvedFactPostypStochVod4 = wd.CentrVodOtvedFactPostypStochVod4,
+                                    CentrVodOtvedObiemStochVod = wd.CentrVodOtvedObiemStochVod,
+                                    CentrVodOtvedUrovenNorm = wd.CentrVodOtvedUrovenNorm,
+                                    DecentrVodoOtvedKolSelsNasPunk = wd.DecentrVodoOtvedKolSelsNasPunk,
+                                    DecentrVodoOtvedKolChel = wd.DecentrVodoOtvedKolChel,
+                                    TarifVodoSnabUsred = tr.TarifVodoSnabUsred,
+                                    TarifVodoSnabFizL = tr.TarifVodoSnabFizL,
+                                    TarifVodoSnabYriL = tr.TarifVodoSnabYriL,
+                                    TarifVodoSnabBudzh = tr.TarifVodoSnabBudzh,
+                                    TarifVodoOtvedUsred = tr.TarifVodoOtvedUsred,
+                                    TarifVodoOtvedFizL = tr.TarifVodoOtvedFizL,
+                                    TarifVodoOtvedYriL = tr.TarifVodoOtvedYriL,
+                                    TarifVodoOtvedBudzh = tr.TarifVodoOtvedBudzh,
+                                    ProtyzhVodoSeteyObsh = n.ProtyzhVodoSeteyObsh,
+                                    ProtyzhVodoSeteyVtomIznos = n.ProtyzhVodoSeteyVtomIznos,
+                                    ProtyzhVodoSeteyIznos = n.ProtyzhVodoSeteyIznos,
+                                    ProtyzhKanalSeteyObsh = n.ProtyzhKanalSeteyObsh,
+                                    ProtyzhKanalSeteyVtomIznos = n.ProtyzhKanalSeteyVtomIznos,
+                                    ProtyzhKanalSeteyIznos = n.ProtyzhKanalSeteyIznos,
+                                    ProtyzhNewSeteyVodoSnab = n.ProtyzhNewSeteyVodoSnab,
+                                    ProtyzhNewSeteyVodoOtved = n.ProtyzhNewSeteyVodoOtved,
+                                    ProtyzhRekonSeteyVodoSnab = n.ProtyzhRekonSeteyVodoSnab,
+                                    ProtyzhRekonSeteyVodoOtved = n.ProtyzhRekonSeteyVodoOtved,
+                                    ProtyzhRemontSeteyVodoSnab = n.ProtyzhRemontSeteyVodoSnab,
+                                    ProtyzhRemontSeteyVodoOtved = n.ProtyzhRemontSeteyVodoOtved
+                                }).FirstOrDefault();
                     //if (form == null) throw new Exception("NotFoundReport");
-                    
-
+                    if(form != null) forms.Add(form);
                 }                
             }
             return forms;
         }
 
-        public byte[] GenerateExcelFile(SeloForms form)
+        public byte[] GenerateExcelFile(List<SeloTotalFormsDto> forms)
         {
-            var doc = _dbSetDoc.Where(x=>x.SeloFormId==form.Id).FirstOrDefault();
-            string? NamePlace = _dbSetKato.Where(x=>x.Code.ToString() == doc.KodNaselPunk).Select(x=>x.NameRu).FirstOrDefault();
+            //var doc = _dbSetDoc.Where(x=>x.SeloFormId==form.Id).FirstOrDefault();
+            //string? NamePlace = _dbSetKato.Where(x=>x.Code.ToString() == doc.KodNaselPunk).Select(x=>x.NameRu).FirstOrDefault();
             using (var package = new OfficeOpenXml.ExcelPackage())
             {
-                var worksheet = package.Workbook.Worksheets.Add("SeloForm");
+                var worksheet = package.Workbook.Worksheets.Add("SeloForms");
                 worksheet.Row(1).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                worksheet.Row(2).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                 worksheet.Row(1).Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                worksheet.Row(1).Style.Font.Bold = true;
+                //worksheet.Row(1).Style.Font.Bold = true;
                 worksheet.Row(1).Height = 200;
 
-                worksheet.Row(2).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;                
-                worksheet.Row(2).Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;                                
+                //worksheet.Row(2).Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;                
+                //worksheet.Row(2).Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;                                
 
                 //Названия колонок
                 worksheet.Cells[1, 1].Value = "Код строк";                
@@ -185,26 +260,112 @@ namespace WebServer.Reposotory
                 worksheet.Cells[1, 89].Value = "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км. водоснабжения, км";
                 worksheet.Cells[1, 90].Value = "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км. водоотведения, км";
                 worksheet.Cells[1, 2, 1,90].Style.WrapText = true;
+                
+                for(int i = 1; i <= 90; i++)
+                {
+                    worksheet.Cells[2, i].Value = i;
+                }
 
-                //Значения колонок
-                worksheet.Cells[3, 1].Value = form.Id;
-                worksheet.Cells[3, 2].Value = NamePlace ?? "";
-                worksheet.Cells[3, 3].Value = doc?.KodNaselPunk;         
-                worksheet.Cells[3, 4].Value = form.StatusOpor == true ? "Да" : "Нет";
-                //worksheet.Cells[2, 3].Value = form.StatusSput == true ? "Да" : "Нет";
-                //worksheet.Cells[2, 4].Value = form.StatusProch;
-                //worksheet.Cells[2, 5].Value = form.StatusPrigran == true ? "Да" : "Нет";
-                //worksheet.Cells[2, 6].Value = form.ObshKolSelNasPun;
-                //worksheet.Cells[2, 7].Value = form.ObshKolChelNasPun;
-                //worksheet.Cells[2, 8].Value = form.ObshKolDomHoz;
-                //worksheet.Cells[2, 9].Value = form.YearSystVodoSnab;
-                //worksheet.Cells[2, 10].Value = form.ObslPredpId;
-                //worksheet.Cells[2, 11].Value = form.SobstId;
 
-                //worksheet.Cells[2, 9].Style.Numberformat.Format = "yyyy-MM-dd";
+                foreach(var form in forms)
+                {
+                    int counter = 0; counter =+ 1;
+                    //Значения колонок
+                    worksheet.Cells[counter + 2, 1].Value = form.Id;
+                    worksheet.Cells[counter + 2, 2].Value = form.NameOfPlace;
+                    worksheet.Cells[counter + 2, 3].Value = form.KodKato;                    
+                    worksheet.Cells[counter + 2, 4].Value = form.StatusOpor == true ? "Да" : "Нет";
+                    worksheet.Cells[counter + 2, 5].Value = form.StatusSput == true ? "да" : "нет";
+                    worksheet.Cells[counter + 2, 6].Value = form.StatusProch;
+                    worksheet.Cells[counter + 2, 7].Value = form.StatusPrigran == true ? "да" : "нет";
+                    worksheet.Cells[counter + 2, 8].Value = form.ObshKolSelNasPun;
+                    worksheet.Cells[counter + 2, 9].Value = form.ObshKolChelNasPun;
+                    worksheet.Cells[counter + 2, 10].Value = form.ObshKolDomHoz;
+                    worksheet.Cells[counter + 2, 11].Value = form.YearSystVodoSnab?.Year;
+                    //worksheet.Cells[counter + 2, 11].Style.Numberformat.Format = "yyyy-MM-dd";
+                    worksheet.Cells[counter + 2, 12].Value = form.ObslPredpBin;
+                    worksheet.Cells[counter + 2, 13].Value = form.ObslPredpName;
+                    worksheet.Cells[counter + 2, 14].Value = form.SobstName;
+                    worksheet.Cells[counter + 2, 15].Value = form.SobstName;
+                    worksheet.Cells[counter + 2, 16].Value = form.DosVodoSnabKolPunk;
+                    worksheet.Cells[counter + 2, 17].Value = form.DosVodoSnabKolChel;
+                    worksheet.Cells[counter + 2, 18].Value = form.DosVodoSnabPercent;
+                    worksheet.Cells[counter + 2, 19].Value = form.CentrVodoSnabKolNasPun;
+                    worksheet.Cells[counter + 2, 20].Value = form.CentrVodoSnabKolChel;
+                    worksheet.Cells[counter + 2, 21].Value = form.CentrVodoSnabObesKolNasPunk;
+                    worksheet.Cells[counter + 2, 22].Value = form.CentrVodoSnabObesKolChel;
+                    worksheet.Cells[counter + 2, 23].Value = form.CentrVodoSnabKolAbon;
+                    worksheet.Cells[counter + 2, 24].Value = form.CentrVodoSnabFizLic;
+                    worksheet.Cells[counter + 2, 25].Value = form.CentrVodoSnabYriLic;
+                    worksheet.Cells[counter + 2, 26].Value = form.CentrVodoSnabBudzhOrg;
+                    worksheet.Cells[counter + 2, 27].Value = form.CentrVodoIndivPriborUchVodyVsego;
+                    worksheet.Cells[counter + 2, 28].Value = form.CentrVodoIndivPriborUchVodyASYE;
+                    worksheet.Cells[counter + 2, 29].Value = form.CentrVodoIndivPriborUchVodyOhvat;
+                    worksheet.Cells[counter + 2, 30].Value = form.NeCtentrVodoKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 31].Value = form.KbmKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 32].Value = form.KbmKolChel;
+                    worksheet.Cells[counter + 2, 33].Value = form.KbmObespNasel;
+                    worksheet.Cells[counter + 2, 34].Value = form.PrvKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 35].Value = form.PrvKolChel;
+                    worksheet.Cells[counter + 2, 36].Value = form.PrvObespNasel;
+                    worksheet.Cells[counter + 2, 37].Value = form.PrivVodaKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 38].Value = form.PrivVodaKolChel;
+                    worksheet.Cells[counter + 2, 39].Value = form.PrivVodaObespNasel;
+                    worksheet.Cells[counter + 2, 40].Value = form.SkvazhKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 41].Value = form.SkvazhKolChel;
+                    worksheet.Cells[counter + 2, 42].Value = form.SkvazhObespNasel;
+                    worksheet.Cells[counter + 2, 43].Value = form.SkvazhKolSelsNasPunkOtkaz;
+                    worksheet.Cells[counter + 2, 44].Value = form.SkvazhKolChelOtkaz;
+                    worksheet.Cells[counter + 2, 45].Value = form.SkvazhDolyaNaselOtkaz;
+                    worksheet.Cells[counter + 2, 46].Value = form.SkvazhDolyaSelOtkaz;
+                    worksheet.Cells[counter + 2, 47].Value = form.CentrVodOtvedKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 48].Value = form.CentrVodOtvedKolChel;
+                    worksheet.Cells[counter + 2, 49].Value = form.CentrVodOtvedKolAbonent;
+                    worksheet.Cells[counter + 2, 50].Value = form.CentrVodOtvedFizLic;
+                    worksheet.Cells[counter + 2, 51].Value = form.CentrVodOtvedYriLic;
+                    worksheet.Cells[counter + 2, 52].Value = form.CentrVodOtvedBydzhOrg;
+                    worksheet.Cells[counter + 2, 53].Value = form.CentrVodOtvedDostypKolNasPunk;
+                    worksheet.Cells[counter + 2, 54].Value = form.CentrVodOtvedDostypKolChel;
+                    worksheet.Cells[counter + 2, 55].Value = form.CentrVodOtvedNalich;
+                    worksheet.Cells[counter + 2, 56].Value = form.CentrVodOtvedNalichMechan;
+                    worksheet.Cells[counter + 2, 57].Value = form.CentrVodOtvedNalichMechanBiolog;
+                    worksheet.Cells[counter + 2, 58].Value = form.CentrVodOtvedProizvod;
+                    worksheet.Cells[counter + 2, 59].Value = form.CentrVodOtvedIznos;
+                    worksheet.Cells[counter + 2, 60].Value = form.CentrVodOtvedOhvatKolChel;
+                    worksheet.Cells[counter + 2, 61].Value = form.CentrVodOtvedOhvatNasel;
+                    worksheet.Cells[counter + 2, 62].Value = form.CentrVodOtvedFactPostypStochVod;
+                    worksheet.Cells[counter + 2, 63].Value = form.CentrVodOtvedFactPostypStochVod1;
+                    worksheet.Cells[counter + 2, 64].Value = form.CentrVodOtvedFactPostypStochVod2;
+                    worksheet.Cells[counter + 2, 65].Value = form.CentrVodOtvedFactPostypStochVod3;
+                    worksheet.Cells[counter + 2, 66].Value = form.CentrVodOtvedFactPostypStochVod4;
+                    worksheet.Cells[counter + 2, 67].Value = form.CentrVodOtvedObiemStochVod;
+                    worksheet.Cells[counter + 2, 68].Value = form.CentrVodOtvedUrovenNorm;
+                    worksheet.Cells[counter + 2, 69].Value = form.DecentrVodoOtvedKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 70].Value = form.DecentrVodoOtvedKolChel;
+                    worksheet.Cells[counter + 2, 71].Value = form.TarifVodoSnabUsred;
+                    worksheet.Cells[counter + 2, 72].Value = form.TarifVodoSnabFizL;
+                    worksheet.Cells[counter + 2, 73].Value = form.TarifVodoSnabYriL;
+                    worksheet.Cells[counter + 2, 74].Value = form.TarifVodoSnabBudzh;
+                    worksheet.Cells[counter + 2, 75].Value = form.TarifVodoOtvedUsred;
+                    worksheet.Cells[counter + 2, 76].Value = form.TarifVodoOtvedFizL;
+                    worksheet.Cells[counter + 2, 77].Value = form.TarifVodoOtvedYriL;
+                    worksheet.Cells[counter + 2, 78].Value = form.TarifVodoOtvedBudzh;
+                    worksheet.Cells[counter + 2, 79].Value = form.ProtyzhVodoSeteyObsh;
+                    worksheet.Cells[counter + 2, 80].Value = form.ProtyzhVodoSeteyVtomIznos;
+                    worksheet.Cells[counter + 2, 81].Value = form.ProtyzhVodoSeteyIznos;
+                    worksheet.Cells[counter + 2, 82].Value = form.ProtyzhKanalSeteyObsh;
+                    worksheet.Cells[counter + 2, 83].Value = form.ProtyzhKanalSeteyVtomIznos;
+                    worksheet.Cells[counter + 2, 84].Value = form.ProtyzhKanalSeteyIznos;
+                    worksheet.Cells[counter + 2, 85].Value = form.ProtyzhNewSeteyVodoSnab;
+                    worksheet.Cells[counter + 2, 86].Value = form.ProtyzhNewSeteyVodoOtved;
+                    worksheet.Cells[counter + 2, 87].Value = form.ProtyzhRekonSeteyVodoSnab;
+                    worksheet.Cells[counter + 2, 88].Value = form.ProtyzhRekonSeteyVodoOtved;
+                    worksheet.Cells[counter + 2, 89].Value = form.ProtyzhRemontSeteyVodoSnab;
+                    worksheet.Cells[counter + 2, 90].Value = form.ProtyzhRemontSeteyVodoOtved;                    
+                }
 
                 // Определите диапазон данных
-                var range = worksheet.Cells[1, 1, 2, 90];
+                var range = worksheet.Cells[1, 1, forms.Count + 2, 90];
 
                 // Добавьте границы к каждой ячейке в диапазоне
                 range.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
