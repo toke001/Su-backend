@@ -7,7 +7,7 @@ namespace WebServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class SeloExportImportController : ControllerBase
     {
         private readonly ISeloExportImport _repo;
@@ -50,6 +50,19 @@ namespace WebServer.Controllers
                 return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SeloFormsTemplate.xlsx");
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("import")]
+        public async Task<IActionResult> ImportExcel(IFormFile file)
+        {
+            if (file == null || file.Length == 0) return BadRequest("File is empty!");
+            try
+            {
+                return Ok(await _repo.ImportExcel(file));
+            }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

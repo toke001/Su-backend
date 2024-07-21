@@ -12,7 +12,7 @@ namespace WebServer.Dtos
         public int? ObshKolSelNasPun { get; set; }
         public int? ObshKolChelNasPun { get; set; }
         public int? ObshKolDomHoz { get; set; }
-        public DateTime? YearSystVodoSnab { get; set; }
+        public string? YearSystVodoSnab { get; set; }
         public Guid? ObslPredpId { get; set; }
         public Guid? SobstId { get; set; }
     }

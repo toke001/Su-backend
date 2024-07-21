@@ -12,7 +12,7 @@
         public int? ObshKolSelNasPun { get; set; }
         public int? ObshKolChelNasPun { get; set; }
         public int? ObshKolDomHoz { get; set; }
-        public DateTime? YearSystVodoSnab { get; set; }
+        public string? YearSystVodoSnab { get; set; }
         public string? ObslPredpBin { get; set; }
         public string? ObslPredpName { get; set; }
         public string? SobstName { get; set; }

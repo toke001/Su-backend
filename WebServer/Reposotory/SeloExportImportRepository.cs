@@ -7,6 +7,8 @@ using System.IO;
 using System.Xml;
 using WebServer.Interfaces;
 using WebServer.Dtos;
+using System.Reflection;
+using WebServer.Helpers;
 
 namespace WebServer.Reposotory
 {
@@ -281,7 +283,7 @@ namespace WebServer.Reposotory
                     worksheet.Cells[counter + 2, 8].Value = form.ObshKolSelNasPun;
                     worksheet.Cells[counter + 2, 9].Value = form.ObshKolChelNasPun;
                     worksheet.Cells[counter + 2, 10].Value = form.ObshKolDomHoz;
-                    worksheet.Cells[counter + 2, 11].Value = form.YearSystVodoSnab?.Year;
+                    worksheet.Cells[counter + 2, 11].Value = form.YearSystVodoSnab;
                     //worksheet.Cells[counter + 2, 11].Style.Numberformat.Format = "yyyy-MM-dd";
                     worksheet.Cells[counter + 2, 12].Value = form.ObslPredpBin;
                     worksheet.Cells[counter + 2, 13].Value = form.ObslPredpName;
@@ -507,6 +509,176 @@ namespace WebServer.Reposotory
                 var content = stream.ToArray();
                 return content;
             }
+        }
+
+        public async Task<int> ImportExcel(IFormFile file)
+        {
+            var listSeloDocs = new List<SeloDocument>();
+            //var listSeloForms = new List<SeloForms>();
+            var listSupply = new List<SeloWaterSupply>();
+            var listDisposal = new List<SeloWaterDisposal>();
+            var listTarif = new List<SeloTariff>();
+            var listNetwork = new List<SeloNetworkLength>();
+
+            using(var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                using(var package = new ExcelPackage(stream))
+                {
+                    var workSheet = package.Workbook.Worksheets[0];
+                    var rowCount = workSheet.Dimension.Rows;
+
+                    for(int row = 3;  row <= rowCount; row++)
+                    {
+                        //var seloForm =  await _dbSetForm.Where(x => x.Id.ToString() == workSheet.Cells[row, 1].Text).FirstOrDefaultAsync();
+                        var doc = new SeloDocument();
+                        var seloForm = new SeloForms();
+                        var supply = new SeloWaterSupply();
+                        var disposal = new SeloWaterDisposal();
+                        var tarif = new SeloTariff();
+                        var network = new SeloNetworkLength();
+
+                        if(workSheet.Cells[row, 1].Text != "") 
+                            seloForm.Id = Guid.Parse(workSheet.Cells[row, 1].Text);
+                        doc.KodNaselPunk = workSheet.Cells[row, 3].Text;
+                        seloForm.StatusOpor = workSheet.Cells[row, 4].Text.ToLower() == "да" ? true : false;
+                        seloForm.StatusSput = workSheet.Cells[row, 5].Text.ToLower() == "да" ? true : false;
+                        seloForm.StatusProch = workSheet.Cells[row, 6].Text;
+                        seloForm.StatusPrigran = workSheet.Cells[row, 7].Text.ToLower() == "да" ? true : false;
+                        if(workSheet.Cells[row, 8].Text != "") seloForm.ObshKolSelNasPun = int.Parse(workSheet.Cells[row, 8].Text);
+                        if(workSheet.Cells[row, 9].Text != "") seloForm.ObshKolChelNasPun = int.Parse(workSheet.Cells[row, 9].Text);
+                        if(workSheet.Cells[row, 10].Text != "") seloForm.ObshKolDomHoz = int.Parse(workSheet.Cells[row, 10].Text);
+                        seloForm.YearSystVodoSnab = workSheet.Cells[row, 11].Text;
+                        seloForm.ObslPredpId = null; //TODO
+                        seloForm.SobstId = null; //TODO
+                        if (workSheet.Cells[row, 16].Text != "") supply.DosVodoSnabKolPunk = int.Parse(workSheet.Cells[row, 16].Text);
+                        if (workSheet.Cells[row, 17].Text != "") supply.DosVodoSnabKolChel = int.Parse(workSheet.Cells[row, 17].Text);
+                        if (workSheet.Cells[row, 18].Text != "") supply.DosVodoSnabPercent = decimal.Parse(workSheet.Cells[row, 18].Text);
+                        if (workSheet.Cells[row, 19].Text != "") supply.CentrVodoSnabKolNasPun = int.Parse(workSheet.Cells[row, 19].Text);
+                        if (workSheet.Cells[row, 20].Text != "") supply.CentrVodoSnabKolChel = int.Parse(workSheet.Cells[row, 20].Text);
+                        if (workSheet.Cells[row, 21].Text != "") supply.CentrVodoSnabObesKolNasPunk = decimal.Parse(workSheet.Cells[row, 21].Text);
+                        if (workSheet.Cells[row, 22].Text != "") supply.CentrVodoSnabObesKolChel = decimal.Parse(workSheet.Cells[row, 22].Text);
+                        if (workSheet.Cells[row, 23].Text != "") supply.CentrVodoSnabKolAbon = int.Parse(workSheet.Cells[row, 23].Text);
+                        if (workSheet.Cells[row, 24].Text != "") supply.CentrVodoSnabFizLic = int.Parse(workSheet.Cells[row, 24].Text);
+                        if (workSheet.Cells[row, 25].Text != "") supply.CentrVodoSnabYriLic = int.Parse(workSheet.Cells[row, 25].Text);
+                        if (workSheet.Cells[row, 26].Text != "") supply.CentrVodoSnabBudzhOrg = int.Parse(workSheet.Cells[row, 26].Text);
+                        if (workSheet.Cells[row, 27].Text != "") supply.CentrVodoIndivPriborUchVodyVsego = int.Parse(workSheet.Cells[row, 27].Text);
+                        if (workSheet.Cells[row, 28].Text != "") supply.CentrVodoIndivPriborUchVodyASYE = int.Parse(workSheet.Cells[row, 28].Text);
+                        if (workSheet.Cells[row, 29].Text != "") supply.CentrVodoIndivPriborUchVodyOhvat = decimal.Parse(workSheet.Cells[row, 29].Text);
+                        if (workSheet.Cells[row, 30].Text != "") supply.NeCtentrVodoKolSelsNasPunk = int.Parse(workSheet.Cells[row, 30].Text);
+                        if (workSheet.Cells[row, 31].Text != "") supply.KbmKolSelsNasPunk = int.Parse(workSheet.Cells[row, 31].Text);
+                        if (workSheet.Cells[row, 32].Text != "") supply.KbmKolChel = int.Parse(workSheet.Cells[row, 32].Text);
+                        if (workSheet.Cells[row, 33].Text != "") supply.KbmObespNasel = decimal.Parse(workSheet.Cells[row, 33].Text);
+                        if (workSheet.Cells[row, 34].Text != "") supply.PrvKolSelsNasPunk = int.Parse(workSheet.Cells[row, 34].Text);
+                        if (workSheet.Cells[row, 35].Text != "") supply.PrvKolChel = int.Parse(workSheet.Cells[row, 35].Text);
+                        if (workSheet.Cells[row, 36].Text != "") supply.PrvObespNasel = decimal.Parse(workSheet.Cells[row, 36].Text);
+                        if (workSheet.Cells[row, 37].Text != "") supply.PrivVodaKolSelsNasPunk = int.Parse(workSheet.Cells[row, 37].Text);
+                        if (workSheet.Cells[row, 38].Text != "") supply.PrivVodaKolChel = int.Parse(workSheet.Cells[row, 38].Text);
+                        if (workSheet.Cells[row, 39].Text != "") supply.PrivVodaObespNasel = decimal.Parse(workSheet.Cells[row, 39].Text);
+                        if (workSheet.Cells[row, 40].Text != "") supply.SkvazhKolSelsNasPunk = int.Parse(workSheet.Cells[row, 40].Text);
+                        if (workSheet.Cells[row, 41].Text != "") supply.SkvazhKolChel = int.Parse(workSheet.Cells[row, 41].Text);
+                        if (workSheet.Cells[row, 42].Text != "") supply.SkvazhObespNasel = decimal.Parse(workSheet.Cells[row, 42].Text);
+                        if (workSheet.Cells[row, 43].Text != "") supply.SkvazhKolSelsNasPunkOtkaz = int.Parse(workSheet.Cells[row, 43].Text);
+                        if (workSheet.Cells[row, 44].Text != "") supply.SkvazhKolChelOtkaz = int.Parse(workSheet.Cells[row, 44].Text);
+                        if (workSheet.Cells[row, 45].Text != "") supply.SkvazhDolyaNaselOtkaz = decimal.Parse(workSheet.Cells[row, 45].Text);
+                        if (workSheet.Cells[row, 46].Text != "") supply.SkvazhDolyaSelOtkaz = decimal.Parse(workSheet.Cells[row, 46].Text);
+
+                        if (workSheet.Cells[row, 47].Text != "") disposal.CentrVodOtvedKolSelsNasPunk = int.Parse(workSheet.Cells[row, 47].Text);
+                        if (workSheet.Cells[row, 48].Text != "") disposal.CentrVodOtvedKolChel = int.Parse(workSheet.Cells[row, 48].Text);
+                        if (workSheet.Cells[row, 49].Text != "") disposal.CentrVodOtvedKolAbonent = int.Parse(workSheet.Cells[row, 49].Text);
+                        if (workSheet.Cells[row, 50].Text != "") disposal.CentrVodOtvedFizLic = int.Parse(workSheet.Cells[row, 50].Text);
+                        if (workSheet.Cells[row, 51].Text != "") disposal.CentrVodOtvedYriLic = int.Parse(workSheet.Cells[row, 51].Text);
+                        if (workSheet.Cells[row, 52].Text != "") disposal.CentrVodOtvedBydzhOrg = int.Parse(workSheet.Cells[row, 52].Text);
+                        if (workSheet.Cells[row, 53].Text != "") disposal.CentrVodOtvedDostypKolNasPunk = decimal.Parse(workSheet.Cells[row, 53].Text);
+                        if (workSheet.Cells[row, 54].Text != "") disposal.CentrVodOtvedDostypKolChel = decimal.Parse(workSheet.Cells[row, 54].Text);
+                        if (workSheet.Cells[row, 55].Text != "") disposal.CentrVodOtvedNalich = int.Parse(workSheet.Cells[row, 55].Text);
+                        if (workSheet.Cells[row, 56].Text != "") disposal.CentrVodOtvedNalichMechan = int.Parse(workSheet.Cells[row, 56].Text);
+                        if (workSheet.Cells[row, 57].Text != "") disposal.CentrVodOtvedNalichMechanBiolog = int.Parse(workSheet.Cells[row, 57].Text);
+                        if (workSheet.Cells[row, 58].Text != "") disposal.CentrVodOtvedProizvod = int.Parse(workSheet.Cells[row, 58].Text);
+                        if (workSheet.Cells[row, 59].Text != "") disposal.CentrVodOtvedIznos = decimal.Parse(workSheet.Cells[row, 59].Text);
+                        if (workSheet.Cells[row, 60].Text != "") disposal.CentrVodOtvedOhvatKolChel = int.Parse(workSheet.Cells[row, 60].Text);
+                        if (workSheet.Cells[row, 61].Text != "") disposal.CentrVodOtvedOhvatNasel = decimal.Parse(workSheet.Cells[row, 61].Text);
+                        if (workSheet.Cells[row, 62].Text != "") disposal.CentrVodOtvedFactPostypStochVod = int.Parse(workSheet.Cells[row, 62].Text);
+                        if (workSheet.Cells[row, 63].Text != "") disposal.CentrVodOtvedFactPostypStochVod1 = int.Parse(workSheet.Cells[row, 63].Text);
+                        if (workSheet.Cells[row, 64].Text != "") disposal.CentrVodOtvedFactPostypStochVod2 = int.Parse(workSheet.Cells[row, 64].Text);
+                        if (workSheet.Cells[row, 65].Text != "") disposal.CentrVodOtvedFactPostypStochVod3 = int.Parse(workSheet.Cells[row, 65].Text);
+                        if (workSheet.Cells[row, 66].Text != "") disposal.CentrVodOtvedFactPostypStochVod4 = int.Parse(workSheet.Cells[row, 66].Text);
+                        if (workSheet.Cells[row, 67].Text != "") disposal.CentrVodOtvedObiemStochVod = int.Parse(workSheet.Cells[row, 67].Text);
+                        if (workSheet.Cells[row, 68].Text != "") disposal.CentrVodOtvedUrovenNorm = decimal.Parse(workSheet.Cells[row, 68].Text);
+                        if (workSheet.Cells[row, 69].Text != "") disposal.DecentrVodoOtvedKolSelsNasPunk = int.Parse(workSheet.Cells[row, 69].Text);
+                        if (workSheet.Cells[row, 70].Text != "") disposal.DecentrVodoOtvedKolChel = int.Parse(workSheet.Cells[row, 70].Text);
+
+                        if (workSheet.Cells[row, 71].Text != "") tarif.TarifVodoSnabUsred = int.Parse(workSheet.Cells[row, 71].Text);
+                        if (workSheet.Cells[row, 72].Text != "") tarif.TarifVodoSnabFizL = int.Parse(workSheet.Cells[row, 72].Text);
+                        if (workSheet.Cells[row, 73].Text != "") tarif.TarifVodoSnabYriL = int.Parse(workSheet.Cells[row, 73].Text);
+                        if (workSheet.Cells[row, 74].Text != "") tarif.TarifVodoSnabBudzh = int.Parse(workSheet.Cells[row, 74].Text);
+                        if (workSheet.Cells[row, 75].Text != "") tarif.TarifVodoOtvedUsred = int.Parse(workSheet.Cells[row, 75].Text);
+                        if (workSheet.Cells[row, 76].Text != "") tarif.TarifVodoOtvedFizL = int.Parse(workSheet.Cells[row, 76].Text);
+                        if (workSheet.Cells[row, 77].Text != "") tarif.TarifVodoOtvedYriL = int.Parse(workSheet.Cells[row, 77].Text);
+                        if (workSheet.Cells[row, 78].Text != "") tarif.TarifVodoOtvedBudzh = int.Parse(workSheet.Cells[row, 78].Text);
+
+                        if (workSheet.Cells[row, 79].Text != "") network.ProtyzhVodoSeteyObsh = int.Parse(workSheet.Cells[row, 79].Text);
+                        if (workSheet.Cells[row, 80].Text != "") network.ProtyzhVodoSeteyVtomIznos = int.Parse(workSheet.Cells[row, 80].Text);
+                        if (workSheet.Cells[row, 81].Text != "") network.ProtyzhVodoSeteyIznos = decimal.Parse(workSheet.Cells[row, 81].Text);
+                        if (workSheet.Cells[row, 82].Text != "") network.ProtyzhKanalSeteyObsh = int.Parse(workSheet.Cells[row, 82].Text);
+                        if (workSheet.Cells[row, 83].Text != "") network.ProtyzhKanalSeteyVtomIznos = int.Parse(workSheet.Cells[row, 83].Text);
+                        if (workSheet.Cells[row, 84].Text != "") network.ProtyzhKanalSeteyIznos = decimal.Parse(workSheet.Cells[row, 84].Text);
+                        if (workSheet.Cells[row, 85].Text != "") network.ProtyzhNewSeteyVodoSnab = int.Parse(workSheet.Cells[row, 85].Text);
+                        if (workSheet.Cells[row, 86].Text != "") network.ProtyzhNewSeteyVodoOtved = int.Parse(workSheet.Cells[row, 86].Text);
+                        if (workSheet.Cells[row, 87].Text != "") network.ProtyzhRekonSeteyVodoSnab = int.Parse(workSheet.Cells[row, 87].Text);
+                        if (workSheet.Cells[row, 88].Text != "") network.ProtyzhRekonSeteyVodoOtved = int.Parse(workSheet.Cells[row, 88].Text);
+                        if (workSheet.Cells[row, 89].Text != "") network.ProtyzhRemontSeteyVodoSnab = int.Parse(workSheet.Cells[row, 89].Text);
+                        if (workSheet.Cells[row, 90].Text != "") network.ProtyzhRemontSeteyVodoOtved = int.Parse(workSheet.Cells[row, 90].Text);
+
+                        //listSeloForms.Add(seloForm);
+                        await _dbSetForm.AddAsync(seloForm);
+                        await _context.SaveChangesAsync();
+                        doc.SeloFormId = seloForm.Id;
+                        
+                        var katoRecord = _dbSetKato.Where(x => x.Code.ToString() == doc.KodNaselPunk).FirstOrDefault();
+                        if (katoRecord != null && katoRecord.ParentId != 0)
+                        {
+                            var oblastKato = await FindParentRecordAsync(katoRecord.ParentId, 0);
+                            if (oblastKato != null) doc.KodOblast = oblastKato.Code.ToString();
+                        }
+                        if (katoRecord != null && katoRecord.ParentId != 0)
+                        {
+                            var raionKato = await FindParentRecordAsync(katoRecord.ParentId, 3);
+                            if (raionKato != null) doc.KodRaiona = raionKato.Code.ToString();
+                        }
+
+                        supply.IdForm = seloForm.Id;
+                        disposal.IdForm = seloForm.Id;
+                        tarif.IdForm = seloForm.Id;
+                        network.IdForm = seloForm.Id;
+
+                        listSeloDocs.Add(doc);
+                        if(ObjectExtensionsHelper.HasAnyValue(supply)) listSupply.Add(supply);
+                        if(ObjectExtensionsHelper.HasAnyValue(disposal)) listDisposal.Add(disposal);
+                        if(ObjectExtensionsHelper.HasAnyValue(tarif)) listTarif.Add(tarif);
+                        if(ObjectExtensionsHelper.HasAnyValue(network)) listNetwork.Add(network);
+                    }
+                }
+            }
+
+            await _dbSetDoc.AddRangeAsync(listSeloDocs);
+            await _dbSetSupply.AddRangeAsync(listSupply);
+            await _dbSetDisposal.AddRangeAsync(listDisposal);
+            await _dbSetTarif.AddRangeAsync(listTarif);
+            await _dbSetNetwork.AddRangeAsync(listNetwork);
+            await _context.SaveChangesAsync();
+
+            return listSeloDocs.Count();
+        }        
+
+        private async Task<Ref_Kato?> FindParentRecordAsync(int parentId, int katoLevel)
+        {
+            var currentRecord = await _dbSetKato.Where(x=>x.Id== parentId).FirstOrDefaultAsync();
+            if(currentRecord != null && currentRecord.KatoLevel != katoLevel && currentRecord.ParentId != 0)
+            {
+                return await FindParentRecordAsync(currentRecord.ParentId, katoLevel);
+            }
+            return currentRecord;
         }
     }
 }

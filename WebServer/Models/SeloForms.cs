@@ -48,7 +48,7 @@ namespace WebServer.Models
         /// Год постройки системы водоснабжения
         /// </summary>
         [Comment("Год постройки системы водоснабжения")]
-        public DateTime? YearSystVodoSnab { get; set; }
+        public string? YearSystVodoSnab { get; set; }
         /// <summary>
         /// Обслуживающее предприятие
         /// </summary>

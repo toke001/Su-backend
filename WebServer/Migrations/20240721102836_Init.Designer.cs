@@ -12,7 +12,7 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    [Migration("20240716065958_Init")]
+    [Migration("20240721102836_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -1213,14 +1213,14 @@ namespace WebServer.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BeginDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("DescriptionCode")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NameCode")
                         .IsRequired()
@@ -1238,7 +1238,6 @@ namespace WebServer.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("KodNaselPunk")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasComment("Код населенного пункта (КАТО)");
 
@@ -1310,8 +1309,8 @@ namespace WebServer.Migrations
                         .HasColumnType("boolean")
                         .HasComment("Статус села спутниковое");
 
-                    b.Property<DateTime?>("YearSystVodoSnab")
-                        .HasColumnType("timestamp without time zone")
+                    b.Property<string>("YearSystVodoSnab")
+                        .HasColumnType("text")
                         .HasComment("Год постройки системы водоснабжения");
 
                     b.HasKey("Id");
