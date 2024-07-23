@@ -53,8 +53,9 @@ namespace WebServer.Reposotory
             var isReportable = await _dbSetKato.Where(x => x.Code.ToString() == kodNaselPunk).Select(x => x.IsReportable).FirstOrDefaultAsync();
             if (!isReportable) return "NotReporting";
 
-            return await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
+            var res = await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
                 .Select(x=>x.SeloForm).FirstOrDefaultAsync();
+            return res;
         }
 
         public async Task<SeloForms> AddSeloForms(Guid idDoc, SeloForms seloForms)

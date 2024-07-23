@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Dtos;
 using WebServer.Interfaces;
@@ -43,6 +44,7 @@ namespace WebServer.Controllers
         /// <param name="seloDocumentDto"></param>
         /// <returns></returns>
         [HttpPost("AddSeloDocument")]
+        [Authorize]
         public async Task<ActionResult> AddSeloDocument(SeloDocumentDto seloDocumentDto)
         {
             try
@@ -85,6 +87,7 @@ namespace WebServer.Controllers
         /// <param name="seloFormsDto"></param>
         /// <returns></returns>
         [HttpPost("AddSeloForms")]
+        [Authorize]
         public async Task<ActionResult> AddSeloForms(Guid idDoc, SeloFormsDto seloFormsDto)
         {
             try
@@ -130,6 +133,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddWaterSupply")]
+        [Authorize]
         public async Task<ActionResult> AddWaterSupply(Guid idForm, SeloWaterSupplyDto dto)
         {
             try
@@ -150,6 +154,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateWaterSupply")]
+        [Authorize]
         public async Task<ActionResult> UpdateWaterSupply(SeloWaterSupplyDto dto)
         {
             try
@@ -195,6 +200,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddWaterDisposal")]
+        [Authorize]
         public async Task<ActionResult> AddWaterDisposal(Guid idForm, SeloWaterDisposalDto dto)
         {
             try
@@ -215,6 +221,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateWaterDisposal")]
+        [Authorize]
         public async Task<ActionResult> UpdateWaterDisposal(SeloWaterDisposalDto dto)
         {
             try
@@ -259,6 +266,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddTarifInfo")]
+        [Authorize]
         public async Task<ActionResult> AddTarifInfo(Guid idForm, SeloTariffDto dto)
         {
             try
@@ -279,6 +287,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateTariffInfo")]
+        [Authorize]
         public async Task<ActionResult> UpdateTariffInfo(SeloTariffDto dto)
         {
             try
@@ -324,6 +333,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddNetworkLength")]
+        [Authorize]
         public async Task<ActionResult> AddNetworkLength(Guid idForm, SeloNetworkLengthDto dto)
         {
             try
@@ -344,6 +354,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateNetworkLength")]
+        [Authorize]
         public async Task<ActionResult> UpdateNetworkLength(SeloNetworkLengthDto dto)
         {
             try
