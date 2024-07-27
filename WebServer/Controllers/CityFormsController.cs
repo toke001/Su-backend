@@ -151,7 +151,13 @@ namespace WebServer.Controllers
         {
             try
             {
-                var entity = _mapper.Map<CityWaterSupply>(dto);
+                var entity = await _repo.GetWaterSupply(dto.IdForm);
+                if (entity == null) { return NotFound(); }
+                var model = _mapper.Map<CityWaterSupply>(dto);
+                if(model.AutoProccesNasosStanc.HasValue) entity.AutoProccesNasosStanc = model.AutoProccesNasosStanc;
+                if(model.AutoProccesSetVodosnab.HasValue) entity.AutoProccesSetVodosnab = model.AutoProccesSetVodosnab;
+
+
                 return Ok(await _repo.UpdateWaterSupply(entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
