@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Dtos;
 using WebServer.Interfaces;
@@ -43,6 +44,7 @@ namespace WebServer.Controllers
         /// <param name="cityDocumentDto"></param>
         /// <returns></returns>
         [HttpPost("AddCityDocument")]
+        [Authorize]
         public async Task<ActionResult> AddCityDocument(CityDocumentDto cityDocumentDto)
         {
             try
@@ -83,6 +85,7 @@ namespace WebServer.Controllers
         /// <param name="cityFormsDto"></param>
         /// <returns></returns>
         [HttpPost("AddCityForms")]
+        [Authorize]
         public async Task<ActionResult> AddCityForms(Guid idDoc, CityFormsDto cityFormsDto)
         {
             try
@@ -127,6 +130,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddWaterSupply")]
+        [Authorize]
         public async Task<ActionResult> AddWaterSupply(Guid idForm, CityWaterSupplyDto dto)
         {
             try
@@ -147,6 +151,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateWaterSupply")]
+        [Authorize]
         public async Task<ActionResult> UpdateWaterSupply(CityWaterSupplyDto dto)
         {
             try
@@ -197,6 +202,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddWaterDisposal")]
+        [Authorize]
         public async Task<ActionResult> AddWaterDisposal(Guid idForm, CityWaterDisposalDto dto)
         {
             try
@@ -217,6 +223,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateWaterDisposal")]
+        [Authorize]
         public async Task<ActionResult> UpdateWaterDisposal(CityWaterDisposalDto dto)
         {
             try
@@ -260,6 +267,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddTarifInfo")]
+        [Authorize]
         public async Task<ActionResult> AddTarifInfo(Guid idForm, CityTarifDto dto)
         {
             try
@@ -280,6 +288,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateTariffInfo")]
+        [Authorize]
         public async Task<ActionResult> UpdateTariffInfo(CityTarifDto dto)
         {
             try
@@ -324,6 +333,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost("AddNetworkLength")]
+        [Authorize]
         public async Task<ActionResult> AddNetworkLength(Guid idForm, CityNetworkLengthDto dto)
         {
             try
@@ -343,6 +353,7 @@ namespace WebServer.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("UpdateNetworkLength")]
+        [Authorize]
         public async Task<ActionResult> UpdateNetworkLength(CityNetworkLengthDto dto)
         {
             try

@@ -22,6 +22,7 @@ namespace WebServer.Reposotory
         private readonly DbSet<SeloTariff> _dbSetTarif;
         private readonly DbSet<SeloNetworkLength> _dbSetNetwork;
         private readonly DbSet<Ref_Kato> _dbSetKato;
+        private readonly DbSet<Account> _dbSetAccount;
 
         public SeloExportImportRepository(WaterDbContext context)
         {
@@ -33,6 +34,7 @@ namespace WebServer.Reposotory
             _dbSetTarif = _context.Set<SeloTariff>();
             _dbSetNetwork = _context.Set<SeloNetworkLength>();
             _dbSetKato = _context.Set<Ref_Kato>();
+            _dbSetAccount = _context.Set<Account>();
         }
 
         public async Task<List<SeloTotalFormsDto>> GetSeloTotalFormsAsync(string kato, int year)
@@ -49,10 +51,10 @@ namespace WebServer.Reposotory
                     var formId = await _dbSetDoc.Where(x => x.KodNaselPunk == t && x.Year == year).Select(x => x.SeloFormId).FirstOrDefaultAsync();
                     //if (formId == null) throw new Exception("NotFound");
                     var form = (from f in _dbSetForm
-                                join ws in _dbSetSupply on f.Id equals ws.IdForm
-                                join wd in _dbSetDisposal on f.Id equals wd.IdForm
-                                join tr in _dbSetTarif on f.Id equals tr.IdForm
-                                join n in _dbSetNetwork on f.Id equals n.IdForm
+                                from ws in _dbSetSupply.Where(x=>x.IdForm== f.Id).DefaultIfEmpty()
+                                from wd in _dbSetDisposal.Where(x => x.IdForm == f.Id).DefaultIfEmpty()
+                                from tr in _dbSetTarif.Where(x => x.IdForm == f.Id).DefaultIfEmpty()
+                                from n in _dbSetNetwork.Where(x => x.IdForm == f.Id).DefaultIfEmpty()   
                                 join k in _dbSetKato on t equals k.Code.ToString()
                                 where f.Id == formId
                                 select new SeloTotalFormsDto
@@ -511,8 +513,9 @@ namespace WebServer.Reposotory
             }
         }
 
-        public async Task<int> ImportExcel(IFormFile file)
+        public async Task<int> ImportExcel(IFormFile file, string login, int year)
         {
+            if (_dbSetAccount.Any(x => x.Login != login)) throw new Exception($"Данного логина не существует - {login}");
             var listSeloDocs = new List<SeloDocument>();
             //var listSeloForms = new List<SeloForms>();
             var listSupply = new List<SeloWaterSupply>();
@@ -536,11 +539,16 @@ namespace WebServer.Reposotory
                         var supply = new SeloWaterSupply();
                         var disposal = new SeloWaterDisposal();
                         var tarif = new SeloTariff();
-                        var network = new SeloNetworkLength();
+                        var network = new SeloNetworkLength();                        
 
                         if(workSheet.Cells[row, 1].Text != "") 
                             seloForm.Id = Guid.Parse(workSheet.Cells[row, 1].Text);
                         doc.KodNaselPunk = workSheet.Cells[row, 3].Text;
+                        doc.Year = year;
+                        doc.Login = login;
+                        if (_dbSetDoc.Any(x => x.KodNaselPunk == doc.KodNaselPunk && x.Year == year))
+                            break;
+
                         seloForm.StatusOpor = workSheet.Cells[row, 4].Text.ToLower() == "да" ? true : false;
                         seloForm.StatusSput = workSheet.Cells[row, 5].Text.ToLower() == "да" ? true : false;
                         seloForm.StatusProch = workSheet.Cells[row, 6].Text;

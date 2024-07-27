@@ -7,7 +7,7 @@ namespace WebServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class SeloExportImportController : ControllerBase
     {
         private readonly ISeloExportImport _repo;
@@ -56,12 +56,12 @@ namespace WebServer.Controllers
         }
 
         [HttpPost("import")]
-        public async Task<IActionResult> ImportExcel(IFormFile file)
+        public async Task<IActionResult> ImportExcel(IFormFile file, string login, int year)
         {
             if (file == null || file.Length == 0) return BadRequest("File is empty!");
             try
             {
-                return Ok(await _repo.ImportExcel(file));
+                return Ok(await _repo.ImportExcel(file, login, year));
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
