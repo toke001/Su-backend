@@ -65,7 +65,7 @@ namespace WebServer
             });
             #endregion
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson();
             builder.Services.AddDbContext<WaterDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             #region DI св¤зи

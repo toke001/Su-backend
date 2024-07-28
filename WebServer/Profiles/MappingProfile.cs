@@ -12,20 +12,23 @@ namespace WebServer.Profiles
             CreateMap<SeloDocument, SeloDocumentDto>();
             CreateMap<SeloDocumentDto, SeloDocument>();
 
-            CreateMap<SeloForms, SeloFormsDto>();
-            CreateMap<SeloFormsDto, SeloForms>();
+            //CreateMap<SeloForms, SeloFormsDto>();
+            //CreateMap<SeloFormsDto, SeloForms>();
 
-            CreateMap<SeloWaterSupply, SeloWaterSupplyDto>();
-            CreateMap<SeloWaterSupplyDto, SeloWaterSupply>();
+            CreateMap<SeloForm, SeloFormDto>();
+            CreateMap<SeloFormDto, SeloForm>();
 
-            CreateMap<SeloWaterDisposal, SeloWaterDisposalDto>();
-            CreateMap<SeloWaterDisposalDto, SeloWaterDisposal>();
+            //CreateMap<SeloWaterSupply, SeloWaterSupplyDto>();
+            //CreateMap<SeloWaterSupplyDto, SeloWaterSupply>();
 
-            CreateMap<SeloTariff, SeloTariffDto>();
-            CreateMap<SeloTariffDto, SeloTariff>();
+            //CreateMap<SeloWaterDisposal, SeloWaterDisposalDto>();
+            //CreateMap<SeloWaterDisposalDto, SeloWaterDisposal>();
 
-            CreateMap<SeloNetworkLength, SeloNetworkLengthDto>();
-            CreateMap<SeloNetworkLengthDto, SeloNetworkLength>();
+            //CreateMap<SeloTariff, SeloTariffDto>();
+            //CreateMap<SeloTariffDto, SeloTariff>();
+
+            //CreateMap<SeloNetworkLength, SeloNetworkLengthDto>();
+            //CreateMap<SeloNetworkLengthDto, SeloNetworkLength>();
 
             //City
             CreateMap<CityDocumentDto, CityDocument>();

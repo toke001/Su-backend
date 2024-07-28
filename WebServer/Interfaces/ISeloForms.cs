@@ -7,18 +7,20 @@ namespace WebServer.Interfaces
         Task<object> GetSeloDocument(string katoKod);
         Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument);
         Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year);
-        Task<SeloForms> AddSeloForms(Guid idDoc, SeloForms seloForms);
-        Task<SeloWaterSupply> GetWaterSupply(Guid idForm);
-        Task<SeloWaterSupply> AddWaterSupply(Guid idForm, SeloWaterSupply waterSupplyInfo);
-        Task<SeloWaterSupply> UpdateWaterSupply(SeloWaterSupply waterSupplyInfo);
-        Task<SeloWaterDisposal> GetWaterDisposal(Guid idForm);
-        Task<SeloWaterDisposal> AddWaterDisposal(Guid idForm, SeloWaterDisposal waterDisposalInfo);
-        Task<SeloWaterDisposal> UpdateWaterDisposal(SeloWaterDisposal waterDisposalInfo);
-        Task<SeloTariff> GetTarifInfo(Guid idForm);
-        Task<SeloTariff> AddTarifInfo(Guid idForm, SeloTariff tariffInfo);
-        Task<SeloTariff> UpdateTariffInfo(SeloTariff tariffInfo);
-        Task<SeloNetworkLength> GetNetworkLength(Guid idForm);
-        Task<SeloNetworkLength> AddNetworkLength(Guid idForm, SeloNetworkLength networkLengthInfo);
-        Task<SeloNetworkLength> UpdateNetworkLength(SeloNetworkLength networkLengthInfo);
+        Task<SeloForm> AddSeloForms(Guid idDoc, SeloForm seloForm);
+        Task<SeloForm> GetSeloFormById(Guid id);
+        Task<SeloForm> UpdateSeloForm(SeloForm seloForm);
+        //Task<SeloWaterSupply> GetWaterSupply(Guid idForm);
+        //Task<SeloWaterSupply> AddWaterSupply(Guid idForm, SeloWaterSupply waterSupplyInfo);
+        //Task<SeloWaterSupply> UpdateWaterSupply(SeloWaterSupply waterSupplyInfo);
+        //Task<SeloWaterDisposal> GetWaterDisposal(Guid idForm);
+        //Task<SeloWaterDisposal> AddWaterDisposal(Guid idForm, SeloWaterDisposal waterDisposalInfo);
+        //Task<SeloWaterDisposal> UpdateWaterDisposal(SeloWaterDisposal waterDisposalInfo);
+        //Task<SeloTariff> GetTarifInfo(Guid idForm);
+        //Task<SeloTariff> AddTarifInfo(Guid idForm, SeloTariff tariffInfo);
+        //Task<SeloTariff> UpdateTariffInfo(SeloTariff tariffInfo);
+        //Task<SeloNetworkLength> GetNetworkLength(Guid idForm);
+        //Task<SeloNetworkLength> AddNetworkLength(Guid idForm, SeloNetworkLength networkLengthInfo);
+        //Task<SeloNetworkLength> UpdateNetworkLength(SeloNetworkLength networkLengthInfo);
     }
 }

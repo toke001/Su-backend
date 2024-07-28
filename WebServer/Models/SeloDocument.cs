@@ -14,7 +14,7 @@ namespace WebServer.Models
         /// </summary>
         [Comment("Главная форма город")]
         public Guid? SeloFormId { get; set; }
-        public virtual SeloForms? SeloForm { get; set; }
+        public virtual SeloForm? SeloForm { get; set; }
         /// <summary>
         /// Код населенного пункта (КАТО)
         /// </summary>
