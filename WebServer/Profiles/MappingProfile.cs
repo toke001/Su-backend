@@ -32,12 +32,8 @@ namespace WebServer.Profiles
 
             //City
             CreateMap<CityDocumentDto, CityDocument>();
-            CreateMap<CityFormsDto, CityForms>();
-            CreateMap<CityForms, CityFormsDto>();
-            CreateMap<CityWaterDisposalDto, CityWaterDisposal>();
-            CreateMap<CityWaterSupplyDto, CityWaterSupply>();
-            CreateMap<CityTarifDto, CityTarif>();
-            CreateMap<CityNetworkLengthDto, CityNetworkLength>();
+            CreateMap<CityFormDto, CityForm>();
+            CreateMap<CityForm, CityFormDto>();            
         }
     }
 }

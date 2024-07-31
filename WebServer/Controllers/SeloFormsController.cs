@@ -128,7 +128,7 @@ namespace WebServer.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Обновление формы
         /// </summary>
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>

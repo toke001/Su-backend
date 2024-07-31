@@ -8,23 +8,15 @@ namespace WebServer.Reposotory
     public class CityFormsRepository : ICityForms
     {
         private readonly WaterDbContext _context;
-        private readonly DbSet<CityForms> _dbSetForm;
-        private readonly DbSet<CityDocument> _dbSetDoc;
-        private readonly DbSet<CityWaterDisposal> _dbSetDisposal;
-        private readonly DbSet<CityWaterSupply> _dbSetSupply;
-        private readonly DbSet<CityTarif> _dbSetTarif;
-        private readonly DbSet<CityNetworkLength> _dbSetNetwork;
+        private readonly DbSet<CityForm> _dbSetForm;
+        private readonly DbSet<CityDocument> _dbSetDoc;        
         private readonly DbSet<Ref_Kato> _dbSetKato;
 
         public CityFormsRepository(WaterDbContext context)
         {
             _context = context;
-            _dbSetForm = _context.Set<CityForms>();
-            _dbSetDoc = _context.Set<CityDocument>();
-            _dbSetDisposal = _context.Set<CityWaterDisposal>();
-            _dbSetSupply = _context.Set<CityWaterSupply>();
-            _dbSetTarif = _context.Set<CityTarif>();
-            _dbSetNetwork = _context.Set<CityNetworkLength>();
+            _dbSetForm = _context.Set<CityForm>();
+            _dbSetDoc = _context.Set<CityDocument>();            
             _dbSetKato = _context.Set<Ref_Kato>();
         }
 
@@ -56,7 +48,7 @@ namespace WebServer.Reposotory
                 .Select(x=>x.CityForm).FirstOrDefaultAsync();
         }
 
-        public async Task<CityForms> AddCityForms(Guid idDoc, CityForms cityForms)
+        public async Task<CityForm> AddCityForms(Guid idDoc, CityForm cityForms)
         {
             var doc = await _dbSetDoc.FindAsync(idDoc);
             if (doc == null) throw new Exception("Документа с таким Id не существует");
@@ -73,93 +65,105 @@ namespace WebServer.Reposotory
             return cityForms;
         }
 
-        public async Task<CityWaterSupply> GetWaterSupply(Guid idForm)
+        public async Task<CityForm> GetCityFormById(Guid id)
         {
-            return await _dbSetSupply.FirstOrDefaultAsync(x => x.IdForm == idForm);
+            return await _dbSetForm.FindAsync(id);
         }
 
-        public async Task<CityWaterSupply> AddWaterSupply(Guid idForm, CityWaterSupply waterSupplyInfo)
+        public async Task<CityForm> UpdateCityForm(CityForm cityForm)
         {
-            var cityForm = await _dbSetForm.FindAsync(idForm);
-            if (cityForm == null) throw new Exception("Форма не найдена");
-            waterSupplyInfo.IdForm = idForm;
-            _dbSetSupply.Add(waterSupplyInfo);
+            _dbSetForm.Update(cityForm);
             await _context.SaveChangesAsync();
-            return waterSupplyInfo;
+            return cityForm;
         }
 
-        public async Task<CityWaterSupply> UpdateWaterSupply(CityWaterSupply waterSupplyInfo)
-        {
-            _dbSetSupply.Update(waterSupplyInfo);
-            await _context.SaveChangesAsync();
-            return waterSupplyInfo;
-        }
+        //public async Task<CityWaterSupply> GetWaterSupply(Guid idForm)
+        //{
+        //    return await _dbSetSupply.FirstOrDefaultAsync(x => x.IdForm == idForm);
+        //}
 
-        public async Task<CityWaterDisposal> GetWaterDisposal(Guid idForm)
-        {
-            return await _dbSetDisposal.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        }
+        //public async Task<CityWaterSupply> AddWaterSupply(Guid idForm, CityWaterSupply waterSupplyInfo)
+        //{
+        //    var cityForm = await _dbSetForm.FindAsync(idForm);
+        //    if (cityForm == null) throw new Exception("Форма не найдена");
+        //    waterSupplyInfo.IdForm = idForm;
+        //    _dbSetSupply.Add(waterSupplyInfo);
+        //    await _context.SaveChangesAsync();
+        //    return waterSupplyInfo;
+        //}
 
-        public async Task<CityWaterDisposal> AddWaterDisposal(Guid idForm, CityWaterDisposal waterDisposalInfo)
-        {
-            var cityForm = await _dbSetForm.FindAsync(idForm);
-            if (cityForm == null) throw new Exception("Форма не найдена");
-            waterDisposalInfo.IdForm = idForm;
-            _dbSetDisposal.Add(waterDisposalInfo);
-            await _context.SaveChangesAsync();
-            return waterDisposalInfo;
-        }
+        //public async Task<CityWaterSupply> UpdateWaterSupply(CityWaterSupply waterSupplyInfo)
+        //{
+        //    _dbSetSupply.Update(waterSupplyInfo);
+        //    await _context.SaveChangesAsync();
+        //    return waterSupplyInfo;
+        //}
 
-        public async Task<CityWaterDisposal> UpdateWaterDisposal(CityWaterDisposal waterDisposalInfo)
-        {
-            _dbSetDisposal.Update(waterDisposalInfo);
-            await _context.SaveChangesAsync();
-            return waterDisposalInfo;
-        }
+        //public async Task<CityWaterDisposal> GetWaterDisposal(Guid idForm)
+        //{
+        //    return await _dbSetDisposal.FirstOrDefaultAsync(x => x.IdForm == idForm);
+        //}
+
+        //public async Task<CityWaterDisposal> AddWaterDisposal(Guid idForm, CityWaterDisposal waterDisposalInfo)
+        //{
+        //    var cityForm = await _dbSetForm.FindAsync(idForm);
+        //    if (cityForm == null) throw new Exception("Форма не найдена");
+        //    waterDisposalInfo.IdForm = idForm;
+        //    _dbSetDisposal.Add(waterDisposalInfo);
+        //    await _context.SaveChangesAsync();
+        //    return waterDisposalInfo;
+        //}
+
+        //public async Task<CityWaterDisposal> UpdateWaterDisposal(CityWaterDisposal waterDisposalInfo)
+        //{
+        //    _dbSetDisposal.Update(waterDisposalInfo);
+        //    await _context.SaveChangesAsync();
+        //    return waterDisposalInfo;
+        //}
 
 
-        public async Task<CityTarif> GetTarifInfo(Guid idForm)
-        {
-            return await _dbSetTarif.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        }
+        //public async Task<CityTarif> GetTarifInfo(Guid idForm)
+        //{
+        //    return await _dbSetTarif.FirstOrDefaultAsync(x => x.IdForm == idForm);
+        //}
 
-        public async Task<CityTarif> AddTarifInfo(Guid idForm, CityTarif tariffInfo)
-        {
-            var cityForm = await _dbSetForm.FindAsync(idForm);
-            if (cityForm == null) throw new Exception("Форма не найдена");
-            tariffInfo.IdForm = idForm;
-            _dbSetTarif.Add(tariffInfo);
-            await _context.SaveChangesAsync();
-            return tariffInfo;
-        }
+        //public async Task<CityTarif> AddTarifInfo(Guid idForm, CityTarif tariffInfo)
+        //{
+        //    var cityForm = await _dbSetForm.FindAsync(idForm);
+        //    if (cityForm == null) throw new Exception("Форма не найдена");
+        //    tariffInfo.IdForm = idForm;
+        //    _dbSetTarif.Add(tariffInfo);
+        //    await _context.SaveChangesAsync();
+        //    return tariffInfo;
+        //}
 
-        public async Task<CityTarif> UpdateTariffInfo(CityTarif tariffInfo)
-        {
-            _dbSetTarif.Update(tariffInfo);
-            await _context.SaveChangesAsync();
-            return tariffInfo;
-        }
+        //public async Task<CityTarif> UpdateTariffInfo(CityTarif tariffInfo)
+        //{
+        //    _dbSetTarif.Update(tariffInfo);
+        //    await _context.SaveChangesAsync();
+        //    return tariffInfo;
+        //}
 
-        public async Task<CityNetworkLength> GetNetworkLength(Guid idForm)
-        {
-            return await _dbSetNetwork.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        }
+        //public async Task<CityNetworkLength> GetNetworkLength(Guid idForm)
+        //{
+        //    return await _dbSetNetwork.FirstOrDefaultAsync(x => x.IdForm == idForm);
+        //}
 
-        public async Task<CityNetworkLength> AddNetworkLength(Guid idForm, CityNetworkLength networkLengthInfo)
-        {
-            var cityForm = await _dbSetForm.FindAsync(idForm);
-            if (cityForm == null) throw new Exception("Форма не найдена");
-            networkLengthInfo.IdForm = idForm;
-            _dbSetNetwork.Add(networkLengthInfo);
-            await _context.SaveChangesAsync();
-            return networkLengthInfo;
-        }
+        //public async Task<CityNetworkLength> AddNetworkLength(Guid idForm, CityNetworkLength networkLengthInfo)
+        //{
+        //    var cityForm = await _dbSetForm.FindAsync(idForm);
+        //    if (cityForm == null) throw new Exception("Форма не найдена");
+        //    networkLengthInfo.IdForm = idForm;
+        //    _dbSetNetwork.Add(networkLengthInfo);
+        //    await _context.SaveChangesAsync();
+        //    return networkLengthInfo;
+        //}
 
-        public async Task<CityNetworkLength> UpdateNetworkLength(CityNetworkLength networkLengthInfo)
-        {
-            _dbSetNetwork.Update(networkLengthInfo);
-            await _context.SaveChangesAsync();
-            return networkLengthInfo;
-        }
+        //public async Task<CityNetworkLength> UpdateNetworkLength(CityNetworkLength networkLengthInfo)
+        //{
+        //    _dbSetNetwork.Update(networkLengthInfo);
+        //    await _context.SaveChangesAsync();
+        //    return networkLengthInfo;
+        //}
     }
 }

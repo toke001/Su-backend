@@ -41,11 +41,7 @@ namespace WebServer.Data
         //public DbSet<SeloTariff> SeloTariffs { get; set; }
         //public DbSet<SeloNetworkLength> SeloNetworkLengths { get; set; }
         public DbSet<CityDocument> CityDocuments { get; set; }
-        public DbSet<CityForms> CityForms { get; set; }
-        public DbSet<CityWaterSupply> CityWaterSupplies { get; set; }
-        public DbSet<CityWaterDisposal> CityWaterDisposals { get; set; }
-        public DbSet<CityTarif> CityTarifs { get; set; }
-        public DbSet<CityNetworkLength> CityNetworkLengths { get; set; }
+        public DbSet<CityForm> CityForms { get; set; }        
         public DbSet<ResponseCode> ResponseCodes { get; set; }
     }
 }
