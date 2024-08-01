@@ -80,6 +80,7 @@ namespace WebServer
             builder.Services.AddScoped(typeof(Interfaces.ISeloForms), typeof(Reposotory.SeloFormsRepository));
             builder.Services.AddScoped(typeof(Interfaces.ICityForms), typeof(Reposotory.CityFormsRepository));
             builder.Services.AddScoped(typeof(Interfaces.ISeloExportImport), typeof(Reposotory.SeloExportImportRepository));
+            builder.Services.AddScoped(typeof(Interfaces.ICityExportImport), typeof(Reposotory.CityExportImportRepository));
             #endregion
             #region Swagger
             builder.Services.AddSwaggerGen(sw =>

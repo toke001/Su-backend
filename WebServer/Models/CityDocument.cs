@@ -19,7 +19,7 @@ namespace WebServer.Models
         /// Код населенного пункта (КАТО)
         /// </summary>
         [Comment("Код населенного пункта (КАТО)")]
-        public required string KodNaselPunk { get; set; }
+        public string KodNaselPunk { get; set; }
         /// <summary>
         /// Код обалсти (КАТО)
         /// </summary>
