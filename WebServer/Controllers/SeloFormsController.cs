@@ -134,6 +134,7 @@ namespace WebServer.Controllers
         /// <param name="patchDoc"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<IActionResult> Patch(Guid id, [FromBody] JsonPatchDocument<SeloForm> patchDoc)
         {
             if (patchDoc == null)
