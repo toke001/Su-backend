@@ -31,6 +31,7 @@ namespace WebServer.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] AccountSignUpRequestDto request)
         {

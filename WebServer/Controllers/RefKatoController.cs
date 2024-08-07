@@ -29,6 +29,26 @@ namespace WebServer.Controllers
             return Ok(await _repository.IsReportable(parentId));
         }
 
+        /// <summary>
+        /// Обновить isReportable, katoLevel в RefKato
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isReportable"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        [HttpGet("UpdateIsRepoLevel")]
+        public async Task<IActionResult> UpdateIsRepoLevel(int id, bool? isReportable, int? level)
+        {
+            try
+            {
+                return Ok(await _repository.UpdateIsRepoLevel(id, isReportable, level));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #region Street
         [HttpGet("street")]
         public async Task<IActionResult> GetRefStreetByKatoId([FromQuery] int id)

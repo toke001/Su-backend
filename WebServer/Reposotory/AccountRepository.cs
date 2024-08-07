@@ -91,9 +91,10 @@ namespace WebServer.Reposotory
                     KatoCode = request.KatoCode,                  
                     PasswordHash = saltedPassword,
                     CreateDate = DateTime.UtcNow,
+                    Email = request.Email
                 };
                 await _dbSet.AddAsync(account);
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
 
                 var list = new List<Account_Roles>();
 
@@ -109,9 +110,9 @@ namespace WebServer.Reposotory
                 }
                 if (list.Count > 0)
                 {
-                    await _dbSetAcRoles.AddRangeAsync(list);
-                    await _context.SaveChangesAsync();
+                    await _dbSetAcRoles.AddRangeAsync(list);                    
                 }
+                await _context.SaveChangesAsync();
                 return new AccountSignUpResponseDto()
                 {
                     Login = request.Login,

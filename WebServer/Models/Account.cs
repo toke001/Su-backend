@@ -11,5 +11,6 @@
         public string? BuildingNumber { get; set; }
         public long KatoCode { get; set; }
         public bool IsActive { get; set; } = true;
+        public string Email { get; set; }
     }
 }

@@ -66,6 +66,10 @@ namespace WebServer.Migrations
                         .HasColumnType("text")
                         .HasComment("Примечания");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("FullNameKk")
                         .HasColumnType("text");
 

@@ -12,7 +12,7 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    [Migration("20240801103357_init")]
+    [Migration("20240807115828_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -68,6 +68,10 @@ namespace WebServer.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasComment("Примечания");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FullNameKk")
                         .HasColumnType("text");

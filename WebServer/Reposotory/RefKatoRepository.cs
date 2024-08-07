@@ -172,5 +172,14 @@ namespace WebServer.Reposotory
             }
             return false;
         }
+
+        public async Task<Ref_Kato> UpdateIsRepoLevel(int id, bool? isReportable, int? level)
+        {
+            var obj = await _dbSet.FindAsync(id) ?? throw new Exception("Не найден КАТО!");
+            if(isReportable.HasValue) obj.IsReportable = isReportable.Value;
+            if(level.HasValue) obj.KatoLevel = level.Value;
+            _context.SaveChanges();
+            return obj;
+        }
     }
 }
