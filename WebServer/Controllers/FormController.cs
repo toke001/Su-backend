@@ -8,6 +8,7 @@ using WebServer.Reposotory;
 
 namespace WebServer.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]

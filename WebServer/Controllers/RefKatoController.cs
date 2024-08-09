@@ -36,7 +36,7 @@ namespace WebServer.Controllers
         /// <param name="isReportable"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        [HttpGet("UpdateIsRepoLevel")]
+        [HttpPut("UpdateIsRepoLevel")]
         public async Task<IActionResult> UpdateIsRepoLevel(int id, bool? isReportable, int? level)
         {
             try

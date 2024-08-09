@@ -76,53 +76,46 @@ namespace WebServer.Reposotory
         //add-migraion initCreate
         //update-database
         public async Task<AccountSignUpResponseDto> SignUp(AccountSignUpRequestDto request)
-        {
-            try
+        {            
+            var oldAccount = await _dbSet.FirstOrDefaultAsync(x => x.Login.ToLower() == request.Login.ToLower());
+            if (oldAccount != null) throw new Exception("Пользователь с таким логином уже существует");
+
+            //var salt = GenerateSalt();
+            var saltedPassword = PasswordHelper.HashPassword(request.Password);
+
+            var account = new Account
             {
-                var oldAccount = await _dbSet.FirstOrDefaultAsync(x => x.Login.ToLower() == request.Login.ToLower());
-                if (oldAccount != null) throw new Exception("Пользователь с таким логином уже существует");
+                Login = request.Login,
+                KatoCode = request.KatoCode,                  
+                PasswordHash = saltedPassword,
+                CreateDate = DateTime.UtcNow,
+                Email = request.Email
+            };
+            await _dbSet.AddAsync(account);
+            //await _context.SaveChangesAsync();
 
-                //var salt = GenerateSalt();
-                var saltedPassword = PasswordHelper.HashPassword(request.Password);
+            var list = new List<Account_Roles>();
 
-                var account = new Account
-                {
-                    Login = request.Login,
-                    KatoCode = request.KatoCode,                  
-                    PasswordHash = saltedPassword,
-                    CreateDate = DateTime.UtcNow,
-                    Email = request.Email
-                };
-                await _dbSet.AddAsync(account);
-                //await _context.SaveChangesAsync();
-
-                var list = new List<Account_Roles>();
-
-                foreach (var t in request.Roles)
-                {
-                    var accountRole = new Account_Roles
-                    {
-                        RoleId = t,
-                        AccountId = account.Id,
-                        CreateDate = DateTime.UtcNow
-                    };
-                    list.Add(accountRole);  
-                }
-                if (list.Count > 0)
-                {
-                    await _dbSetAcRoles.AddRangeAsync(list);                    
-                }
-                await _context.SaveChangesAsync();
-                return new AccountSignUpResponseDto()
-                {
-                    Login = request.Login,
-                    Password = request.Password,
-                };
-            }
-            catch (Exception ex) 
+            foreach (var t in request.Roles)
             {
-                throw;
+                var accountRole = new Account_Roles
+                {
+                    RoleId = t,
+                    AccountId = account.Id,
+                    CreateDate = DateTime.UtcNow
+                };
+                list.Add(accountRole);  
             }
+            if (list.Count > 0)
+            {
+                await _dbSetAcRoles.AddRangeAsync(list);                    
+            }
+            await _context.SaveChangesAsync();
+            return new AccountSignUpResponseDto()
+            {
+                Login = request.Login,
+                Password = request.Password,
+            };            
         }
     }
 }

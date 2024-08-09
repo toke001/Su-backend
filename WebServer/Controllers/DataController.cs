@@ -4,8 +4,9 @@ using WebServer.Dtos;
 
 namespace WebServer.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]    
     public class DataController : ControllerBase
     {
         private readonly Interfaces.IData _repo;

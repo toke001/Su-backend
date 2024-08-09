@@ -5,6 +5,7 @@ using WebServer.Models;
 
 namespace WebServer.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/[controller]")]
     [ApiController]
     public class FormItemController : ControllerBase
