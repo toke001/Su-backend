@@ -20,15 +20,15 @@ namespace WebServer.Controllers
         /// <summary>
         /// Получение ексель файла с данными административно-территориальной единицы по КАТО и году с дочерними объектами
         /// </summary>
-        /// <param name="kato"></param>
+        /// <param name="parentKato"></param>
         /// <param name="year"></param>
         /// <returns></returns>        
         [HttpGet("export")]
-        public async Task<IActionResult> ExportToExcel(string kato, int year)
+        public async Task<IActionResult> ExportToExcel(string parentKato, int year)
         {
             try
             {
-                var entities = await _repo.GetSeloTotalFormsAsync(kato, year);
+                var entities = await _repo.GetSeloTotalFormsByParentCodAsync(parentKato, year);
                 var content = _repo.GenerateExcelFile(entities);
                 return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"SeloForms_{year}.xlsx");
             }catch(Exception ex)

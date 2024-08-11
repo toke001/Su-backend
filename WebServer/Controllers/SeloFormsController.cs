@@ -89,11 +89,11 @@ namespace WebServer.Controllers
         /// <returns></returns>
         [HttpPost("AddSeloForms")]
         [Authorize]
-        public async Task<ActionResult> AddSeloForms(Guid idDoc, SeloFormDto seloFormDto)
+        public async Task<ActionResult> AddSeloForms(Guid idDoc, List<SeloFormDto> seloFormDto)
         {
             try
             {
-                var entity = _mapper.Map<SeloForm>(seloFormDto);
+                var entity = _mapper.Map<List<SeloForm>>(seloFormDto);
                 return Ok(await _repo.AddSeloForms(idDoc, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }

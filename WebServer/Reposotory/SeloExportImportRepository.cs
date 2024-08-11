@@ -17,10 +17,6 @@ namespace WebServer.Reposotory
         private readonly WaterDbContext _context;
         private readonly DbSet<SeloForm> _dbSetForm;
         private readonly DbSet<SeloDocument> _dbSetDoc;
-        //private readonly DbSet<SeloWaterDisposal> _dbSetDisposal;
-        //private readonly DbSet<SeloWaterSupply> _dbSetSupply;
-        //private readonly DbSet<SeloTariff> _dbSetTarif;
-        //private readonly DbSet<SeloNetworkLength> _dbSetNetwork;
         private readonly DbSet<Ref_Kato> _dbSetKato;
         private readonly DbSet<Account> _dbSetAccount;
 
@@ -29,39 +25,148 @@ namespace WebServer.Reposotory
             _context = context;
             _dbSetForm = _context.Set<SeloForm>();
             _dbSetDoc = _context.Set<SeloDocument>();
-            //_dbSetDisposal = _context.Set<SeloWaterDisposal>();
-            //_dbSetSupply = _context.Set<SeloWaterSupply>();
-            //_dbSetTarif = _context.Set<SeloTariff>();
-            //_dbSetNetwork = _context.Set<SeloNetworkLength>();
             _dbSetKato = _context.Set<Ref_Kato>();
             _dbSetAccount = _context.Set<Account>();
         }
 
-        public async Task<List<SeloTotalFormsDto>> GetSeloTotalFormsAsync(string kato, int year)
+        //public async Task<SeloTotalFormsDto> GetSeloTotalFormsAsync(string kato, int year)
+        //{
+        //    //List<SeloTotalFormsDto> forms = new List<SeloTotalFormsDto>();
+        //    var form = new SeloTotalFormsDto();
+        //    var mainKato = await _dbSetKato.Where(x=>x.Code.ToString() == kato && x.IsReportable == true).FirstOrDefaultAsync();
+        //    if (mainKato != null)
+        //    {
+        //        //var codesOfKatos = await _dbSetKato.Where(x=>x.ParentId==mainKato!.Id).Select(x=>x.Code.ToString()).ToListAsync();//список всех КАТО
+        //        //codesOfKatos.Insert(0, mainKato!.Code.ToString()); //Вношу главное КАТО, которое при в параметрах
+
+        //        //foreach (var t in codesOfKatos)
+        //        //{
+        //            var formId = await _dbSetDoc.Where(x => x.KodNaselPunk == mainKato.Code.ToString() && x.Year == year).Select(x => x.SeloFormId).FirstOrDefaultAsync();
+        //            //if (formId == null) throw new Exception("NotFound");
+        //            form = (from f in _dbSetForm
+        //                        join k in _dbSetKato on mainKato.Code equals k.Code
+        //                        where f.Id == formId
+        //                        select new SeloTotalFormsDto
+        //                        {
+        //                            Id = f.Id,
+        //                            NameOfPlace = k.NameRu,
+        //                            KodKato = mainKato.Code.ToString(),
+        //                            StatusOpor = f.StatusOpor,
+        //                            StatusSput = f.StatusSput,
+        //                            StatusProch = f.StatusProch,
+        //                            StatusPrigran = f.StatusPrigran,
+        //                            ObshKolSelNasPun = f.ObshKolChelNasPun,
+        //                            ObshKolChelNasPun = f.ObshKolChelNasPun,
+        //                            ObshKolDomHoz = f.ObshKolDomHoz,
+        //                            YearSystVodoSnab = f.YearSystVodoSnab,
+        //                            ObslPredpBin = "",
+        //                            ObslPredpName = "",
+        //                            SobstName = null,
+        //                            DosVodoSnabKolPunk = f.DosVodoSnabKolPunk,
+        //                            DosVodoSnabKolChel = f.DosVodoSnabKolChel,
+        //                            DosVodoSnabPercent = f.DosVodoSnabPercent,
+        //                            CentrVodoSnabKolNasPun = f.CentrVodoSnabKolNasPun,
+        //                            CentrVodoSnabKolChel = f.CentrVodoSnabKolChel,
+        //                            CentrVodoSnabObesKolNasPunk = f.CentrVodoSnabObesKolNasPunk,
+        //                            CentrVodoSnabObesKolChel = f.CentrVodoSnabObesKolChel,
+        //                            CentrVodoSnabKolAbon = f.CentrVodoSnabKolAbon,
+        //                            CentrVodoSnabFizLic = f.CentrVodoSnabFizLic,
+        //                            CentrVodoSnabYriLic = f.CentrVodoSnabYriLic,
+        //                            CentrVodoSnabBudzhOrg = f.CentrVodoSnabBudzhOrg,
+        //                            CentrVodoIndivPriborUchVodyVsego = f.CentrVodoIndivPriborUchVodyVsego,
+        //                            CentrVodoIndivPriborUchVodyASYE = f.CentrVodoIndivPriborUchVodyASYE,
+        //                            CentrVodoIndivPriborUchVodyOhvat = f.CentrVodoIndivPriborUchVodyOhvat,
+        //                            NeCtentrVodoKolSelsNasPunk = f.NeCtentrVodoKolSelsNasPunk,
+        //                            KbmKolSelsNasPunk = f.KbmKolSelsNasPunk,
+        //                            KbmKolChel = f.KbmKolChel,
+        //                            KbmObespNasel = f.KbmObespNasel,
+        //                            PrvKolSelsNasPunk = f.PrvKolSelsNasPunk,
+        //                            PrvKolChel = f.PrvKolChel,
+        //                            PrvObespNasel = f.PrvObespNasel,
+        //                            PrivVodaKolSelsNasPunk = f.PrivVodaKolSelsNasPunk,
+        //                            PrivVodaKolChel = f.PrivVodaKolChel,
+        //                            PrivVodaObespNasel = f.PrivVodaObespNasel,
+        //                            SkvazhKolSelsNasPunk = f.SkvazhKolSelsNasPunk,
+        //                            SkvazhKolChel = f.SkvazhKolChel,
+        //                            SkvazhObespNasel = f.SkvazhObespNasel,
+        //                            SkvazhKolSelsNasPunkOtkaz = f.SkvazhKolSelsNasPunkOtkaz,
+        //                            SkvazhKolChelOtkaz = f.SkvazhKolChelOtkaz,
+        //                            SkvazhDolyaNaselOtkaz = f.SkvazhDolyaNaselOtkaz,
+        //                            SkvazhDolyaSelOtkaz = f.SkvazhDolyaSelOtkaz,
+        //                            CentrVodOtvedKolSelsNasPunk = f.CentrVodOtvedKolSelsNasPunk,
+        //                            CentrVodOtvedKolChel = f.CentrVodOtvedKolChel,
+        //                            CentrVodOtvedKolAbonent = f.CentrVodOtvedKolAbonent,
+        //                            CentrVodOtvedFizLic = f.CentrVodOtvedFizLic,
+        //                            CentrVodOtvedYriLic = f.CentrVodOtvedYriLic,
+        //                            CentrVodOtvedBydzhOrg = f.CentrVodOtvedBydzhOrg,
+        //                            CentrVodOtvedDostypKolNasPunk = f.CentrVodOtvedDostypKolNasPunk,
+        //                            CentrVodOtvedDostypKolChel = f.CentrVodOtvedDostypKolChel,
+        //                            CentrVodOtvedNalich = f.CentrVodOtvedNalich,
+        //                            CentrVodOtvedNalichMechan = f.CentrVodOtvedNalichMechan,
+        //                            CentrVodOtvedNalichMechanBiolog = f.CentrVodOtvedNalichMechanBiolog,
+        //                            CentrVodOtvedProizvod = f.CentrVodOtvedProizvod,
+        //                            CentrVodOtvedIznos = f.CentrVodOtvedIznos,
+        //                            CentrVodOtvedOhvatKolChel = f.CentrVodOtvedOhvatKolChel,
+        //                            CentrVodOtvedOhvatNasel = f.CentrVodOtvedOhvatNasel,
+        //                            CentrVodOtvedFactPostypStochVod = f.CentrVodOtvedFactPostypStochVod,
+        //                            CentrVodOtvedFactPostypStochVod1 = f.CentrVodOtvedFactPostypStochVod1,
+        //                            CentrVodOtvedFactPostypStochVod2 = f.CentrVodOtvedFactPostypStochVod2,
+        //                            CentrVodOtvedFactPostypStochVod3 = f.CentrVodOtvedFactPostypStochVod3,
+        //                            CentrVodOtvedFactPostypStochVod4 = f.CentrVodOtvedFactPostypStochVod4,
+        //                            CentrVodOtvedObiemStochVod = f.CentrVodOtvedObiemStochVod,
+        //                            CentrVodOtvedUrovenNorm = f.CentrVodOtvedUrovenNorm,
+        //                            DecentrVodoOtvedKolSelsNasPunk = f.DecentrVodoOtvedKolSelsNasPunk,
+        //                            DecentrVodoOtvedKolChel = f.DecentrVodoOtvedKolChel,
+        //                            TarifVodoSnabUsred = f.TarifVodoSnabUsred,
+        //                            TarifVodoSnabFizL = f.TarifVodoSnabFizL,
+        //                            TarifVodoSnabYriL = f.TarifVodoSnabYriL,
+        //                            TarifVodoSnabBudzh = f.TarifVodoSnabBudzh,
+        //                            TarifVodoOtvedUsred = f.TarifVodoOtvedUsred,
+        //                            TarifVodoOtvedFizL = f.TarifVodoOtvedFizL,
+        //                            TarifVodoOtvedYriL = f.TarifVodoOtvedYriL,
+        //                            TarifVodoOtvedBudzh = f.TarifVodoOtvedBudzh,
+        //                            ProtyzhVodoSeteyObsh = f.ProtyzhVodoSeteyObsh,
+        //                            ProtyzhVodoSeteyVtomIznos = f.ProtyzhVodoSeteyVtomIznos,
+        //                            ProtyzhVodoSeteyIznos = f.ProtyzhVodoSeteyIznos,
+        //                            ProtyzhKanalSeteyObsh = f.ProtyzhKanalSeteyObsh,
+        //                            ProtyzhKanalSeteyVtomIznos = f.ProtyzhKanalSeteyVtomIznos,
+        //                            ProtyzhKanalSeteyIznos = f.ProtyzhKanalSeteyIznos,
+        //                            ProtyzhNewSeteyVodoSnab = f.ProtyzhNewSeteyVodoSnab,
+        //                            ProtyzhNewSeteyVodoOtved = f.ProtyzhNewSeteyVodoOtved,
+        //                            ProtyzhRekonSeteyVodoSnab = f.ProtyzhRekonSeteyVodoSnab,
+        //                            ProtyzhRekonSeteyVodoOtved = f.ProtyzhRekonSeteyVodoOtved,
+        //                            ProtyzhRemontSeteyVodoSnab = f.ProtyzhRemontSeteyVodoSnab,
+        //                            ProtyzhRemontSeteyVodoOtved = f.ProtyzhRemontSeteyVodoOtved
+        //                        }).FirstOrDefault();
+        //            //if (form == null) throw new Exception("NotFoundReport");
+        //            //if(form != null) forms.Add(form);
+        //        }                
+        //    //}
+        //    return form;
+        //}
+
+        public async Task<List<SeloTotalFormsDto>> GetSeloTotalFormsByParentCodAsync(string parentKato, int year)
         {
-            List<SeloTotalFormsDto> forms = new List<SeloTotalFormsDto>();
-            var mainKato = await _dbSetKato.Where(x=>x.Code.ToString() == kato && x.IsReportable == true).FirstOrDefaultAsync();
+            List<SeloTotalFormsDto> listForms = new List<SeloTotalFormsDto>();
+            var mainKato = await _dbSetKato.Where(x => x.Code.ToString() == parentKato && x.IsReportable == true).FirstOrDefaultAsync();
             if (mainKato != null)
             {
-                var codesOfKatos = await _dbSetKato.Where(x=>x.ParentId==mainKato!.Id).Select(x=>x.Code.ToString()).ToListAsync();//список всех КАТО
-                codesOfKatos.Insert(0, mainKato!.Code.ToString()); //Вношу главное КАТО, которое при в параметрах
+                var childrenOfKatos = await FindChildRecordsAsync(mainKato.Id);
+                //var codesOfKatos = await _dbSetKato.Where(x => x.ParentId == mainKato!.Id).Select(x => x.Code.ToString()).ToListAsync();//список всех КАТО
+                //codesOfKatos.Insert(0, mainKato!.Code.ToString()); //Вношу главное КАТО, которое при в параметрах
 
-                foreach (var t in codesOfKatos)
+                foreach (var t in childrenOfKatos)
                 {
-                    var formId = await _dbSetDoc.Where(x => x.KodNaselPunk == t && x.Year == year).Select(x => x.SeloFormId).FirstOrDefaultAsync();
+                    var docId = await _dbSetDoc.Where(x => x.KodNaselPunk == t.Code.ToString() && x.Year == year).Select(x => x.Id).FirstOrDefaultAsync();
                     //if (formId == null) throw new Exception("NotFound");
-                    var form = (from f in _dbSetForm
-                                //from ws in _dbSetSupply.Where(x=>x.IdForm== f.Id).DefaultIfEmpty()
-                                //from wd in _dbSetDisposal.Where(x => x.IdForm == f.Id).DefaultIfEmpty()
-                                //from tr in _dbSetTarif.Where(x => x.IdForm == f.Id).DefaultIfEmpty()
-                                //from n in _dbSetNetwork.Where(x => x.IdForm == f.Id).DefaultIfEmpty()   
-                                join k in _dbSetKato on t equals k.Code.ToString()
-                                where f.Id == formId
+                    var forms = await (from f in _dbSetForm
+                                join k in _dbSetKato on t.Code equals k.Code
+                                where f.DocumentId == docId
                                 select new SeloTotalFormsDto
                                 {
                                     Id = f.Id,
                                     NameOfPlace = k.NameRu,
-                                    KodKato = t,
+                                    KodKato = t.Code.ToString(),
                                     StatusOpor = f.StatusOpor,
                                     StatusSput = f.StatusSput,
                                     StatusProch = f.StatusProch,
@@ -148,12 +253,12 @@ namespace WebServer.Reposotory
                                     ProtyzhRekonSeteyVodoOtved = f.ProtyzhRekonSeteyVodoOtved,
                                     ProtyzhRemontSeteyVodoSnab = f.ProtyzhRemontSeteyVodoSnab,
                                     ProtyzhRemontSeteyVodoOtved = f.ProtyzhRemontSeteyVodoOtved
-                                }).FirstOrDefault();
+                                }).ToListAsync();
                     //if (form == null) throw new Exception("NotFoundReport");
-                    if(form != null) forms.Add(form);
-                }                
+                    if (forms != null) listForms.AddRange(forms);
+                }
             }
-            return forms;
+            return listForms;
         }
 
         public byte[] GenerateExcelFile(List<SeloTotalFormsDto> forms)
@@ -270,10 +375,10 @@ namespace WebServer.Reposotory
                     worksheet.Cells[2, i].Value = i;
                 }
 
-
-                foreach(var form in forms)
+                int counter = 0;
+                foreach (var form in forms)
                 {
-                    int counter = 0; counter =+ 1;
+                    counter = counter + 1;
                     //Значения колонок
                     worksheet.Cells[counter + 2, 1].Value = form.Id;
                     worksheet.Cells[counter + 2, 2].Value = form.NameOfPlace;
@@ -516,12 +621,7 @@ namespace WebServer.Reposotory
         public async Task<int> ImportExcel(IFormFile file, string login, int year)
         {
             if (_dbSetAccount.Any(x => x.Login != login)) throw new Exception($"Данного логина не существует - {login}");
-            var listSeloDocs = new List<SeloDocument>();
-            //var listSeloForms = new List<SeloForms>();
-            //var listSupply = new List<SeloWaterSupply>();
-            //var listDisposal = new List<SeloWaterDisposal>();
-            //var listTarif = new List<SeloTariff>();
-            //var listNetwork = new List<SeloNetworkLength>();
+            var listSeloForms = new List<SeloForm>();
 
             using(var stream = new MemoryStream())
             {
@@ -637,11 +737,8 @@ namespace WebServer.Reposotory
                         if (workSheet.Cells[row, 88].Text != "") seloForm.ProtyzhRekonSeteyVodoOtved = int.Parse(workSheet.Cells[row, 88].Text);
                         if (workSheet.Cells[row, 89].Text != "") seloForm.ProtyzhRemontSeteyVodoSnab = int.Parse(workSheet.Cells[row, 89].Text);
                         if (workSheet.Cells[row, 90].Text != "") seloForm.ProtyzhRemontSeteyVodoOtved = int.Parse(workSheet.Cells[row, 90].Text);
-
-                        //listSeloForms.Add(seloForm);
-                        await _dbSetForm.AddAsync(seloForm);
-                        await _context.SaveChangesAsync();
-                        doc.SeloFormId = seloForm.Id;
+                        
+                        
                         
                         var katoRecord = _dbSetKato.Where(x => x.Code.ToString() == doc.KodNaselPunk).FirstOrDefault();
                         if (katoRecord != null && katoRecord.ParentId != 0)
@@ -655,28 +752,19 @@ namespace WebServer.Reposotory
                             if (raionKato != null) doc.KodRaiona = raionKato.Code.ToString();
                         }
 
-                        //supply.IdForm = seloForm.Id;
-                        //disposal.IdForm = seloForm.Id;
-                        //tarif.IdForm = seloForm.Id;
-                        //network.IdForm = seloForm.Id;
+                        await _dbSetDoc.AddAsync(doc);
+                        await _context.SaveChangesAsync();
+                        seloForm.DocumentId = doc.Id;
 
-                        listSeloDocs.Add(doc);
-                        //if(ObjectExtensionsHelper.HasAnyValue(supply)) listSupply.Add(supply);
-                        //if(ObjectExtensionsHelper.HasAnyValue(disposal)) listDisposal.Add(disposal);
-                        //if(ObjectExtensionsHelper.HasAnyValue(tarif)) listTarif.Add(tarif);
-                        //if(ObjectExtensionsHelper.HasAnyValue(network)) listNetwork.Add(network);
+                        listSeloForms.Add(seloForm);                       
                     }
                 }
             }
 
-            await _dbSetDoc.AddRangeAsync(listSeloDocs);
-            //await _dbSetSupply.AddRangeAsync(listSupply);
-            //await _dbSetDisposal.AddRangeAsync(listDisposal);
-            //await _dbSetTarif.AddRangeAsync(listTarif);
-            //await _dbSetNetwork.AddRangeAsync(listNetwork);
+            await _dbSetForm.AddRangeAsync(listSeloForms);            
             await _context.SaveChangesAsync();
 
-            return listSeloDocs.Count();
+            return listSeloForms.Count();
         }        
 
         private async Task<Ref_Kato?> FindParentRecordAsync(int parentId, int katoLevel)
@@ -688,5 +776,20 @@ namespace WebServer.Reposotory
             }
             return currentRecord;
         }
+
+        private async Task<List<Ref_Kato>> FindChildRecordsAsync(int parentId)
+        {
+            var children = await _dbSetKato.Where(e => e.ParentId == parentId).ToListAsync();
+
+            var allDescendants = new List<Ref_Kato>(children);
+
+            foreach (var child in children)
+            {
+                allDescendants.AddRange(await FindChildRecordsAsync(child.Id));
+            }
+
+            return allDescendants;
+        }
+
     }
 }

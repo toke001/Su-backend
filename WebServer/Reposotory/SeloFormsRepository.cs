@@ -10,10 +10,7 @@ namespace WebServer.Reposotory
         private readonly WaterDbContext _context;
         private readonly DbSet<SeloForm> _dbSetForm;
         private readonly DbSet<SeloDocument> _dbSetDoc;
-        //private readonly DbSet<SeloWaterDisposal> _dbSetDisposal;
-        //private readonly DbSet<SeloWaterSupply> _dbSetSupply;
-        //private readonly DbSet<SeloTariff> _dbSetTarif;
-        //private readonly DbSet<SeloNetworkLength> _dbSetNetwork;
+        private readonly DbSet<Account> _dbSetAccount;
         private readonly DbSet<Ref_Kato> _dbSetKato;
         //private readonly DbSet<ResponseCode> _dbSetResponse;
 
@@ -22,8 +19,7 @@ namespace WebServer.Reposotory
             _context = context;
             _dbSetForm = _context.Set<SeloForm>();
             _dbSetDoc = _context.Set<SeloDocument>();
-            //_dbSetDisposal = _context.Set<SeloWaterDisposal>();
-            //_dbSetSupply = _context.Set<SeloWaterSupply>();
+            _dbSetAccount = _context.Set<Account>();
             //_dbSetTarif = _context.Set<SeloTariff>();
             //_dbSetNetwork = _context.Set<SeloNetworkLength>();
             _dbSetKato = _context.Set<Ref_Kato>();
@@ -42,10 +38,11 @@ namespace WebServer.Reposotory
         {
             if (await _dbSetDoc.AnyAsync(x => x.Year == seloDoument.Year && x.KodNaselPunk == seloDoument.KodNaselPunk))
                 throw new Exception("За указанный год и насленный пункт уже имеется отчет!");
-            await _dbSetDoc.AddAsync(seloDoument);
+            await _dbSetDoc.AddAsync(seloDoument);            
             await _context.SaveChangesAsync();
+            //await AddDocumentLink(seloDoument.Id);
             return seloDoument;
-        }
+        }        
 
         public async Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year)
         {
@@ -53,26 +50,21 @@ namespace WebServer.Reposotory
             var isReportable = await _dbSetKato.Where(x => x.Code.ToString() == kodNaselPunk).Select(x => x.IsReportable).FirstOrDefaultAsync();
             if (!isReportable) return "NotReporting";
 
-            var res = await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
-                .Select(x=>x.SeloForm).FirstOrDefaultAsync();
+            var docId = await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
+                .Select(x=>x.Id).FirstOrDefaultAsync();
+            var res = await _dbSetForm.Where(x=>x.DocumentId==docId).ToListAsync();
             return res;
         }
-
-        public async Task<SeloForm> AddSeloForms(Guid idDoc, SeloForm seloForm)
+                
+        public async Task<List<SeloForm>> AddSeloForms(Guid idDoc, List<SeloForm> seloForms)
         {
             var doc = await _dbSetDoc.FindAsync(idDoc);
             if (doc == null) throw new Exception("Документа с таким Id не существует");
-
-            if (doc.SeloFormId != null) throw new Exception("У данного документа уже есть форма");
-
-            await _dbSetForm.AddAsync(seloForm);
+            if (seloForms.Count == 0) throw new Exception("Формы пустые");
+            
+            await _dbSetForm.AddRangeAsync(seloForms);
             await _context.SaveChangesAsync();
-
-            doc.SeloFormId = seloForm.Id;
-
-            await _context.SaveChangesAsync();
-
-            return seloForm;
+            return seloForms;
         }
 
         public async Task<SeloForm> GetSeloFormById(Guid id)
@@ -85,96 +77,6 @@ namespace WebServer.Reposotory
             _dbSetForm.Update(seloForm);
             await _context.SaveChangesAsync();
             return seloForm;
-        }
-
-
-        //public async Task<SeloWaterSupply> GetWaterSupply(Guid idForm)
-        //{
-        //    return await _dbSetSupply.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        //}
-
-        //public async Task<SeloWaterSupply> AddWaterSupply(Guid idForm, SeloWaterSupply waterSupplyInfo)
-        //{
-        //    var seloForm = await _dbSetForm.FindAsync(idForm);
-        //    if (seloForm == null) throw new Exception("Форма не найдена");
-        //    waterSupplyInfo.IdForm = idForm;
-        //    _dbSetSupply.Add(waterSupplyInfo);
-        //    await _context.SaveChangesAsync();
-        //    return waterSupplyInfo;
-        //}
-
-        //public async Task<SeloWaterSupply> UpdateWaterSupply(SeloWaterSupply waterSupplyInfo)
-        //{
-        //    _dbSetSupply.Update(waterSupplyInfo);
-        //    await _context.SaveChangesAsync();
-        //    return waterSupplyInfo;
-        //}
-
-        //public async Task<SeloWaterDisposal> GetWaterDisposal(Guid idForm)
-        //{
-        //    return await _dbSetDisposal.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        //}
-
-        //public async Task<SeloWaterDisposal> AddWaterDisposal(Guid idForm, SeloWaterDisposal waterDisposalInfo)
-        //{
-        //    var seloForm = await _dbSetForm.FindAsync(idForm);
-        //    if (seloForm == null) throw new Exception("Форма не найдена");
-        //    waterDisposalInfo.IdForm = idForm;
-        //    _dbSetDisposal.Add(waterDisposalInfo);
-        //    await _context.SaveChangesAsync();
-        //    return waterDisposalInfo;
-        //}
-
-        //public async Task<SeloWaterDisposal> UpdateWaterDisposal(SeloWaterDisposal waterDisposalInfo)
-        //{
-        //    _dbSetDisposal.Update(waterDisposalInfo);
-        //    await _context.SaveChangesAsync();
-        //    return waterDisposalInfo;
-        //}
-
-
-        //public async Task<SeloTariff> GetTarifInfo(Guid idForm)
-        //{
-        //    return await _dbSetTarif.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        //}
-
-        //public async Task<SeloTariff> AddTarifInfo(Guid idForm, SeloTariff tariffInfo)
-        //{
-        //    var seloForm = await _dbSetForm.FindAsync(idForm);
-        //    if (seloForm == null) throw new Exception("Форма не найдена");
-        //    tariffInfo.IdForm = idForm;
-        //    _dbSetTarif.Add(tariffInfo);
-        //    await _context.SaveChangesAsync();
-        //    return tariffInfo;
-        //}
-
-        //public async Task<SeloTariff> UpdateTariffInfo(SeloTariff tariffInfo)
-        //{
-        //    _dbSetTarif.Update(tariffInfo);
-        //    await _context.SaveChangesAsync();
-        //    return tariffInfo;
-        //}
-
-        //public async Task<SeloNetworkLength> GetNetworkLength(Guid idForm)
-        //{
-        //    return await _dbSetNetwork.FirstOrDefaultAsync(x => x.IdForm == idForm);
-        //}
-
-        //public async Task<SeloNetworkLength> AddNetworkLength(Guid idForm, SeloNetworkLength networkLengthInfo)
-        //{
-        //    var seloForm = await _dbSetForm.FindAsync(idForm);
-        //    if (seloForm == null) throw new Exception("Форма не найдена");
-        //    networkLengthInfo.IdForm = idForm;
-        //    _dbSetNetwork.Add(networkLengthInfo);
-        //    await _context.SaveChangesAsync();
-        //    return networkLengthInfo;
-        //}
-
-        //public async Task<SeloNetworkLength> UpdateNetworkLength(SeloNetworkLength networkLengthInfo)
-        //{
-        //    _dbSetNetwork.Update(networkLengthInfo);
-        //    await _context.SaveChangesAsync();
-        //    return networkLengthInfo;
-        //}
+        }                
     }
 }

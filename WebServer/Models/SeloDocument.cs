@@ -12,9 +12,9 @@ namespace WebServer.Models
         /// <summary>
         /// Главная форма город
         /// </summary>
-        [Comment("Главная форма город")]
-        public Guid? SeloFormId { get; set; }
-        public virtual SeloForm? SeloForm { get; set; }
+        //[Comment("Главная форма город")]
+        //public Guid? SeloDocLinkId{ get; set; }
+        //public virtual SeloForm? SeloForm { get; set; }
         /// <summary>
         /// Код населенного пункта (КАТО)
         /// </summary>

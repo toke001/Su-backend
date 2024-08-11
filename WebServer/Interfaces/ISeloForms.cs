@@ -7,7 +7,7 @@ namespace WebServer.Interfaces
         Task<object> GetSeloDocument(string katoKod);
         Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument);
         Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year);
-        Task<SeloForm> AddSeloForms(Guid idDoc, SeloForm seloForm);
+        Task<List<SeloForm>> AddSeloForms(Guid idDoc, List<SeloForm> seloForms);
         Task<SeloForm> GetSeloFormById(Guid id);
         Task<SeloForm> UpdateSeloForm(SeloForm seloForm);
         //Task<SeloWaterSupply> GetWaterSupply(Guid idForm);

@@ -3,6 +3,7 @@
     public class SeloFormDto
     {
         public Guid Id { get; set; }
+        public Guid DocumentId { get; set; }
         public bool? StatusOpor { get; set; }
         public bool? StatusSput { get; set; }
         public string? StatusProch { get; set; }

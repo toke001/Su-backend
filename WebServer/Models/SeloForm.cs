@@ -9,6 +9,9 @@ namespace WebServer.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
+
+        public Guid DocumentId { get; set; }
+        public virtual SeloDocument Document { get; set; } = new SeloDocument();
         /// <summary>
         /// Статус села опорное
         /// </summary>
