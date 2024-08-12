@@ -1197,17 +1197,11 @@ namespace WebServer.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("SeloFormId")
-                        .HasColumnType("uuid")
-                        .HasComment("Главная форма город");
-
                     b.Property<int>("Year")
                         .HasColumnType("integer")
                         .HasComment("За какой год данные");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SeloFormId");
 
                     b.ToTable("SeloDocuments");
                 });
@@ -1357,6 +1351,9 @@ namespace WebServer.Migrations
                     b.Property<int?>("DecentrVodoOtvedKolSelsNasPunk")
                         .HasColumnType("integer")
                         .HasComment("Децентрализованное водоотведение Кол-во сельских населенных пунктов (единиц)");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid");
 
                     b.Property<int?>("DosVodoSnabKolChel")
                         .HasColumnType("integer")
@@ -1559,6 +1556,8 @@ namespace WebServer.Migrations
                         .HasComment("Год постройки системы водоснабжения");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
 
                     b.ToTable("SeloForms");
                 });
@@ -1893,13 +1892,15 @@ namespace WebServer.Migrations
                     b.Navigation("RefStatus");
                 });
 
-            modelBuilder.Entity("WebServer.Models.SeloDocument", b =>
+            modelBuilder.Entity("WebServer.Models.SeloForm", b =>
                 {
-                    b.HasOne("WebServer.Models.SeloForm", "SeloForm")
+                    b.HasOne("WebServer.Models.SeloDocument", "Document")
                         .WithMany()
-                        .HasForeignKey("SeloFormId");
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("SeloForm");
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("WebServer.Models.Supplier", b =>

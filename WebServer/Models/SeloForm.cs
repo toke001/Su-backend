@@ -11,7 +11,7 @@ namespace WebServer.Models
         public Guid Id { get; set; }
 
         public Guid DocumentId { get; set; }
-        public virtual SeloDocument Document { get; set; } = new SeloDocument();
+        public virtual SeloDocument? Document { get; set; }
         /// <summary>
         /// Статус села опорное
         /// </summary>

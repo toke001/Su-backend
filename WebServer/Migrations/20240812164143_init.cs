@@ -267,99 +267,19 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SeloForms",
+                name: "SeloDocuments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    StatusOpor = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села опорное"),
-                    StatusSput = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села спутниковое"),
-                    StatusProch = table.Column<string>(type: "text", nullable: true, comment: "Статус села прочие"),
-                    StatusPrigran = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села приграничные"),
-                    ObshKolSelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество сельских населенных пунктов в области(единиц)"),
-                    ObshKolChelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общая численность населения в сельских населенных пунктах (человек)"),
-                    ObshKolDomHoz = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество домохозяйств (квартир, ИЖД)"),
-                    YearSystVodoSnab = table.Column<string>(type: "text", nullable: true, comment: "Год постройки системы водоснабжения"),
-                    ObslPredpId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Обслуживающее предприятие"),
-                    SobstId = table.Column<Guid>(type: "uuid", nullable: true, comment: "в чьей собственности находится"),
-                    DosVodoSnabKolPunk = table.Column<int>(type: "integer", nullable: true, comment: "Доступ населения к услугам водоснабжения Количество сельских населенных пунктов (единиц)"),
-                    DosVodoSnabKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Доступ населения к услугам водоснабжения Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
-                    DosVodoSnabPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Доступ населения к услугам водоснабжения, %"),
-                    CentrVodoSnabKolNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во сельских населенных пунктов (единиц)"),
-                    CentrVodoSnabKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
-                    CentrVodoSnabObesKolNasPunk = table.Column<decimal>(type: "numeric", nullable: true, comment: "Обеспеченность централизованным водоснабжением по количеству сельских населенных пунктов, % гр.19/гр.8 *100"),
-                    CentrVodoSnabObesKolChel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Обеспеченность централизованным водоснабжением по численности населения, % гр.20/гр.9 *100"),
-                    CentrVodoSnabKolAbon = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоснабжением (единиц)"),
-                    CentrVodoSnabFizLic = table.Column<int>(type: "integer", nullable: true, comment: "в том числе физических лиц/население (единиц)"),
-                    CentrVodoSnabYriLic = table.Column<int>(type: "integer", nullable: true, comment: "в том числе юридических лиц (единиц)"),
-                    CentrVodoSnabBudzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "в том числе бюджетных организаций (единиц)"),
-                    CentrVodoIndivPriborUchVodyVsego = table.Column<int>(type: "integer", nullable: true, comment: "Всего установлено индивидуальных приборов учета воды по состоянию на конец отчетного года (единиц)"),
-                    CentrVodoIndivPriborUchVodyASYE = table.Column<int>(type: "integer", nullable: true, comment: "в том числе с дистанционной передачей данных в АСУЭ обслуживающего предприятия (единиц)"),
-                    CentrVodoIndivPriborUchVodyOhvat = table.Column<decimal>(type: "numeric", nullable: true, comment: "Охват индивидуальными приборами учета воды, % гр.27/гр. 23*100"),
-                    NeCtentrVodoKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Количество сельских населенных пунктов (единиц)"),
-                    KbmKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Количество сельских населенных пунктов, где установлено КБМ"),
-                    KbmKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Численность населения, проживающего в сельских населенных пунктах, где установлены КБМ (человек)"),
-                    KbmObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Обеспеченность населения услугами КБМ, % гр.32/гр.9*100"),
-                    PrvKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Количество сельских населенных пунктов, где установлено ПРВ"),
-                    PrvKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Численность населения, проживающего в сельских населенных пунктах, где установлены ПРВ (человек)"),
-                    PrvObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Обеспеченность населения услугами  ПРВ, % гр.35/гр.9*100"),
-                    PrivVodaKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Количество сельских населенных пунктов, жители которых используют привозную воду"),
-                    PrivVodaKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Численность населения, проживающего в сельских населенных пунктах, где используют привозную воду"),
-                    PrivVodaObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Обеспеченность населения привозной водой, % гр.38/гр.9*100"),
-                    SkvazhKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых используют воду из скважин и колодцов"),
-                    SkvazhKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Численность населения, проживающего в сельских населенных пунктах, где используют  воду из скважин и колодцев"),
-                    SkvazhObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Обеспеченность  привозной водой, % гр.41/гр.9*100"),
-                    SkvazhKolSelsNasPunkOtkaz = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)"),
-                    SkvazhKolChelOtkaz = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Численность населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)"),
-                    SkvazhDolyaNaselOtkaz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Доля населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа), гр.44/гр.9*100"),
-                    SkvazhDolyaSelOtkaz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Доля сел, жители которых отказались от  строительства ЦВ, установки КБМ и ПРВ, %, гр.43/гр.8*100"),
-                    CentrVodOtvedKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Кол-во сельских населенных пунктов (единиц)"),
-                    CentrVodOtvedKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
-                    CentrVodOtvedKolAbonent = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Кол-во абонентов, проживающих в данных сельских населенных пунктах (единиц)"),
-                    CentrVodOtvedFizLic = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе физических лиц/население (единиц)"),
-                    CentrVodOtvedYriLic = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе юридических лиц (единиц)"),
-                    CentrVodOtvedBydzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе бюджетных организаций (единиц)"),
-                    CentrVodOtvedDostypKolNasPunk = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Доступ к централизованному водоотведению по количеству сельских населенных пунктов, в % гр.47/гр.8 *100"),
-                    CentrVodOtvedDostypKolChel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Доступ к централизованному водоотведению по численности населения, в % гр.48/гр.9 *100"),
-                    CentrVodOtvedNalich = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Наличие канализационно- очистных сооружений (единиц)"),
-                    CentrVodOtvedNalichMechan = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе только с механичес-кой очисткой (еди-ниц)"),
-                    CentrVodOtvedNalichMechanBiolog = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе с механической и биологической очист-кой (еди-ниц)"),
-                    CentrVodOtvedProizvod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Производительность канализационно-очистных сооружений (проектная)"),
-                    CentrVodOtvedIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Износ канализационно- очистных сооружений, в %"),
-                    CentrVodOtvedOhvatKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Числен-ность населе-ния, охваченного действующими канализационно- очистными сооружениями (человек)"),
-                    CentrVodOtvedOhvatNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Охват населения очисткой сточных вод, в % гр.60/гр.9*100"),
-                    CentrVodOtvedFactPostypStochVod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3)"),
-                    CentrVodOtvedFactPostypStochVod1 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За I квартал (тыс.м3)"),
-                    CentrVodOtvedFactPostypStochVod2 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За II квартал (тыс.м3)"),
-                    CentrVodOtvedFactPostypStochVod3 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За III квартал (тыс.м3)"),
-                    CentrVodOtvedFactPostypStochVod4 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За IV квартал (тыс.м3)"),
-                    CentrVodOtvedObiemStochVod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Объем сточных вод, соответствующей нормативной очистке по собственному лабораторному мониторингу за отчетный период (тыс.м3)"),
-                    CentrVodOtvedUrovenNorm = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Уровень нормативно- очищенной воды, % гр.67/гр.62 * 100"),
-                    DecentrVodoOtvedKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Децентрализованное водоотведение Кол-во сельских населенных пунктов (единиц)"),
-                    DecentrVodoOtvedKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Децентрализованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
-                    TarifVodoSnabUsred = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение усредненный, тенге/м3"),
-                    TarifVodoSnabFizL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение физическим лицам/населению, тенге/м3"),
-                    TarifVodoSnabYriL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение юридическим лицам, тенге/м3"),
-                    TarifVodoSnabBudzh = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение бюджетным организациям, тенге/м3"),
-                    TarifVodoOtvedUsred = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение усредненный, тенге/м3"),
-                    TarifVodoOtvedFizL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение физическим лицам/населению, тенге/м3"),
-                    TarifVodoOtvedYriL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение юридическим лицам, тенге/м3"),
-                    TarifVodoOtvedBudzh = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение бюджетным организациям, тенге/м3"),
-                    ProtyzhVodoSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) общая, км"),
-                    ProtyzhVodoSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
-                    ProtyzhVodoSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) Износ, % гр.80/гр.79"),
-                    ProtyzhKanalSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) общая, км"),
-                    ProtyzhKanalSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
-                    ProtyzhKanalSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) Износ, % гр.83/гр.82"),
-                    ProtyzhNewSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhNewSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км"),
-                    ProtyzhRekonSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhRekonSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км"),
-                    ProtyzhRemontSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км"),
-                    ProtyzhRemontSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км")
+                    KodNaselPunk = table.Column<string>(type: "text", nullable: true, comment: "Код населенного пункта (КАТО)"),
+                    KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
+                    KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
+                    Login = table.Column<string>(type: "text", nullable: true),
+                    Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SeloForms", x => x.Id);
+                    table.PrimaryKey("PK_SeloDocuments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -608,25 +528,106 @@ namespace WebServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SeloDocuments",
+                name: "SeloForms",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SeloFormId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Главная форма город"),
-                    KodNaselPunk = table.Column<string>(type: "text", nullable: true, comment: "Код населенного пункта (КАТО)"),
-                    KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
-                    KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
-                    Login = table.Column<string>(type: "text", nullable: true),
-                    Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
+                    DocumentId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StatusOpor = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села опорное"),
+                    StatusSput = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села спутниковое"),
+                    StatusProch = table.Column<string>(type: "text", nullable: true, comment: "Статус села прочие"),
+                    StatusPrigran = table.Column<bool>(type: "boolean", nullable: true, comment: "Статус села приграничные"),
+                    ObshKolSelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество сельских населенных пунктов в области(единиц)"),
+                    ObshKolChelNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Общая численность населения в сельских населенных пунктах (человек)"),
+                    ObshKolDomHoz = table.Column<int>(type: "integer", nullable: true, comment: "Общее количество домохозяйств (квартир, ИЖД)"),
+                    YearSystVodoSnab = table.Column<string>(type: "text", nullable: true, comment: "Год постройки системы водоснабжения"),
+                    ObslPredpId = table.Column<Guid>(type: "uuid", nullable: true, comment: "Обслуживающее предприятие"),
+                    SobstId = table.Column<Guid>(type: "uuid", nullable: true, comment: "в чьей собственности находится"),
+                    DosVodoSnabKolPunk = table.Column<int>(type: "integer", nullable: true, comment: "Доступ населения к услугам водоснабжения Количество сельских населенных пунктов (единиц)"),
+                    DosVodoSnabKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Доступ населения к услугам водоснабжения Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
+                    DosVodoSnabPercent = table.Column<decimal>(type: "numeric", nullable: true, comment: "Доступ населения к услугам водоснабжения, %"),
+                    CentrVodoSnabKolNasPun = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во сельских населенных пунктов (единиц)"),
+                    CentrVodoSnabKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
+                    CentrVodoSnabObesKolNasPunk = table.Column<decimal>(type: "numeric", nullable: true, comment: "Обеспеченность централизованным водоснабжением по количеству сельских населенных пунктов, % гр.19/гр.8 *100"),
+                    CentrVodoSnabObesKolChel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Обеспеченность централизованным водоснабжением по численности населения, % гр.20/гр.9 *100"),
+                    CentrVodoSnabKolAbon = table.Column<int>(type: "integer", nullable: true, comment: "Кол-во абонентов, охваченных централизованным водоснабжением (единиц)"),
+                    CentrVodoSnabFizLic = table.Column<int>(type: "integer", nullable: true, comment: "в том числе физических лиц/население (единиц)"),
+                    CentrVodoSnabYriLic = table.Column<int>(type: "integer", nullable: true, comment: "в том числе юридических лиц (единиц)"),
+                    CentrVodoSnabBudzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "в том числе бюджетных организаций (единиц)"),
+                    CentrVodoIndivPriborUchVodyVsego = table.Column<int>(type: "integer", nullable: true, comment: "Всего установлено индивидуальных приборов учета воды по состоянию на конец отчетного года (единиц)"),
+                    CentrVodoIndivPriborUchVodyASYE = table.Column<int>(type: "integer", nullable: true, comment: "в том числе с дистанционной передачей данных в АСУЭ обслуживающего предприятия (единиц)"),
+                    CentrVodoIndivPriborUchVodyOhvat = table.Column<decimal>(type: "numeric", nullable: true, comment: "Охват индивидуальными приборами учета воды, % гр.27/гр. 23*100"),
+                    NeCtentrVodoKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Количество сельских населенных пунктов (единиц)"),
+                    KbmKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Количество сельских населенных пунктов, где установлено КБМ"),
+                    KbmKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Численность населения, проживающего в сельских населенных пунктах, где установлены КБМ (человек)"),
+                    KbmObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение КБМ Обеспеченность населения услугами КБМ, % гр.32/гр.9*100"),
+                    PrvKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Количество сельских населенных пунктов, где установлено ПРВ"),
+                    PrvKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Численность населения, проживающего в сельских населенных пунктах, где установлены ПРВ (человек)"),
+                    PrvObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение ПРВ Обеспеченность населения услугами  ПРВ, % гр.35/гр.9*100"),
+                    PrivVodaKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Количество сельских населенных пунктов, жители которых используют привозную воду"),
+                    PrivVodaKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Численность населения, проживающего в сельских населенных пунктах, где используют привозную воду"),
+                    PrivVodaObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Привозная вода Обеспеченность населения привозной водой, % гр.38/гр.9*100"),
+                    SkvazhKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых используют воду из скважин и колодцов"),
+                    SkvazhKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Численность населения, проживающего в сельских населенных пунктах, где используют  воду из скважин и колодцев"),
+                    SkvazhObespNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Обеспеченность  привозной водой, % гр.41/гр.9*100"),
+                    SkvazhKolSelsNasPunkOtkaz = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Количество сельских населенных пунктов, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)"),
+                    SkvazhKolChelOtkaz = table.Column<int>(type: "integer", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Численность населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа)"),
+                    SkvazhDolyaNaselOtkaz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Доля населения, жители которых отказались от строительства ЦВ, установки КБМ и ПРВ  (наличие протоколов  отказа), гр.44/гр.9*100"),
+                    SkvazhDolyaSelOtkaz = table.Column<decimal>(type: "numeric", nullable: true, comment: "Нецентрализованное водоснабжение Скважины, колодцы Доля сел, жители которых отказались от  строительства ЦВ, установки КБМ и ПРВ, %, гр.43/гр.8*100"),
+                    CentrVodOtvedKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Кол-во сельских населенных пунктов (единиц)"),
+                    CentrVodOtvedKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
+                    CentrVodOtvedKolAbonent = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Кол-во абонентов, проживающих в данных сельских населенных пунктах (единиц)"),
+                    CentrVodOtvedFizLic = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе физических лиц/население (единиц)"),
+                    CentrVodOtvedYriLic = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе юридических лиц (единиц)"),
+                    CentrVodOtvedBydzhOrg = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе бюджетных организаций (единиц)"),
+                    CentrVodOtvedDostypKolNasPunk = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Доступ к централизованному водоотведению по количеству сельских населенных пунктов, в % гр.47/гр.8 *100"),
+                    CentrVodOtvedDostypKolChel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Доступ к централизованному водоотведению по численности населения, в % гр.48/гр.9 *100"),
+                    CentrVodOtvedNalich = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Наличие канализационно- очистных сооружений (единиц)"),
+                    CentrVodOtvedNalichMechan = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе только с механичес-кой очисткой (еди-ниц)"),
+                    CentrVodOtvedNalichMechanBiolog = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение в том числе с механической и биологической очист-кой (еди-ниц)"),
+                    CentrVodOtvedProizvod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Производительность канализационно-очистных сооружений (проектная)"),
+                    CentrVodOtvedIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Износ канализационно- очистных сооружений, в %"),
+                    CentrVodOtvedOhvatKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Числен-ность населе-ния, охваченного действующими канализационно- очистными сооружениями (человек)"),
+                    CentrVodOtvedOhvatNasel = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Охват населения очисткой сточных вод, в % гр.60/гр.9*100"),
+                    CentrVodOtvedFactPostypStochVod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Фактически поступило сточных вод в канализационно-очистные сооружения (тыс.м3)"),
+                    CentrVodOtvedFactPostypStochVod1 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За I квартал (тыс.м3)"),
+                    CentrVodOtvedFactPostypStochVod2 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За II квартал (тыс.м3)"),
+                    CentrVodOtvedFactPostypStochVod3 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За III квартал (тыс.м3)"),
+                    CentrVodOtvedFactPostypStochVod4 = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение В том числе За IV квартал (тыс.м3)"),
+                    CentrVodOtvedObiemStochVod = table.Column<int>(type: "integer", nullable: true, comment: "Централизованное водоотведение Объем сточных вод, соответствующей нормативной очистке по собственному лабораторному мониторингу за отчетный период (тыс.м3)"),
+                    CentrVodOtvedUrovenNorm = table.Column<decimal>(type: "numeric", nullable: true, comment: "Централизованное водоотведение Уровень нормативно- очищенной воды, % гр.67/гр.62 * 100"),
+                    DecentrVodoOtvedKolSelsNasPunk = table.Column<int>(type: "integer", nullable: true, comment: "Децентрализованное водоотведение Кол-во сельских населенных пунктов (единиц)"),
+                    DecentrVodoOtvedKolChel = table.Column<int>(type: "integer", nullable: true, comment: "Децентрализованное водоотведение Численность населения, проживающего в данных сельских населенных пунктах (человек)"),
+                    TarifVodoSnabUsred = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение усредненный, тенге/м3"),
+                    TarifVodoSnabFizL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение физическим лицам/населению, тенге/м3"),
+                    TarifVodoSnabYriL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение юридическим лицам, тенге/м3"),
+                    TarifVodoSnabBudzh = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоснабжение бюджетным организациям, тенге/м3"),
+                    TarifVodoOtvedUsred = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение усредненный, тенге/м3"),
+                    TarifVodoOtvedFizL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение физическим лицам/населению, тенге/м3"),
+                    TarifVodoOtvedYriL = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение юридическим лицам, тенге/м3"),
+                    TarifVodoOtvedBudzh = table.Column<int>(type: "integer", nullable: true, comment: "Уровень тарифов водоотведение бюджетным организациям, тенге/м3"),
+                    ProtyzhVodoSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) общая, км"),
+                    ProtyzhVodoSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
+                    ProtyzhVodoSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность водопроводных сетей, км (по состоянию на конец отчетного года) Износ, % гр.80/гр.79"),
+                    ProtyzhKanalSeteyObsh = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) общая, км"),
+                    ProtyzhKanalSeteyVtomIznos = table.Column<int>(type: "integer", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) в том числе изношенных, км"),
+                    ProtyzhKanalSeteyIznos = table.Column<decimal>(type: "numeric", nullable: true, comment: "Протяженность канализационных сетей, км (по состоянию на конец отчетного года) Износ, % гр.83/гр.82"),
+                    ProtyzhNewSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhNewSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность построенных (новых) сетей в отчетном году, км - водоотведения, км"),
+                    ProtyzhRekonSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhRekonSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность реконструированных (замененных) сетей в отчетном году, км - водоотведения, км"),
+                    ProtyzhRemontSeteyVodoSnab = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоснабжения, км"),
+                    ProtyzhRemontSeteyVodoOtved = table.Column<int>(type: "integer", nullable: true, comment: "Общая протяженность отремонтированных (текущий/капитальный ремонт) сетей в отчетном году, км - водоотведения, км")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SeloDocuments", x => x.Id);
+                    table.PrimaryKey("PK_SeloForms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SeloDocuments_SeloForms_SeloFormId",
-                        column: x => x.SeloFormId,
-                        principalTable: "SeloForms",
-                        principalColumn: "Id");
+                        name: "FK_SeloForms_SeloDocuments_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "SeloDocuments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -911,9 +912,9 @@ namespace WebServer.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeloDocuments_SeloFormId",
-                table: "SeloDocuments",
-                column: "SeloFormId");
+                name: "IX_SeloForms_DocumentId",
+                table: "SeloForms",
+                column: "DocumentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Suppliers_KatoId",
@@ -966,7 +967,7 @@ namespace WebServer.Migrations
                 name: "ResponseCodes");
 
             migrationBuilder.DropTable(
-                name: "SeloDocuments");
+                name: "SeloForms");
 
             migrationBuilder.DropTable(
                 name: "SettingsValues");
@@ -999,7 +1000,7 @@ namespace WebServer.Migrations
                 name: "Suppliers");
 
             migrationBuilder.DropTable(
-                name: "SeloForms");
+                name: "SeloDocuments");
 
             migrationBuilder.DropTable(
                 name: "Report_Forms");
