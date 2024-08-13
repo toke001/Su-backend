@@ -40,6 +40,25 @@ namespace WebServer.Controllers
         }
 
         /// <summary>
+        /// Все формы по id документа
+        /// </summary>
+        /// <param name="idDoc"></param>
+        /// <returns></returns>
+        [HttpGet("GetSeloFormsByDocId")]
+        public async Task<ActionResult> GetSeloFormsByDocId(Guid idDoc)
+        {
+            try
+            {
+                var entity = await _repo.GetSeloFormsByDocId(idDoc);
+                return Ok(entity);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Добавление документа по селу
         /// </summary>
         /// <param name="seloDocumentDto"></param>

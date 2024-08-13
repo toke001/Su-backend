@@ -5,6 +5,7 @@ namespace WebServer.Interfaces
     public interface ISeloForms
     {
         Task<object> GetSeloDocument(string katoKod);
+        Task<object> GetSeloFormsByDocId(Guid idDoc);
         Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument);
         Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year);
         Task<List<SeloForm>> AddSeloForms(Guid idDoc, List<SeloForm> seloForms);

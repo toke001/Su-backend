@@ -34,6 +34,12 @@ namespace WebServer.Reposotory
             return await _dbSetDoc.Where(x => x.KodNaselPunk == katoKod).ToListAsync();
         }
 
+        public async Task<object> GetSeloFormsByDocId(Guid idDoc)
+        {
+            if (!_dbSetDoc.Any(x => x.Id == idDoc)) throw new Exception("NotFound");            
+            return await _dbSetForm.Where(x => x.DocumentId == idDoc).ToListAsync();
+        }
+
         public async Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument)
         {
             if (await _dbSetDoc.AnyAsync(x => x.Year == seloDoument.Year && x.KodNaselPunk == seloDoument.KodNaselPunk))
