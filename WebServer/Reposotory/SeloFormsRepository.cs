@@ -34,6 +34,25 @@ namespace WebServer.Reposotory
             return await _dbSetDoc.Where(x => x.KodNaselPunk == katoKod).ToListAsync();
         }
 
+        public async Task<List<SeloDocument>> GetSeloDocumentByParams(string? kodOblast, string? kodRaion, int? year)
+        {
+            var query = _dbSetDoc.AsQueryable();
+            if (!string.IsNullOrEmpty(kodOblast))
+            {
+                query = query.Where(x => x.KodOblast == kodOblast);
+            }
+            if (!string.IsNullOrEmpty(kodRaion))
+            {
+                query = query.Where(x => x.KodRaiona == kodRaion);
+            }
+            if (year.HasValue)
+            {
+                query = query.Where(x => x.Year == year);
+            }
+            var result = await query.ToListAsync();
+            return  result;
+        }
+
         public async Task<object> GetSeloFormsByDocId(Guid idDoc)
         {
             if (!_dbSetDoc.Any(x => x.Id == idDoc)) throw new Exception("NotFound");            

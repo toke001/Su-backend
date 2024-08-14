@@ -163,14 +163,11 @@ namespace WebServer.Reposotory
             }
             return;
         }
-        public async Task<bool> IsReportable(int id)
+        public async Task<object> IsReportable(int id)
         {
             var entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
-            if (entity != null)
-            {
-                return entity.IsReportable;
-            }
-            return false;
+            if(entity == null) throw new Exception("NotFound");
+            return new { entity.IsReportable, entity.KatoLevel };
         }
 
         public async Task<Ref_Kato> UpdateIsRepoLevel(int id, bool? isReportable, int? level)

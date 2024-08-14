@@ -14,7 +14,7 @@ namespace WebServer.Interfaces
         public Task<Ref_Building> AddBuilding(Ref_Building row);
         public Task<Ref_Building> UpdateBuilding(Ref_Building row, int id);
         public Task DeleteBuilding(int id);
-        public Task<bool> IsReportable(int id);
+        public Task<object> IsReportable(int id);
         Task<Ref_Kato> UpdateIsRepoLevel(int id, bool? isReportable, int? level);
     }
 }
