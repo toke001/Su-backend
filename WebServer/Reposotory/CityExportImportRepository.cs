@@ -59,67 +59,67 @@ namespace WebServer.Reposotory
                                     TotalCountChel = f.TotalCountChel,
                                     ObslPredpBin = "",
                                     ObslPredpName = "",
-                                    KolichAbonent = f.KolichAbonent,
-                                    KolFizLic = f.KolFizLic,
-                                    KolYriLic = f.KolYriLic,
-                                    KolBydzhOrg = f.KolBydzhOrg,
-                                    KolChelDostyp = f.KolChelDostyp,
-                                    ObespechCentrlVodo = f.ObespechCentrlVodo,
-                                    IndivUchetVodyVsego = f.IndivUchetVodyVsego,
-                                    IndivUchetVodyDistance = f.IndivUchetVodyDistance,
-                                    IndivUchetVodyPercent = f.IndivUchetVodyPercent,
-                                    ObshePodlezhashKolZdan = f.ObshePodlezhashKolZdan,
-                                    ObsheUstanKolZdan = f.ObsheUstanKolZdan,
-                                    ObsheUstanPriborKol = f.ObsheUstanPriborKol,
-                                    ObsheUstanDistanceKol = f.ObsheUstanDistanceKol,
-                                    ObsheOhvatPercent = f.ObsheOhvatPercent,
-                                    AutoProccesVodoZabor = f.AutoProccesVodoZabor,
-                                    AutoProccesVodoPodgot = f.AutoProccesVodoPodgot,
-                                    AutoProccesNasosStanc = f.AutoProccesNasosStanc,
-                                    AutoProccesSetVodosnab = f.AutoProccesSetVodosnab,
-                                    KolAbonent = f.KolAbonent,
-                                    KolAbonFizLic = f.KolAbonFizLic,
-                                    KolAbonYriLic = f.KolAbonYriLic,
-                                    KolBydzhetOrg = f.KolBydzhetOrg,
-                                    KolChelOhvatCentrVodo = f.KolChelOhvatCentrVodo,
-                                    DostypCentrVodo = f.DostypCentrVodo,
-                                    KolichKanaliz = f.KolichKanaliz,
-                                    KolichKanalizMechan = f.KolichKanalizMechan,
-                                    KolichKanalizMechanBiolog = f.KolichKanalizMechanBiolog,
-                                    ProizvodKanaliz = f.ProizvodKanaliz,
-                                    IznosKanaliz = f.IznosKanaliz,
-                                    KolChelKanaliz = f.KolChelKanaliz,
-                                    OhvatChelKanaliz = f.OhvatChelKanaliz,
-                                    FactPostypKanaliz = f.FactPostypKanaliz,
-                                    FactPostypKanaliz1kv = f.FactPostypKanaliz1kv,
-                                    FactPostypKanaliz2kv = f.FactPostypKanaliz2kv,
-                                    FactPostypKanaliz3kv = f.FactPostypKanaliz3kv,
-                                    FactPostypKanaliz4kv = f.FactPostypKanaliz4kv,
-                                    ObiemKanalizNormOchist = f.ObiemKanalizNormOchist,
-                                    UrovenNormOchishVody = f.UrovenNormOchishVody,
-                                    AutoProccesSetKanaliz = f.AutoProccesSetKanaliz,
-                                    AutoProccesKanalizNasos = f.AutoProccesKanalizNasos,
-                                    AutoProccesKanalizSooruzh = f.AutoProccesKanalizSooruzh,
-                                    VodoSnabUsrednen = f.VodoSnabUsrednen,
-                                    VodoSnabFizLic = f.VodoSnabFizLic,
-                                    VodoSnabYriLic = f.VodoSnabYriLic,
-                                    VodoSnabBydzhOrg = f.VodoSnabBydzhOrg,
-                                    VodoOtvedUsred = f.VodoOtvedUsred,
-                                    VodoOtvedFizLic = f.VodoOtvedFizLic,
-                                    VodoOtvedYriLic = f.VodoOtvedYriLic,
-                                    VodoOtvedBydzhOrg = f.VodoOtvedBydzhOrg,
-                                    VodoProvodLengthTotal = f.VodoProvodLengthTotal,
-                                    VodoProvodLengthIznos = f.VodoProvodLengthIznos,
-                                    VodoProvodIznosPercent = f.VodoProvodIznosPercent,
-                                    KanalizLengthTotal = f.KanalizLengthTotal,
-                                    KanalizLengthIznos = f.KanalizLengthIznos,
-                                    KanalizIznosPercent = f.KanalizIznosPercent,
-                                    ObshNewSetiVodo = f.ObshNewSetiVodo,
-                                    ObshNewSetiKanaliz = f.ObshNewSetiKanaliz,
-                                    ObshZamenSetiVodo = f.ObshZamenSetiVodo,
-                                    ObshZamenSetiKanaliz = f.ObshZamenSetiKanaliz,
-                                    ObshRemontSetiVodo = f.ObshRemontSetiVodo,
-                                    ObshRemontSetiKanaliz = f.ObshRemontSetiKanaliz
+                                    VodoSnabKolichAbonent = f.VodoSnabKolichAbonent,
+                                    VodoSnabKolFizLic = f.VodoSnabKolFizLic,
+                                    VodoSnabKolYriLic = f.VodoSnabKolYriLic,
+                                    VodoSnabKolBydzhOrg = f.VodoSnabKolBydzhOrg,
+                                    VodoSnabKolChelDostyp = f.VodoSnabKolChelDostyp,
+                                    VodoSnabObespechCentrlVodo = f.VodoSnabObespechCentrlVodo,
+                                    VodoSnabIndivUchetVodyVsego = f.VodoSnabIndivUchetVodyVsego,
+                                    VodoSnabIndivUchetVodyDistance = f.VodoSnabIndivUchetVodyDistance,
+                                    VodoSnabIndivUchetVodyPercent = f.VodoSnabIndivUchetVodyPercent,
+                                    VodoSnabObshePodlezhashKolZdan = f.VodoSnabObshePodlezhashKolZdan,
+                                    VodoSnabObsheUstanKolZdan = f.VodoSnabObsheUstanKolZdan,
+                                    VodoSnabObsheUstanPriborKol = f.VodoSnabObsheUstanPriborKol,
+                                    VodoSnabObsheUstanDistanceKol = f.VodoSnabObsheUstanDistanceKol,
+                                    VodoSnabObsheOhvatPercent = f.VodoSnabObsheOhvatPercent,
+                                    VodoSnabAutoProccesVodoZabor = f.VodoSnabAutoProccesVodoZabor,
+                                    VodoSnabAutoProccesVodoPodgot = f.VodoSnabAutoProccesVodoPodgot,
+                                    VodoSnabAutoProccesNasosStanc = f.VodoSnabAutoProccesNasosStanc,
+                                    VodoSnabAutoProccesSetVodosnab = f.VodoSnabAutoProccesSetVodosnab,
+                                    VodoOtvKolAbonent = f.VodoOtvKolAbonent,
+                                    VodoOtvKolAbonFizLic = f.VodoOtvKolAbonFizLic,
+                                    VodoOtvKolAbonYriLic = f.VodoOtvKolAbonYriLic,
+                                    VodoOtvKolBydzhetOrg = f.VodoOtvKolBydzhetOrg,
+                                    VodoOtvKolChelOhvatCentrVodo = f.VodoOtvKolChelOhvatCentrVodo,
+                                    VodoOtvDostypCentrVodo = f.VodoOtvDostypCentrVodo,
+                                    VodoOtvKolichKanaliz = f.VodoOtvKolichKanaliz,
+                                    VodoOtvKolichKanalizMechan = f.VodoOtvKolichKanalizMechan,
+                                    VodoOtvKolichKanalizMechanBiolog = f.VodoOtvKolichKanalizMechanBiolog,
+                                    VodoOtvProizvodKanaliz = f.VodoOtvProizvodKanaliz,
+                                    VodoOtvIznosKanaliz = f.VodoOtvIznosKanaliz,
+                                    VodoOtvKolChelKanaliz = f.VodoOtvKolChelKanaliz,
+                                    VodoOtvOhvatChelKanaliz = f.VodoOtvOhvatChelKanaliz,
+                                    VodoOtvFactPostypKanaliz = f.VodoOtvFactPostypKanaliz,
+                                    VodoOtvFactPostypKanaliz1kv = f.VodoOtvFactPostypKanaliz1kv,
+                                    VodoOtvFactPostypKanaliz2kv = f.VodoOtvFactPostypKanaliz2kv,
+                                    VodoOtvFactPostypKanaliz3kv = f.VodoOtvFactPostypKanaliz3kv,
+                                    VodoOtvFactPostypKanaliz4kv = f.VodoOtvFactPostypKanaliz4kv,
+                                    VodoOtvObiemKanalizNormOchist = f.VodoOtvObiemKanalizNormOchist,
+                                    VodoOtvUrovenNormOchishVody = f.VodoOtvUrovenNormOchishVody,
+                                    VodoOtvAutoProccesSetKanaliz = f.VodoOtvAutoProccesSetKanaliz,
+                                    VodoOtvAutoProccesKanalizNasos = f.VodoOtvAutoProccesKanalizNasos,
+                                    VodoOtvAutoProccesKanalizSooruzh = f.VodoOtvAutoProccesKanalizSooruzh,
+                                    UrTarVodoSnabUsrednen = f.UrTarVodoSnabUsrednen,
+                                    UrTarVodoSnabFizLic = f.UrTarVodoSnabFizLic,
+                                    UrTarVodoSnabYriLic = f.UrTarVodoSnabYriLic,
+                                    UrTarVodoSnabBydzhOrg = f.UrTarVodoSnabBydzhOrg,
+                                    UrTarVodoOtvedUsred = f.UrTarVodoOtvedUsred,
+                                    UrTarVodoOtvedFizLic = f.UrTarVodoOtvedFizLic,
+                                    UrTarVodoOtvedYriLic = f.UrTarVodoOtvedYriLic,
+                                    UrTarVodoOtvedBydzhOrg = f.UrTarVodoOtvedBydzhOrg,
+                                    LengthVodoProvodTotal = f.LengthVodoProvodTotal,
+                                    LengthVodoProvodIznos = f.LengthVodoProvodIznos,
+                                    LengthVodoProvodIznosPercent = f.LengthVodoProvodIznosPercent,
+                                    LengthKanalizTotal = f.LengthKanalizTotal,
+                                    LengthKanalizIznos = f.LengthKanalizIznos,
+                                    LengthKanalizIznosPercent = f.LengthKanalizIznosPercent,
+                                    LengthObshNewSetiVodo = f.LengthObshNewSetiVodo,
+                                    LengthObshNewSetiKanaliz = f.LengthObshNewSetiKanaliz,
+                                    LengthObshZamenSetiVodo = f.LengthObshZamenSetiVodo,
+                                    LengthObshZamenSetiKanaliz = f.LengthObshZamenSetiKanaliz,
+                                    LengthObshRemontSetiVodo = f.LengthObshRemontSetiVodo,
+                                    LengthObshRemontSetiKanaliz = f.LengthObshRemontSetiKanaliz
                                 }).FirstOrDefault();
                     //if (form == null) throw new Exception("NotFoundReport");
                     if(form != null) forms.Add(form);
@@ -234,67 +234,67 @@ namespace WebServer.Reposotory
                     worksheet.Cells[counter + 2, 6].Value = form.TotalCountChel;
                     worksheet.Cells[counter + 2, 7].Value = form.ObslPredpBin;
                     worksheet.Cells[counter + 2, 8].Value = form.ObslPredpName;
-                    worksheet.Cells[counter + 2, 9].Value = form.KolichAbonent;
-                    worksheet.Cells[counter + 2, 10].Value = form.KolFizLic;
-                    worksheet.Cells[counter + 2, 11].Value = form.KolYriLic;
-                    worksheet.Cells[counter + 2, 12].Value = form.KolBydzhOrg;
-                    worksheet.Cells[counter + 2, 13].Value = form.KolChelDostyp;
-                    worksheet.Cells[counter + 2, 14].Value = form.ObespechCentrlVodo;
-                    worksheet.Cells[counter + 2, 15].Value = form.IndivUchetVodyVsego;
-                    worksheet.Cells[counter + 2, 16].Value = form.IndivUchetVodyDistance;
-                    worksheet.Cells[counter + 2, 17].Value = form.IndivUchetVodyPercent;
-                    worksheet.Cells[counter + 2, 18].Value = form.ObshePodlezhashKolZdan;
-                    worksheet.Cells[counter + 2, 19].Value = form.ObsheUstanKolZdan;
-                    worksheet.Cells[counter + 2, 20].Value = form.ObsheUstanPriborKol;
-                    worksheet.Cells[counter + 2, 21].Value = form.ObsheUstanDistanceKol;
-                    worksheet.Cells[counter + 2, 22].Value = form.ObsheOhvatPercent;
-                    worksheet.Cells[counter + 2, 23].Value = form.AutoProccesVodoZabor;
-                    worksheet.Cells[counter + 2, 24].Value = form.AutoProccesVodoPodgot;
-                    worksheet.Cells[counter + 2, 25].Value = form.AutoProccesNasosStanc;
-                    worksheet.Cells[counter + 2, 26].Value = form.AutoProccesSetVodosnab;
-                    worksheet.Cells[counter + 2, 27].Value = form.KolAbonent;
-                    worksheet.Cells[counter + 2, 28].Value = form.KolAbonFizLic;
-                    worksheet.Cells[counter + 2, 29].Value = form.KolAbonYriLic;
-                    worksheet.Cells[counter + 2, 30].Value = form.KolBydzhetOrg;
-                    worksheet.Cells[counter + 2, 31].Value = form.KolChelOhvatCentrVodo;
-                    worksheet.Cells[counter + 2, 32].Value = form.DostypCentrVodo;
-                    worksheet.Cells[counter + 2, 33].Value = form.KolichKanaliz;
-                    worksheet.Cells[counter + 2, 34].Value = form.KolichKanalizMechan;
-                    worksheet.Cells[counter + 2, 35].Value = form.KolichKanalizMechanBiolog;
-                    worksheet.Cells[counter + 2, 36].Value = form.ProizvodKanaliz;
-                    worksheet.Cells[counter + 2, 37].Value = form.IznosKanaliz;
-                    worksheet.Cells[counter + 2, 38].Value = form.KolChelKanaliz;
-                    worksheet.Cells[counter + 2, 39].Value = form.OhvatChelKanaliz;
-                    worksheet.Cells[counter + 2, 40].Value = form.FactPostypKanaliz;
-                    worksheet.Cells[counter + 2, 41].Value = form.FactPostypKanaliz1kv;
-                    worksheet.Cells[counter + 2, 42].Value = form.FactPostypKanaliz2kv;
-                    worksheet.Cells[counter + 2, 43].Value = form.FactPostypKanaliz3kv;
-                    worksheet.Cells[counter + 2, 44].Value = form.FactPostypKanaliz4kv;
-                    worksheet.Cells[counter + 2, 45].Value = form.ObiemKanalizNormOchist;
-                    worksheet.Cells[counter + 2, 46].Value = form.UrovenNormOchishVody;
-                    worksheet.Cells[counter + 2, 47].Value = form.AutoProccesSetKanaliz;
-                    worksheet.Cells[counter + 2, 48].Value = form.AutoProccesKanalizNasos;
-                    worksheet.Cells[counter + 2, 49].Value = form.AutoProccesKanalizSooruzh;
-                    worksheet.Cells[counter + 2, 50].Value = form.VodoSnabUsrednen;
-                    worksheet.Cells[counter + 2, 51].Value = form.VodoSnabFizLic;
-                    worksheet.Cells[counter + 2, 52].Value = form.VodoSnabYriLic;
-                    worksheet.Cells[counter + 2, 53].Value = form.VodoSnabBydzhOrg;
-                    worksheet.Cells[counter + 2, 54].Value = form.VodoOtvedUsred;
-                    worksheet.Cells[counter + 2, 55].Value = form.VodoOtvedFizLic;
-                    worksheet.Cells[counter + 2, 56].Value = form.VodoOtvedYriLic;
-                    worksheet.Cells[counter + 2, 57].Value = form.VodoOtvedBydzhOrg;
-                    worksheet.Cells[counter + 2, 58].Value = form.VodoProvodLengthTotal;
-                    worksheet.Cells[counter + 2, 59].Value = form.VodoProvodLengthIznos;
-                    worksheet.Cells[counter + 2, 60].Value = form.VodoProvodIznosPercent;
-                    worksheet.Cells[counter + 2, 61].Value = form.KanalizLengthTotal;
-                    worksheet.Cells[counter + 2, 62].Value = form.KanalizLengthIznos;
-                    worksheet.Cells[counter + 2, 63].Value = form.KanalizIznosPercent;
-                    worksheet.Cells[counter + 2, 64].Value = form.ObshNewSetiVodo;
-                    worksheet.Cells[counter + 2, 65].Value = form.ObshNewSetiKanaliz;
-                    worksheet.Cells[counter + 2, 66].Value = form.ObshZamenSetiVodo;
-                    worksheet.Cells[counter + 2, 67].Value = form.ObshZamenSetiKanaliz;
-                    worksheet.Cells[counter + 2, 68].Value = form.ObshRemontSetiVodo;
-                    worksheet.Cells[counter + 2, 69].Value = form.ObshRemontSetiKanaliz;                    
+                    worksheet.Cells[counter + 2, 9].Value = form.VodoSnabKolichAbonent;
+                    worksheet.Cells[counter + 2, 10].Value = form.VodoSnabKolFizLic;
+                    worksheet.Cells[counter + 2, 11].Value = form.VodoSnabKolYriLic;
+                    worksheet.Cells[counter + 2, 12].Value = form.VodoSnabKolBydzhOrg;
+                    worksheet.Cells[counter + 2, 13].Value = form.VodoSnabKolChelDostyp;
+                    worksheet.Cells[counter + 2, 14].Value = form.VodoSnabObespechCentrlVodo;
+                    worksheet.Cells[counter + 2, 15].Value = form.VodoSnabIndivUchetVodyVsego;
+                    worksheet.Cells[counter + 2, 16].Value = form.VodoSnabIndivUchetVodyDistance;
+                    worksheet.Cells[counter + 2, 17].Value = form.VodoSnabIndivUchetVodyPercent;
+                    worksheet.Cells[counter + 2, 18].Value = form.VodoSnabObshePodlezhashKolZdan;
+                    worksheet.Cells[counter + 2, 19].Value = form.VodoSnabObsheUstanKolZdan;
+                    worksheet.Cells[counter + 2, 20].Value = form.VodoSnabObsheUstanPriborKol;
+                    worksheet.Cells[counter + 2, 21].Value = form.VodoSnabObsheUstanDistanceKol;
+                    worksheet.Cells[counter + 2, 22].Value = form.VodoSnabObsheOhvatPercent;
+                    worksheet.Cells[counter + 2, 23].Value = form.VodoSnabAutoProccesVodoZabor;
+                    worksheet.Cells[counter + 2, 24].Value = form.VodoSnabAutoProccesVodoPodgot;
+                    worksheet.Cells[counter + 2, 25].Value = form.VodoSnabAutoProccesNasosStanc;
+                    worksheet.Cells[counter + 2, 26].Value = form.VodoSnabAutoProccesSetVodosnab;
+                    worksheet.Cells[counter + 2, 27].Value = form.VodoOtvKolAbonent;
+                    worksheet.Cells[counter + 2, 28].Value = form.VodoOtvKolAbonFizLic;
+                    worksheet.Cells[counter + 2, 29].Value = form.VodoOtvKolAbonYriLic;
+                    worksheet.Cells[counter + 2, 30].Value = form.VodoOtvKolBydzhetOrg;
+                    worksheet.Cells[counter + 2, 31].Value = form.VodoOtvKolChelOhvatCentrVodo;
+                    worksheet.Cells[counter + 2, 32].Value = form.VodoOtvDostypCentrVodo;
+                    worksheet.Cells[counter + 2, 33].Value = form.VodoOtvKolichKanaliz;
+                    worksheet.Cells[counter + 2, 34].Value = form.VodoOtvKolichKanalizMechan;
+                    worksheet.Cells[counter + 2, 35].Value = form.VodoOtvKolichKanalizMechanBiolog;
+                    worksheet.Cells[counter + 2, 36].Value = form.VodoOtvProizvodKanaliz;
+                    worksheet.Cells[counter + 2, 37].Value = form.VodoOtvIznosKanaliz;
+                    worksheet.Cells[counter + 2, 38].Value = form.VodoOtvKolChelKanaliz;
+                    worksheet.Cells[counter + 2, 39].Value = form.VodoOtvOhvatChelKanaliz;
+                    worksheet.Cells[counter + 2, 40].Value = form.VodoOtvFactPostypKanaliz;
+                    worksheet.Cells[counter + 2, 41].Value = form.VodoOtvFactPostypKanaliz1kv;
+                    worksheet.Cells[counter + 2, 42].Value = form.VodoOtvFactPostypKanaliz2kv;
+                    worksheet.Cells[counter + 2, 43].Value = form.VodoOtvFactPostypKanaliz3kv;
+                    worksheet.Cells[counter + 2, 44].Value = form.VodoOtvFactPostypKanaliz4kv;
+                    worksheet.Cells[counter + 2, 45].Value = form.VodoOtvObiemKanalizNormOchist;
+                    worksheet.Cells[counter + 2, 46].Value = form.VodoOtvUrovenNormOchishVody;
+                    worksheet.Cells[counter + 2, 47].Value = form.VodoOtvAutoProccesSetKanaliz;
+                    worksheet.Cells[counter + 2, 48].Value = form.VodoOtvAutoProccesKanalizNasos;
+                    worksheet.Cells[counter + 2, 49].Value = form.VodoOtvAutoProccesKanalizSooruzh;
+                    worksheet.Cells[counter + 2, 50].Value = form.UrTarVodoSnabUsrednen;
+                    worksheet.Cells[counter + 2, 51].Value = form.UrTarVodoSnabFizLic;
+                    worksheet.Cells[counter + 2, 52].Value = form.UrTarVodoSnabYriLic;
+                    worksheet.Cells[counter + 2, 53].Value = form.UrTarVodoSnabBydzhOrg;
+                    worksheet.Cells[counter + 2, 54].Value = form.UrTarVodoOtvedUsred;
+                    worksheet.Cells[counter + 2, 55].Value = form.UrTarVodoOtvedFizLic;
+                    worksheet.Cells[counter + 2, 56].Value = form.UrTarVodoOtvedYriLic;
+                    worksheet.Cells[counter + 2, 57].Value = form.UrTarVodoOtvedBydzhOrg;
+                    worksheet.Cells[counter + 2, 58].Value = form.LengthVodoProvodTotal;
+                    worksheet.Cells[counter + 2, 59].Value = form.LengthVodoProvodIznos;
+                    worksheet.Cells[counter + 2, 60].Value = form.LengthVodoProvodIznosPercent;
+                    worksheet.Cells[counter + 2, 61].Value = form.LengthKanalizTotal;
+                    worksheet.Cells[counter + 2, 62].Value = form.LengthKanalizIznos;
+                    worksheet.Cells[counter + 2, 63].Value = form.LengthKanalizIznosPercent;
+                    worksheet.Cells[counter + 2, 64].Value = form.LengthObshNewSetiVodo;
+                    worksheet.Cells[counter + 2, 65].Value = form.LengthObshNewSetiKanaliz;
+                    worksheet.Cells[counter + 2, 66].Value = form.LengthObshZamenSetiVodo;
+                    worksheet.Cells[counter + 2, 67].Value = form.LengthObshZamenSetiKanaliz;
+                    worksheet.Cells[counter + 2, 68].Value = form.LengthObshRemontSetiVodo;
+                    worksheet.Cells[counter + 2, 69].Value = form.LengthObshRemontSetiKanaliz;                    
                 }
 
                 // Определите диапазон данных
@@ -450,68 +450,68 @@ namespace WebServer.Reposotory
                         if (workSheet.Cells[row, 5].Text != "") cityForm.TotalCountDomHoz = int.Parse(workSheet.Cells[row, 5].Text);
                         if (workSheet.Cells[row, 6].Text != "") cityForm.TotalCountChel = int.Parse(workSheet.Cells[row, 6].Text);
                         cityForm.ObslPredpId = null; //TODO                        
-                        if (workSheet.Cells[row, 9].Text != "") cityForm.KolichAbonent = int.Parse(workSheet.Cells[row, 9].Text);
-                        if (workSheet.Cells[row, 10].Text != "") cityForm.KolFizLic = int.Parse(workSheet.Cells[row, 10].Text);
-                        if (workSheet.Cells[row, 11].Text != "") cityForm.KolYriLic = int.Parse(workSheet.Cells[row, 11].Text);
-                        if (workSheet.Cells[row, 12].Text != "") cityForm.KolBydzhOrg = int.Parse(workSheet.Cells[row, 12].Text);
-                        if (workSheet.Cells[row, 13].Text != "") cityForm.KolChelDostyp = int.Parse(workSheet.Cells[row, 13].Text);
-                        if (workSheet.Cells[row, 14].Text != "") cityForm.ObespechCentrlVodo = decimal.Parse(workSheet.Cells[row, 14].Text);
-                        if (workSheet.Cells[row, 15].Text != "") cityForm.IndivUchetVodyVsego = int.Parse(workSheet.Cells[row, 15].Text);
-                        if (workSheet.Cells[row, 16].Text != "") cityForm.IndivUchetVodyDistance = int.Parse(workSheet.Cells[row, 16].Text);
-                        if (workSheet.Cells[row, 17].Text != "") cityForm.IndivUchetVodyPercent = decimal.Parse(workSheet.Cells[row, 17].Text);
-                        if (workSheet.Cells[row, 18].Text != "") cityForm.ObshePodlezhashKolZdan = int.Parse(workSheet.Cells[row, 18].Text);
-                        if (workSheet.Cells[row, 19].Text != "") cityForm.ObsheUstanKolZdan = int.Parse(workSheet.Cells[row, 19].Text);
-                        if (workSheet.Cells[row, 20].Text != "") cityForm.ObsheUstanPriborKol = int.Parse(workSheet.Cells[row, 20].Text);
-                        if (workSheet.Cells[row, 21].Text != "") cityForm.ObsheUstanDistanceKol = int.Parse(workSheet.Cells[row, 21].Text);
-                        if (workSheet.Cells[row, 22].Text != "") cityForm.ObsheOhvatPercent = decimal.Parse(workSheet.Cells[row, 22].Text);
-                        if (workSheet.Cells[row, 23].Text != "") cityForm.AutoProccesVodoZabor = int.Parse(workSheet.Cells[row, 23].Text);
-                        if (workSheet.Cells[row, 24].Text != "") cityForm.AutoProccesVodoPodgot = int.Parse(workSheet.Cells[row, 24].Text);
-                        if (workSheet.Cells[row, 25].Text != "") cityForm.AutoProccesNasosStanc = int.Parse(workSheet.Cells[row, 25].Text);
-                        if (workSheet.Cells[row, 26].Text != "") cityForm.AutoProccesSetVodosnab = int.Parse(workSheet.Cells[row, 26].Text);
-                        if (workSheet.Cells[row, 27].Text != "") cityForm.KolAbonent = int.Parse(workSheet.Cells[row, 27].Text);
-                        if (workSheet.Cells[row, 28].Text != "") cityForm.KolAbonFizLic = int.Parse(workSheet.Cells[row, 28].Text);
-                        if (workSheet.Cells[row, 29].Text != "") cityForm.KolAbonYriLic = int.Parse(workSheet.Cells[row, 29].Text);
-                        if (workSheet.Cells[row, 30].Text != "") cityForm.KolBydzhetOrg = int.Parse(workSheet.Cells[row, 30].Text);
-                        if (workSheet.Cells[row, 31].Text != "") cityForm.KolChelOhvatCentrVodo = int.Parse(workSheet.Cells[row, 31].Text);
-                        if (workSheet.Cells[row, 32].Text != "") cityForm.DostypCentrVodo = decimal.Parse(workSheet.Cells[row, 32].Text);
-                        if (workSheet.Cells[row, 33].Text != "") cityForm.KolichKanaliz = int.Parse(workSheet.Cells[row, 33].Text);
-                        if (workSheet.Cells[row, 34].Text != "") cityForm.KolichKanalizMechan = int.Parse(workSheet.Cells[row, 34].Text);
-                        if (workSheet.Cells[row, 35].Text != "") cityForm.KolichKanalizMechanBiolog = int.Parse(workSheet.Cells[row, 35].Text);
-                        if (workSheet.Cells[row, 36].Text != "") cityForm.ProizvodKanaliz = int.Parse(workSheet.Cells[row, 36].Text);
-                        if (workSheet.Cells[row, 37].Text != "") cityForm.IznosKanaliz = decimal.Parse(workSheet.Cells[row, 37].Text);
-                        if (workSheet.Cells[row, 38].Text != "") cityForm.KolChelKanaliz = int.Parse(workSheet.Cells[row, 38].Text);
-                        if (workSheet.Cells[row, 39].Text != "") cityForm.OhvatChelKanaliz = decimal.Parse(workSheet.Cells[row, 39].Text);
-                        if (workSheet.Cells[row, 40].Text != "") cityForm.FactPostypKanaliz = int.Parse(workSheet.Cells[row, 40].Text);
-                        if (workSheet.Cells[row, 41].Text != "") cityForm.FactPostypKanaliz1kv = int.Parse(workSheet.Cells[row, 41].Text);
-                        if (workSheet.Cells[row, 42].Text != "") cityForm.FactPostypKanaliz2kv = int.Parse(workSheet.Cells[row, 42].Text);
-                        if (workSheet.Cells[row, 43].Text != "") cityForm.FactPostypKanaliz3kv = int.Parse(workSheet.Cells[row, 43].Text);
-                        if (workSheet.Cells[row, 44].Text != "") cityForm.FactPostypKanaliz4kv = int.Parse(workSheet.Cells[row, 44].Text);
-                        if (workSheet.Cells[row, 45].Text != "") cityForm.ObiemKanalizNormOchist = int.Parse(workSheet.Cells[row, 45].Text);
-                        if (workSheet.Cells[row, 46].Text != "") cityForm.UrovenNormOchishVody = int.Parse(workSheet.Cells[row, 46].Text);
+                        if (workSheet.Cells[row, 9].Text != "") cityForm.VodoSnabKolichAbonent = int.Parse(workSheet.Cells[row, 9].Text);
+                        if (workSheet.Cells[row, 10].Text != "") cityForm.VodoSnabKolFizLic = int.Parse(workSheet.Cells[row, 10].Text);
+                        if (workSheet.Cells[row, 11].Text != "") cityForm.VodoSnabKolYriLic = int.Parse(workSheet.Cells[row, 11].Text);
+                        if (workSheet.Cells[row, 12].Text != "") cityForm.VodoSnabKolBydzhOrg = int.Parse(workSheet.Cells[row, 12].Text);
+                        if (workSheet.Cells[row, 13].Text != "") cityForm.VodoSnabKolChelDostyp = int.Parse(workSheet.Cells[row, 13].Text);
+                        if (workSheet.Cells[row, 14].Text != "") cityForm.VodoSnabObespechCentrlVodo = decimal.Parse(workSheet.Cells[row, 14].Text);
+                        if (workSheet.Cells[row, 15].Text != "") cityForm.VodoSnabIndivUchetVodyVsego = int.Parse(workSheet.Cells[row, 15].Text);
+                        if (workSheet.Cells[row, 16].Text != "") cityForm.VodoSnabIndivUchetVodyDistance = int.Parse(workSheet.Cells[row, 16].Text);
+                        if (workSheet.Cells[row, 17].Text != "") cityForm.VodoSnabIndivUchetVodyPercent = decimal.Parse(workSheet.Cells[row, 17].Text);
+                        if (workSheet.Cells[row, 18].Text != "") cityForm.VodoSnabObshePodlezhashKolZdan = int.Parse(workSheet.Cells[row, 18].Text);
+                        if (workSheet.Cells[row, 19].Text != "") cityForm.VodoSnabObsheUstanKolZdan = int.Parse(workSheet.Cells[row, 19].Text);
+                        if (workSheet.Cells[row, 20].Text != "") cityForm.VodoSnabObsheUstanPriborKol = int.Parse(workSheet.Cells[row, 20].Text);
+                        if (workSheet.Cells[row, 21].Text != "") cityForm.VodoSnabObsheUstanDistanceKol = int.Parse(workSheet.Cells[row, 21].Text);
+                        if (workSheet.Cells[row, 22].Text != "") cityForm.VodoSnabObsheOhvatPercent = decimal.Parse(workSheet.Cells[row, 22].Text);
+                        if (workSheet.Cells[row, 23].Text != "") cityForm.VodoSnabAutoProccesVodoZabor = int.Parse(workSheet.Cells[row, 23].Text);
+                        if (workSheet.Cells[row, 24].Text != "") cityForm.VodoSnabAutoProccesVodoPodgot = int.Parse(workSheet.Cells[row, 24].Text);
+                        if (workSheet.Cells[row, 25].Text != "") cityForm.VodoSnabAutoProccesNasosStanc = int.Parse(workSheet.Cells[row, 25].Text);
+                        if (workSheet.Cells[row, 26].Text != "") cityForm.VodoSnabAutoProccesSetVodosnab = int.Parse(workSheet.Cells[row, 26].Text);
+                        if (workSheet.Cells[row, 27].Text != "") cityForm.VodoOtvKolAbonent = int.Parse(workSheet.Cells[row, 27].Text);
+                        if (workSheet.Cells[row, 28].Text != "") cityForm.VodoOtvKolAbonFizLic = int.Parse(workSheet.Cells[row, 28].Text);
+                        if (workSheet.Cells[row, 29].Text != "") cityForm.VodoOtvKolAbonYriLic = int.Parse(workSheet.Cells[row, 29].Text);
+                        if (workSheet.Cells[row, 30].Text != "") cityForm.VodoOtvKolBydzhetOrg = int.Parse(workSheet.Cells[row, 30].Text);
+                        if (workSheet.Cells[row, 31].Text != "") cityForm.VodoOtvKolChelOhvatCentrVodo = int.Parse(workSheet.Cells[row, 31].Text);
+                        if (workSheet.Cells[row, 32].Text != "") cityForm.VodoOtvDostypCentrVodo = decimal.Parse(workSheet.Cells[row, 32].Text);
+                        if (workSheet.Cells[row, 33].Text != "") cityForm.VodoOtvKolichKanaliz = int.Parse(workSheet.Cells[row, 33].Text);
+                        if (workSheet.Cells[row, 34].Text != "") cityForm.VodoOtvKolichKanalizMechan = int.Parse(workSheet.Cells[row, 34].Text);
+                        if (workSheet.Cells[row, 35].Text != "") cityForm.VodoOtvKolichKanalizMechanBiolog = int.Parse(workSheet.Cells[row, 35].Text);
+                        if (workSheet.Cells[row, 36].Text != "") cityForm.VodoOtvProizvodKanaliz = int.Parse(workSheet.Cells[row, 36].Text);
+                        if (workSheet.Cells[row, 37].Text != "") cityForm.VodoOtvIznosKanaliz = decimal.Parse(workSheet.Cells[row, 37].Text);
+                        if (workSheet.Cells[row, 38].Text != "") cityForm.VodoOtvKolChelKanaliz = int.Parse(workSheet.Cells[row, 38].Text);
+                        if (workSheet.Cells[row, 39].Text != "") cityForm.VodoOtvOhvatChelKanaliz = decimal.Parse(workSheet.Cells[row, 39].Text);
+                        if (workSheet.Cells[row, 40].Text != "") cityForm.VodoOtvFactPostypKanaliz = int.Parse(workSheet.Cells[row, 40].Text);
+                        if (workSheet.Cells[row, 41].Text != "") cityForm.VodoOtvFactPostypKanaliz1kv = int.Parse(workSheet.Cells[row, 41].Text);
+                        if (workSheet.Cells[row, 42].Text != "") cityForm.VodoOtvFactPostypKanaliz2kv = int.Parse(workSheet.Cells[row, 42].Text);
+                        if (workSheet.Cells[row, 43].Text != "") cityForm.VodoOtvFactPostypKanaliz3kv = int.Parse(workSheet.Cells[row, 43].Text);
+                        if (workSheet.Cells[row, 44].Text != "") cityForm.VodoOtvFactPostypKanaliz4kv = int.Parse(workSheet.Cells[row, 44].Text);
+                        if (workSheet.Cells[row, 45].Text != "") cityForm.VodoOtvObiemKanalizNormOchist = int.Parse(workSheet.Cells[row, 45].Text);
+                        if (workSheet.Cells[row, 46].Text != "") cityForm.VodoOtvUrovenNormOchishVody = int.Parse(workSheet.Cells[row, 46].Text);
 
-                        if (workSheet.Cells[row, 47].Text != "") cityForm.AutoProccesSetKanaliz = int.Parse(workSheet.Cells[row, 47].Text);
-                        if (workSheet.Cells[row, 48].Text != "") cityForm.AutoProccesKanalizNasos = int.Parse(workSheet.Cells[row, 48].Text);
-                        if (workSheet.Cells[row, 49].Text != "") cityForm.AutoProccesKanalizSooruzh = int.Parse(workSheet.Cells[row, 49].Text);
-                        if (workSheet.Cells[row, 50].Text != "") cityForm.VodoSnabUsrednen = int.Parse(workSheet.Cells[row, 50].Text);
-                        if (workSheet.Cells[row, 51].Text != "") cityForm.VodoSnabFizLic = int.Parse(workSheet.Cells[row, 51].Text);
-                        if (workSheet.Cells[row, 52].Text != "") cityForm.VodoSnabYriLic = int.Parse(workSheet.Cells[row, 52].Text);
-                        if (workSheet.Cells[row, 53].Text != "") cityForm.VodoSnabBydzhOrg = int.Parse(workSheet.Cells[row, 53].Text);
-                        if (workSheet.Cells[row, 54].Text != "") cityForm.VodoOtvedUsred = int.Parse(workSheet.Cells[row, 54].Text);
-                        if (workSheet.Cells[row, 55].Text != "") cityForm.VodoOtvedFizLic = int.Parse(workSheet.Cells[row, 55].Text);
-                        if (workSheet.Cells[row, 56].Text != "") cityForm.VodoOtvedYriLic = int.Parse(workSheet.Cells[row, 56].Text);
-                        if (workSheet.Cells[row, 57].Text != "") cityForm.VodoOtvedBydzhOrg = int.Parse(workSheet.Cells[row, 57].Text);
-                        if (workSheet.Cells[row, 58].Text != "") cityForm.VodoProvodLengthTotal = int.Parse(workSheet.Cells[row, 58].Text);
-                        if (workSheet.Cells[row, 59].Text != "") cityForm.VodoProvodLengthIznos = int.Parse(workSheet.Cells[row, 59].Text);
-                        if (workSheet.Cells[row, 60].Text != "") cityForm.VodoProvodIznosPercent = decimal.Parse(workSheet.Cells[row, 60].Text);
-                        if (workSheet.Cells[row, 61].Text != "") cityForm.KanalizLengthTotal = int.Parse(workSheet.Cells[row, 61].Text);
-                        if (workSheet.Cells[row, 62].Text != "") cityForm.KanalizLengthIznos = int.Parse(workSheet.Cells[row, 62].Text);
-                        if (workSheet.Cells[row, 63].Text != "") cityForm.KanalizIznosPercent = decimal.Parse(workSheet.Cells[row, 63].Text);
-                        if (workSheet.Cells[row, 64].Text != "") cityForm.ObshNewSetiVodo = int.Parse(workSheet.Cells[row, 64].Text);
-                        if (workSheet.Cells[row, 65].Text != "") cityForm.ObshNewSetiKanaliz = int.Parse(workSheet.Cells[row, 65].Text);
-                        if (workSheet.Cells[row, 66].Text != "") cityForm.ObshZamenSetiVodo = int.Parse(workSheet.Cells[row, 66].Text);
-                        if (workSheet.Cells[row, 67].Text != "") cityForm.ObshZamenSetiKanaliz = int.Parse(workSheet.Cells[row, 67].Text);
-                        if (workSheet.Cells[row, 68].Text != "") cityForm.ObshRemontSetiVodo = int.Parse(workSheet.Cells[row, 68].Text);
-                        if (workSheet.Cells[row, 69].Text != "") cityForm.ObshRemontSetiKanaliz = int.Parse(workSheet.Cells[row, 69].Text);
+                        if (workSheet.Cells[row, 47].Text != "") cityForm.VodoOtvAutoProccesSetKanaliz = int.Parse(workSheet.Cells[row, 47].Text);
+                        if (workSheet.Cells[row, 48].Text != "") cityForm.VodoOtvAutoProccesKanalizNasos = int.Parse(workSheet.Cells[row, 48].Text);
+                        if (workSheet.Cells[row, 49].Text != "") cityForm.VodoOtvAutoProccesKanalizSooruzh = int.Parse(workSheet.Cells[row, 49].Text);
+                        if (workSheet.Cells[row, 50].Text != "") cityForm.UrTarVodoSnabUsrednen = int.Parse(workSheet.Cells[row, 50].Text);
+                        if (workSheet.Cells[row, 51].Text != "") cityForm.UrTarVodoSnabFizLic = int.Parse(workSheet.Cells[row, 51].Text);
+                        if (workSheet.Cells[row, 52].Text != "") cityForm.UrTarVodoSnabYriLic = int.Parse(workSheet.Cells[row, 52].Text);
+                        if (workSheet.Cells[row, 53].Text != "") cityForm.UrTarVodoSnabBydzhOrg = int.Parse(workSheet.Cells[row, 53].Text);
+                        if (workSheet.Cells[row, 54].Text != "") cityForm.UrTarVodoOtvedUsred = int.Parse(workSheet.Cells[row, 54].Text);
+                        if (workSheet.Cells[row, 55].Text != "") cityForm.UrTarVodoOtvedFizLic = int.Parse(workSheet.Cells[row, 55].Text);
+                        if (workSheet.Cells[row, 56].Text != "") cityForm.UrTarVodoOtvedYriLic = int.Parse(workSheet.Cells[row, 56].Text);
+                        if (workSheet.Cells[row, 57].Text != "") cityForm.UrTarVodoOtvedBydzhOrg = int.Parse(workSheet.Cells[row, 57].Text);
+                        if (workSheet.Cells[row, 58].Text != "") cityForm.LengthVodoProvodTotal = int.Parse(workSheet.Cells[row, 58].Text);
+                        if (workSheet.Cells[row, 59].Text != "") cityForm.LengthVodoProvodIznos = int.Parse(workSheet.Cells[row, 59].Text);
+                        if (workSheet.Cells[row, 60].Text != "") cityForm.LengthVodoProvodIznosPercent = decimal.Parse(workSheet.Cells[row, 60].Text);
+                        if (workSheet.Cells[row, 61].Text != "") cityForm.LengthKanalizTotal = int.Parse(workSheet.Cells[row, 61].Text);
+                        if (workSheet.Cells[row, 62].Text != "") cityForm.LengthKanalizIznos = int.Parse(workSheet.Cells[row, 62].Text);
+                        if (workSheet.Cells[row, 63].Text != "") cityForm.LengthKanalizIznosPercent = decimal.Parse(workSheet.Cells[row, 63].Text);
+                        if (workSheet.Cells[row, 64].Text != "") cityForm.LengthObshNewSetiVodo = int.Parse(workSheet.Cells[row, 64].Text);
+                        if (workSheet.Cells[row, 65].Text != "") cityForm.LengthObshNewSetiKanaliz = int.Parse(workSheet.Cells[row, 65].Text);
+                        if (workSheet.Cells[row, 66].Text != "") cityForm.LengthObshZamenSetiVodo = int.Parse(workSheet.Cells[row, 66].Text);
+                        if (workSheet.Cells[row, 67].Text != "") cityForm.LengthObshZamenSetiKanaliz = int.Parse(workSheet.Cells[row, 67].Text);
+                        if (workSheet.Cells[row, 68].Text != "") cityForm.LengthObshRemontSetiVodo = int.Parse(workSheet.Cells[row, 68].Text);
+                        if (workSheet.Cells[row, 69].Text != "") cityForm.LengthObshRemontSetiKanaliz = int.Parse(workSheet.Cells[row, 69].Text);
 
                         await _dbSetForm.AddAsync(cityForm);
                         await _context.SaveChangesAsync();

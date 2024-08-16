@@ -189,26 +189,26 @@ namespace WebServer.Reposotory
                                     CentrVodoSnabFizLic = f.CentrVodoSnabFizLic,
                                     CentrVodoSnabYriLic = f.CentrVodoSnabYriLic,
                                     CentrVodoSnabBudzhOrg = f.CentrVodoSnabBudzhOrg,
-                                    CentrVodoIndivPriborUchVodyVsego = f.CentrVodoIndivPriborUchVodyVsego,
-                                    CentrVodoIndivPriborUchVodyASYE = f.CentrVodoIndivPriborUchVodyASYE,
-                                    CentrVodoIndivPriborUchVodyOhvat = f.CentrVodoIndivPriborUchVodyOhvat,
-                                    NeCtentrVodoKolSelsNasPunk = f.NeCtentrVodoKolSelsNasPunk,
-                                    KbmKolSelsNasPunk = f.KbmKolSelsNasPunk,
-                                    KbmKolChel = f.KbmKolChel,
-                                    KbmObespNasel = f.KbmObespNasel,
-                                    PrvKolSelsNasPunk = f.PrvKolSelsNasPunk,
-                                    PrvKolChel = f.PrvKolChel,
-                                    PrvObespNasel = f.PrvObespNasel,
-                                    PrivVodaKolSelsNasPunk = f.PrivVodaKolSelsNasPunk,
-                                    PrivVodaKolChel = f.PrivVodaKolChel,
-                                    PrivVodaObespNasel = f.PrivVodaObespNasel,
-                                    SkvazhKolSelsNasPunk = f.SkvazhKolSelsNasPunk,
-                                    SkvazhKolChel = f.SkvazhKolChel,
-                                    SkvazhObespNasel = f.SkvazhObespNasel,
-                                    SkvazhKolSelsNasPunkOtkaz = f.SkvazhKolSelsNasPunkOtkaz,
-                                    SkvazhKolChelOtkaz = f.SkvazhKolChelOtkaz,
-                                    SkvazhDolyaNaselOtkaz = f.SkvazhDolyaNaselOtkaz,
-                                    SkvazhDolyaSelOtkaz = f.SkvazhDolyaSelOtkaz,
+                                    CentrVodoSnabIndivPriborUchVodyVsego = f.CentrVodoSnabIndivPriborUchVodyVsego,
+                                    CentrVodoSnabIndivPriborUchVodyASYE = f.CentrVodoSnabIndivPriborUchVodyASYE,
+                                    CentrVodoSnabIndivPriborUchVodyOhvat = f.CentrVodoSnabIndivPriborUchVodyOhvat,
+                                    NecVodosnabKolSelsNasPunk = f.NecVodosnabKolSelsNasPunk,
+                                    NecVodosnabKbmKolSelsNasPunk = f.NecVodosnabKbmKolSelsNasPunk,
+                                    NecVodosnabKbmKolChel = f.NecVodosnabKbmKolChel,
+                                    NecVodosnabKbmObespNasel = f.NecVodosnabKbmObespNasel,
+                                    NecVodosnabPrvKolSelsNasPunk = f.NecVodosnabPrvKolSelsNasPunk,
+                                    NecVodosnabPrvKolChel = f.NecVodosnabPrvKolChel,
+                                    NecVodosnabPrvObespNasel = f.NecVodosnabPrvObespNasel,
+                                    NecVodosnabPrivVodaKolSelsNasPunk = f.NecVodosnabPrivVodaKolSelsNasPunk,
+                                    NecVodosnabPrivVodaKolChel = f.NecVodosnabPrivVodaKolChel,
+                                    NecVodosnabPrivVodaObespNasel = f.NecVodosnabPrivVodaObespNasel,
+                                    NecVodosnabSkvazhKolSelsNasPunk = f.NecVodosnabSkvazhKolSelsNasPunk,
+                                    NecVodosnabSkvazhKolChel = f.NecVodosnabSkvazhKolChel,
+                                    NecVodosnabSkvazhObespNasel = f.NecVodosnabSkvazhObespNasel,
+                                    NecVodosnabSkvazhKolSelsNasPunkOtkaz = f.NecVodosnabSkvazhKolSelsNasPunkOtkaz,
+                                    NecVodosnabSkvazhKolChelOtkaz = f.NecVodosnabSkvazhKolChelOtkaz,
+                                    NecVodosnabSkvazhDolyaNaselOtkaz = f.NecVodosnabSkvazhDolyaNaselOtkaz,
+                                    NecVodosnabSkvazhDolyaSelOtkaz = f.NecVodosnabSkvazhDolyaSelOtkaz,
                                     CentrVodOtvedKolSelsNasPunk = f.CentrVodOtvedKolSelsNasPunk,
                                     CentrVodOtvedKolChel = f.CentrVodOtvedKolChel,
                                     CentrVodOtvedKolAbonent = f.CentrVodOtvedKolAbonent,
@@ -407,26 +407,26 @@ namespace WebServer.Reposotory
                     worksheet.Cells[counter + 2, 24].Value = form.CentrVodoSnabFizLic;
                     worksheet.Cells[counter + 2, 25].Value = form.CentrVodoSnabYriLic;
                     worksheet.Cells[counter + 2, 26].Value = form.CentrVodoSnabBudzhOrg;
-                    worksheet.Cells[counter + 2, 27].Value = form.CentrVodoIndivPriborUchVodyVsego;
-                    worksheet.Cells[counter + 2, 28].Value = form.CentrVodoIndivPriborUchVodyASYE;
-                    worksheet.Cells[counter + 2, 29].Value = form.CentrVodoIndivPriborUchVodyOhvat;
-                    worksheet.Cells[counter + 2, 30].Value = form.NeCtentrVodoKolSelsNasPunk;
-                    worksheet.Cells[counter + 2, 31].Value = form.KbmKolSelsNasPunk;
-                    worksheet.Cells[counter + 2, 32].Value = form.KbmKolChel;
-                    worksheet.Cells[counter + 2, 33].Value = form.KbmObespNasel;
-                    worksheet.Cells[counter + 2, 34].Value = form.PrvKolSelsNasPunk;
-                    worksheet.Cells[counter + 2, 35].Value = form.PrvKolChel;
-                    worksheet.Cells[counter + 2, 36].Value = form.PrvObespNasel;
-                    worksheet.Cells[counter + 2, 37].Value = form.PrivVodaKolSelsNasPunk;
-                    worksheet.Cells[counter + 2, 38].Value = form.PrivVodaKolChel;
-                    worksheet.Cells[counter + 2, 39].Value = form.PrivVodaObespNasel;
-                    worksheet.Cells[counter + 2, 40].Value = form.SkvazhKolSelsNasPunk;
-                    worksheet.Cells[counter + 2, 41].Value = form.SkvazhKolChel;
-                    worksheet.Cells[counter + 2, 42].Value = form.SkvazhObespNasel;
-                    worksheet.Cells[counter + 2, 43].Value = form.SkvazhKolSelsNasPunkOtkaz;
-                    worksheet.Cells[counter + 2, 44].Value = form.SkvazhKolChelOtkaz;
-                    worksheet.Cells[counter + 2, 45].Value = form.SkvazhDolyaNaselOtkaz;
-                    worksheet.Cells[counter + 2, 46].Value = form.SkvazhDolyaSelOtkaz;
+                    worksheet.Cells[counter + 2, 27].Value = form.CentrVodoSnabIndivPriborUchVodyVsego;
+                    worksheet.Cells[counter + 2, 28].Value = form.CentrVodoSnabIndivPriborUchVodyASYE;
+                    worksheet.Cells[counter + 2, 29].Value = form.CentrVodoSnabIndivPriborUchVodyOhvat;
+                    worksheet.Cells[counter + 2, 30].Value = form.NecVodosnabKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 31].Value = form.NecVodosnabKbmKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 32].Value = form.NecVodosnabKbmKolChel;
+                    worksheet.Cells[counter + 2, 33].Value = form.NecVodosnabKbmObespNasel;
+                    worksheet.Cells[counter + 2, 34].Value = form.NecVodosnabPrvKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 35].Value = form.NecVodosnabPrvKolChel;
+                    worksheet.Cells[counter + 2, 36].Value = form.NecVodosnabPrvObespNasel;
+                    worksheet.Cells[counter + 2, 37].Value = form.NecVodosnabPrivVodaKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 38].Value = form.NecVodosnabPrivVodaKolChel;
+                    worksheet.Cells[counter + 2, 39].Value = form.NecVodosnabPrivVodaObespNasel;
+                    worksheet.Cells[counter + 2, 40].Value = form.NecVodosnabSkvazhKolSelsNasPunk;
+                    worksheet.Cells[counter + 2, 41].Value = form.NecVodosnabSkvazhKolChel;
+                    worksheet.Cells[counter + 2, 42].Value = form.NecVodosnabSkvazhObespNasel;
+                    worksheet.Cells[counter + 2, 43].Value = form.NecVodosnabSkvazhKolSelsNasPunkOtkaz;
+                    worksheet.Cells[counter + 2, 44].Value = form.NecVodosnabSkvazhKolChelOtkaz;
+                    worksheet.Cells[counter + 2, 45].Value = form.NecVodosnabSkvazhDolyaNaselOtkaz;
+                    worksheet.Cells[counter + 2, 46].Value = form.NecVodosnabSkvazhDolyaSelOtkaz;
                     worksheet.Cells[counter + 2, 47].Value = form.CentrVodOtvedKolSelsNasPunk;
                     worksheet.Cells[counter + 2, 48].Value = form.CentrVodOtvedKolChel;
                     worksheet.Cells[counter + 2, 49].Value = form.CentrVodOtvedKolAbonent;
@@ -670,26 +670,26 @@ namespace WebServer.Reposotory
                         if (workSheet.Cells[row, 24].Text != "") seloForm.CentrVodoSnabFizLic = int.Parse(workSheet.Cells[row, 24].Text);
                         if (workSheet.Cells[row, 25].Text != "") seloForm.CentrVodoSnabYriLic = int.Parse(workSheet.Cells[row, 25].Text);
                         if (workSheet.Cells[row, 26].Text != "") seloForm.CentrVodoSnabBudzhOrg = int.Parse(workSheet.Cells[row, 26].Text);
-                        if (workSheet.Cells[row, 27].Text != "") seloForm.CentrVodoIndivPriborUchVodyVsego = int.Parse(workSheet.Cells[row, 27].Text);
-                        if (workSheet.Cells[row, 28].Text != "") seloForm.CentrVodoIndivPriborUchVodyASYE = int.Parse(workSheet.Cells[row, 28].Text);
-                        if (workSheet.Cells[row, 29].Text != "") seloForm.CentrVodoIndivPriborUchVodyOhvat = decimal.Parse(workSheet.Cells[row, 29].Text);
-                        if (workSheet.Cells[row, 30].Text != "") seloForm.NeCtentrVodoKolSelsNasPunk = int.Parse(workSheet.Cells[row, 30].Text);
-                        if (workSheet.Cells[row, 31].Text != "") seloForm.KbmKolSelsNasPunk = int.Parse(workSheet.Cells[row, 31].Text);
-                        if (workSheet.Cells[row, 32].Text != "") seloForm.KbmKolChel = int.Parse(workSheet.Cells[row, 32].Text);
-                        if (workSheet.Cells[row, 33].Text != "") seloForm.KbmObespNasel = decimal.Parse(workSheet.Cells[row, 33].Text);
-                        if (workSheet.Cells[row, 34].Text != "") seloForm.PrvKolSelsNasPunk = int.Parse(workSheet.Cells[row, 34].Text);
-                        if (workSheet.Cells[row, 35].Text != "") seloForm.PrvKolChel = int.Parse(workSheet.Cells[row, 35].Text);
-                        if (workSheet.Cells[row, 36].Text != "") seloForm.PrvObespNasel = decimal.Parse(workSheet.Cells[row, 36].Text);
-                        if (workSheet.Cells[row, 37].Text != "") seloForm.PrivVodaKolSelsNasPunk = int.Parse(workSheet.Cells[row, 37].Text);
-                        if (workSheet.Cells[row, 38].Text != "") seloForm.PrivVodaKolChel = int.Parse(workSheet.Cells[row, 38].Text);
-                        if (workSheet.Cells[row, 39].Text != "") seloForm.PrivVodaObespNasel = decimal.Parse(workSheet.Cells[row, 39].Text);
-                        if (workSheet.Cells[row, 40].Text != "") seloForm.SkvazhKolSelsNasPunk = int.Parse(workSheet.Cells[row, 40].Text);
-                        if (workSheet.Cells[row, 41].Text != "") seloForm.SkvazhKolChel = int.Parse(workSheet.Cells[row, 41].Text);
-                        if (workSheet.Cells[row, 42].Text != "") seloForm.SkvazhObespNasel = decimal.Parse(workSheet.Cells[row, 42].Text);
-                        if (workSheet.Cells[row, 43].Text != "") seloForm.SkvazhKolSelsNasPunkOtkaz = int.Parse(workSheet.Cells[row, 43].Text);
-                        if (workSheet.Cells[row, 44].Text != "") seloForm.SkvazhKolChelOtkaz = int.Parse(workSheet.Cells[row, 44].Text);
-                        if (workSheet.Cells[row, 45].Text != "") seloForm.SkvazhDolyaNaselOtkaz = decimal.Parse(workSheet.Cells[row, 45].Text);
-                        if (workSheet.Cells[row, 46].Text != "") seloForm.SkvazhDolyaSelOtkaz = decimal.Parse(workSheet.Cells[row, 46].Text);
+                        if (workSheet.Cells[row, 27].Text != "") seloForm.CentrVodoSnabIndivPriborUchVodyVsego = int.Parse(workSheet.Cells[row, 27].Text);
+                        if (workSheet.Cells[row, 28].Text != "") seloForm.CentrVodoSnabIndivPriborUchVodyASYE = int.Parse(workSheet.Cells[row, 28].Text);
+                        if (workSheet.Cells[row, 29].Text != "") seloForm.CentrVodoSnabIndivPriborUchVodyOhvat = decimal.Parse(workSheet.Cells[row, 29].Text);
+                        if (workSheet.Cells[row, 30].Text != "") seloForm.NecVodosnabKolSelsNasPunk = int.Parse(workSheet.Cells[row, 30].Text);
+                        if (workSheet.Cells[row, 31].Text != "") seloForm.NecVodosnabKbmKolSelsNasPunk = int.Parse(workSheet.Cells[row, 31].Text);
+                        if (workSheet.Cells[row, 32].Text != "") seloForm.NecVodosnabKbmKolChel = int.Parse(workSheet.Cells[row, 32].Text);
+                        if (workSheet.Cells[row, 33].Text != "") seloForm.NecVodosnabKbmObespNasel = decimal.Parse(workSheet.Cells[row, 33].Text);
+                        if (workSheet.Cells[row, 34].Text != "") seloForm.NecVodosnabPrvKolSelsNasPunk = int.Parse(workSheet.Cells[row, 34].Text);
+                        if (workSheet.Cells[row, 35].Text != "") seloForm.NecVodosnabPrvKolChel = int.Parse(workSheet.Cells[row, 35].Text);
+                        if (workSheet.Cells[row, 36].Text != "") seloForm.NecVodosnabPrvObespNasel = decimal.Parse(workSheet.Cells[row, 36].Text);
+                        if (workSheet.Cells[row, 37].Text != "") seloForm.NecVodosnabPrivVodaKolSelsNasPunk = int.Parse(workSheet.Cells[row, 37].Text);
+                        if (workSheet.Cells[row, 38].Text != "") seloForm.NecVodosnabPrivVodaKolChel = int.Parse(workSheet.Cells[row, 38].Text);
+                        if (workSheet.Cells[row, 39].Text != "") seloForm.NecVodosnabPrivVodaObespNasel = decimal.Parse(workSheet.Cells[row, 39].Text);
+                        if (workSheet.Cells[row, 40].Text != "") seloForm.NecVodosnabSkvazhKolSelsNasPunk = int.Parse(workSheet.Cells[row, 40].Text);
+                        if (workSheet.Cells[row, 41].Text != "") seloForm.NecVodosnabSkvazhKolChel = int.Parse(workSheet.Cells[row, 41].Text);
+                        if (workSheet.Cells[row, 42].Text != "") seloForm.NecVodosnabSkvazhObespNasel = decimal.Parse(workSheet.Cells[row, 42].Text);
+                        if (workSheet.Cells[row, 43].Text != "") seloForm.NecVodosnabSkvazhKolSelsNasPunkOtkaz = int.Parse(workSheet.Cells[row, 43].Text);
+                        if (workSheet.Cells[row, 44].Text != "") seloForm.NecVodosnabSkvazhKolChelOtkaz = int.Parse(workSheet.Cells[row, 44].Text);
+                        if (workSheet.Cells[row, 45].Text != "") seloForm.NecVodosnabSkvazhDolyaNaselOtkaz = decimal.Parse(workSheet.Cells[row, 45].Text);
+                        if (workSheet.Cells[row, 46].Text != "") seloForm.NecVodosnabSkvazhDolyaSelOtkaz = decimal.Parse(workSheet.Cells[row, 46].Text);
 
                         if (workSheet.Cells[row, 47].Text != "") seloForm.CentrVodOtvedKolSelsNasPunk = int.Parse(workSheet.Cells[row, 47].Text);
                         if (workSheet.Cells[row, 48].Text != "") seloForm.CentrVodOtvedKolChel = int.Parse(workSheet.Cells[row, 48].Text);
