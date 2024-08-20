@@ -95,9 +95,9 @@ namespace WebServer.Controllers
 
 
         [HttpGet("businesList")]
-        public async Task<ActionResult> GetBusinesDictList()
+        public async Task<ActionResult> GetBusinesDictList(Guid? parentId, string? type)
         {
-            return Ok(await _repo.GetBusinesDictList());
+            return Ok(await _repo.GetBusinesDictList(parentId, type));
         }
 
         [HttpGet("GetBusinesDictById")]

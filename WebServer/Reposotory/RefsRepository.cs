@@ -115,9 +115,13 @@ namespace WebServer.Reposotory
         #endregion Universal_Refferences
 
         #region Business_Dictionary
-        public async Task<List<RefBusinesDictDto>> GetBusinesDictList()
+        public async Task<List<RefBusinesDictDto>> GetBusinesDictList(Guid? parentId, string? type)
         {
-            return await _dbSetBusines.Where(x => x.IsDel == false).Select(x => new RefBusinesDictDto
+            var query = _dbSetBusines.Where(x => x.IsDel == false).AsQueryable();
+            if(parentId.HasValue) query = query.Where(x=>x.ParentId == parentId.Value);
+            if (!string.IsNullOrEmpty(type)) query = query.Where(x => x.Type == type);
+
+            return await query.Select(x => new RefBusinesDictDto
             {
                 Id = x.Id,
                 ParentId = x.ParentId,

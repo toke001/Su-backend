@@ -107,7 +107,7 @@ namespace WebServer.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("GetSeloFormById")]
+        [HttpGet("GetCityFormById")]
         public async Task<ActionResult> GetCityFormById(Guid id)
         {
             try

@@ -101,6 +101,19 @@ namespace WebServer.Controllers
             }
         }
 
+        [HttpGet("FindParentRecordAsync")]
+        public async Task<ActionResult> FindParentRecordAsync(int parentId, int katoLevel)
+        {
+            try
+            {
+                return Ok(await _repo.FindParentRecordAsync(parentId, katoLevel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         /// <summary>
         /// Получение Формы по коду КАТО и году
         /// </summary>
@@ -129,12 +142,12 @@ namespace WebServer.Controllers
         /// <returns></returns>
         [HttpPost("AddSeloForms")]
         [Authorize]
-        public async Task<ActionResult> AddSeloForms(Guid idDoc, List<SeloFormDto> seloFormDto)
+        public async Task<ActionResult> AddSeloForms(string login, List<SeloFormDto> seloFormDto)
         {
             try
             {
                 var entity = _mapper.Map<List<SeloForm>>(seloFormDto);
-                return Ok(await _repo.AddSeloForms(idDoc, entity));
+                return Ok(await _repo.AddSeloForms(login, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
@@ -172,10 +185,11 @@ namespace WebServer.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>
+        /// <param name="login"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
         [Authorize]
-        public async Task<IActionResult> Patch(Guid id, [FromBody] JsonPatchDocument<SeloForm> patchDoc)
+        public async Task<IActionResult> Patch(Guid id, string login, [FromBody] JsonPatchDocument<SeloForm> patchDoc)
         {
             if (patchDoc == null)
             {
@@ -195,7 +209,7 @@ namespace WebServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _repo.UpdateSeloForm(entity);
+            await _repo.UpdateSeloForm(login, entity);
 
             return Ok(entity);
         }

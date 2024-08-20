@@ -148,12 +148,13 @@ namespace WebServer.Reposotory
         public async Task<List<SeloTotalFormsDto>> GetSeloTotalFormsByParentCodAsync(string parentKato, int year)
         {
             List<SeloTotalFormsDto> listForms = new List<SeloTotalFormsDto>();
-            var mainKato = await _dbSetKato.Where(x => x.Code.ToString() == parentKato && x.IsReportable == true).FirstOrDefaultAsync();
+            var mainKato = await _dbSetKato.Where(x => x.Code.ToString() == parentKato).FirstOrDefaultAsync();
             if (mainKato != null)
             {
                 var childrenOfKatos = await FindChildRecordsAsync(mainKato.Id);
                 //var codesOfKatos = await _dbSetKato.Where(x => x.ParentId == mainKato!.Id).Select(x => x.Code.ToString()).ToListAsync();//список всех КАТО
                 //codesOfKatos.Insert(0, mainKato!.Code.ToString()); //Вношу главное КАТО, которое при в параметрах
+                childrenOfKatos.Insert(0, mainKato);
 
                 foreach (var t in childrenOfKatos)
                 {

@@ -35,7 +35,8 @@ namespace WebServer.Models
         /// </summary>
         [Comment("Код района (КАТО)")]
         public string? KodRaiona { get; set; }
-        public string? Login { get; set; }
+        [Required]
+        public string Login { get; set; } = string.Empty;
         /// <summary>
         /// За какой год данные
         /// </summary>

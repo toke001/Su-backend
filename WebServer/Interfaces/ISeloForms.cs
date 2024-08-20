@@ -8,10 +8,11 @@ namespace WebServer.Interfaces
         Task<List<SeloDocument>> GetSeloDocumentByParams(string? kodOblast, string? kodRaion, int? year);
         Task<object> GetSeloFormsByDocId(Guid idDoc);
         Task<SeloDocument> AddSeloDocument(SeloDocument seloDoument);
+        Task<Ref_Kato?> FindParentRecordAsync(int parentId, int katoLevel);
         Task<object> GetSeloFormsByKodYear(string kodNaselPunk, int year);
-        Task<List<SeloForm>> AddSeloForms(Guid idDoc, List<SeloForm> seloForms);
+        Task<List<SeloForm>> AddSeloForms(string login, List<SeloForm> seloForms);
         Task<SeloForm> GetSeloFormById(Guid id);
-        Task<SeloForm> UpdateSeloForm(SeloForm seloForm);
+        Task<SeloForm> UpdateSeloForm(string login, SeloForm seloForm);
         
     }
 }

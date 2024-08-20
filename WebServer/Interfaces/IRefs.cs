@@ -16,7 +16,7 @@ namespace WebServer.Interfaces
 
         #endregion Universal_Refferences
 
-        Task<List<RefBusinesDictDto>> GetBusinesDictList();
+        Task<List<RefBusinesDictDto>> GetBusinesDictList(Guid? parentId, string? type);
         Task<RefBusinesDictDto> GetBusinesDictById(Guid Id);
         Task<Business_Dictionary> AddBusinesDict(Business_Dictionary model);
         Task<RefBusinesDictDto> UpdateBusinesDict(Business_Dictionary model);
