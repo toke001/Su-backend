@@ -101,6 +101,12 @@ namespace WebServer.Controllers
             }
         }
 
+        /// <summary>
+        /// Найти родителя по Id и уровню
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="katoLevel"></param>
+        /// <returns></returns>
         [HttpGet("FindParentRecordAsync")]
         public async Task<ActionResult> FindParentRecordAsync(int parentId, int katoLevel)
         {
