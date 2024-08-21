@@ -117,5 +117,33 @@ namespace WebServer.Reposotory
                 Password = request.Password,
             };            
         }
+
+        public async Task<object> GetUsers(AccountGetUsersRequestDto model)
+        {
+            var query = _dbSet.Where(x=>x.IsDel==false).AsQueryable();
+            if(!string.IsNullOrEmpty(model.Login)) query = query.Where(x=>x.Login == model.Login);
+            if(!string.IsNullOrEmpty(model.KatoCode)) query = query.Where(x=>x.KatoCode.ToString() == model.KatoCode);
+            if(!string.IsNullOrEmpty(model.Email)) query = query.Where(x=>x.Email == model.Email);
+            if (model.RoleId.HasValue)
+            {
+
+                query = from q in query
+                        join r in _dbSetAcRoles on q.Id equals r.AccountId
+                        where r.RoleId == model.RoleId.Value
+                        select q;
+            }
+
+            return await (from q in query                                                
+                        select new
+                        {
+                            q.Id,
+                            q.Login,
+                            q.KatoCode,
+                            q.Email,
+                            Roles = _dbSetAcRoles.Where(x=>x.AccountId==q.Id).ToList()
+                        }).ToListAsync();
+
+            //return await query.Select(x => new {x.Id, x.Login, x.KatoCode, x.Email, }).ToListAsync();
+        }
     }
 }

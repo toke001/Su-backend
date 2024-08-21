@@ -44,5 +44,24 @@ namespace WebServer.Controllers
                 return BadRequest(ex.InnerException?.Message ?? ex.Message);
             }
         }
+
+        /// <summary>
+        /// Список логинов с ролями
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost("list")]
+        public async Task<IActionResult> GetUsers(AccountGetUsersRequestDto model)
+        {
+            try
+            {
+                return Ok(await _repository.GetUsers(model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using WebServer.Dtos;
+using WebServer.Models;
 
 namespace WebServer.Interfaces
 {
@@ -6,5 +7,6 @@ namespace WebServer.Interfaces
     {
         public Task<AccountSignInResponseDto> SignIn(AccountSignInRequestDto request);
         Task<AccountSignUpResponseDto> SignUp(AccountSignUpRequestDto request);
+        Task<object> GetUsers(AccountGetUsersRequestDto model);
     }
 }
