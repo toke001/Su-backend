@@ -4,22 +4,12 @@ namespace WebServer.Dtos
 {
     public class AccountSignUpRequestDto
     {
-        [Required]
-        public required string Login { get; set; }
-
-        [Required]
-        public required long KatoCode { get; set; }
-
-        //[Required]
-        //public required string Description { get; set; }               
-        [Required]
-        public List<int> Roles { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
+        public string Login { get; set; } = string.Empty;
+        public long KatoCode { get; set; } = 0;
+        public List<int> Roles { get; set; } = new List<int>();              
+        public string Email { get; set; } = string.Empty;
+                
+        public string Password { get; set; } = string.Empty;
+        public Guid AuthorId { get; set; }
     }
 }

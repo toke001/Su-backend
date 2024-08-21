@@ -79,6 +79,7 @@ namespace WebServer.Reposotory
         {            
             var oldAccount = await _dbSet.FirstOrDefaultAsync(x => x.Login.ToLower() == request.Login.ToLower());
             if (oldAccount != null) throw new Exception("Пользователь с таким логином уже существует");
+            if (!_dbSet.Any(x => x.Id == request.AuthorId)) throw new Exception("Автора с таким Id не существует");
 
             //var salt = GenerateSalt();
             var saltedPassword = PasswordHelper.HashPassword(request.Password);
@@ -89,7 +90,8 @@ namespace WebServer.Reposotory
                 KatoCode = request.KatoCode,                  
                 PasswordHash = saltedPassword,
                 CreateDate = DateTime.UtcNow,
-                Email = request.Email
+                Email = request.Email,
+                AuthorId = request.AuthorId
             };
             await _dbSet.AddAsync(account);
             //await _context.SaveChangesAsync();

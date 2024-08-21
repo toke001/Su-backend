@@ -1195,6 +1195,7 @@ namespace WebServer.Migrations
                         .HasComment("Код района (КАТО)");
 
                     b.Property<string>("Login")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Year")

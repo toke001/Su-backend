@@ -12,7 +12,7 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    [Migration("20240818113501_init")]
+    [Migration("20240821130753_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -1198,6 +1198,7 @@ namespace WebServer.Migrations
                         .HasComment("Код района (КАТО)");
 
                     b.Property<string>("Login")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Year")

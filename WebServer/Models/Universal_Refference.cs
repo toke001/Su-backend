@@ -18,12 +18,12 @@ namespace WebServer.Models
         /// Код*
         /// </summary>
         [Comment("Код*")]
-        public required string Code { get; set; }
+        public string Code { get; set; } = string.Empty;
         /// <summary>
         /// Тип*
         /// </summary>
         [Comment("Тип*")]
-        public required string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Бизнес описание
         /// </summary>

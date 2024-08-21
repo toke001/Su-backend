@@ -274,7 +274,7 @@ namespace WebServer.Migrations
                     KodNaselPunk = table.Column<string>(type: "text", nullable: true, comment: "Код населенного пункта (КАТО)"),
                     KodOblast = table.Column<string>(type: "text", nullable: true, comment: "Код обалсти (КАТО)"),
                     KodRaiona = table.Column<string>(type: "text", nullable: true, comment: "Код района (КАТО)"),
-                    Login = table.Column<string>(type: "text", nullable: true),
+                    Login = table.Column<string>(type: "text", nullable: false),
                     Year = table.Column<int>(type: "integer", nullable: false, comment: "За какой год данные")
                 },
                 constraints: table =>
