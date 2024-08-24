@@ -12,7 +12,7 @@ using WebServer.Data;
 namespace WebServer.Migrations
 {
     [DbContext(typeof(WaterDbContext))]
-    [Migration("20240821130753_init")]
+    [Migration("20240824073356_init")]
     partial class init
     {
         /// <inheritdoc />
