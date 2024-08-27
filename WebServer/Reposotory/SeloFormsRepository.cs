@@ -63,10 +63,10 @@ namespace WebServer.Reposotory
         {
             var loginKatoCode = await _dbSetAccount.Where(x=>x.Login == seloDoument.Login).Select(x=>x.KatoCode).FirstOrDefaultAsync();
             var loginKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code == loginKatoCode);
-            var loginOblast = await FindParentRecordAsync(loginKato.Id, 0);
+            var loginOblast = await FindParentRecordAsync(loginKato?.Id ?? 0, 0);
 
             var seloDocumentKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code.ToString() == seloDoument.KodNaselPunk);
-            var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato.Id, 0);
+            var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato?.Id ?? 0, 0);
 
             if (loginOblast.Id != seloDocumentOblast.Id) throw new Exception("Можно создавать документ только в рамках своей области!");
 

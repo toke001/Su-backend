@@ -41,6 +41,46 @@ namespace WebServer.Controllers
         }
 
         /// <summary>
+        /// Список документов по коду области, района и по году
+        /// </summary>
+        /// <param name="kodOblast"></param>
+        /// <param name="kodRaion"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        [HttpGet("GetCityDocumentByParams")]
+        public async Task<ActionResult> GetCityDocumentByParams(string? kodOblast, string? kodRaion, int? year)
+        {
+            try
+            {
+                var entity = await _repo.GetCityDocumentByParams(kodOblast, kodRaion, year);
+                return Ok(entity);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Все формы по id документа
+        /// </summary>
+        /// <param name="idDoc"></param>
+        /// <returns></returns>
+        [HttpGet("GetCityFormsByDocId")]
+        public async Task<ActionResult> GetCityFormsByDocId(Guid idDoc)
+        {
+            try
+            {
+                var entity = await _repo.GetCityFormsByDocId(idDoc);
+                return Ok(entity);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Добавление документа по селу
         /// </summary>
         /// <param name="cityDocumentDto"></param>

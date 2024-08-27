@@ -5,9 +5,11 @@ namespace WebServer.Interfaces
     public interface ICityForms
     {
         Task<object> GetCityDocument(string katoKod);
-        Task<CityDocument> AddCityDocument(CityDocument seloDoument);
+        Task<List<CityDocument>> GetCityDocumentByParams(string? kodOblast, string? kodRaion, int? year);
+        Task<object> GetCityFormsByDocId(Guid idDoc);
+        Task<CityDocument> AddCityDocument(CityDocument cityDocument);
         Task<object> GetCityFormsByKodYear(string kodNaselPunk, int year);
-        Task<CityForm> AddCityForms(Guid idDoc, CityForm seloForms);
+        Task<CityForm> AddCityForms(Guid idDoc, CityForm cityForms);
         Task<CityForm> GetCityFormById(Guid id);
         Task<CityForm> UpdateCityForm(CityForm cityForm);
         //Task<CityWaterSupply> GetWaterSupply(Guid idForm);

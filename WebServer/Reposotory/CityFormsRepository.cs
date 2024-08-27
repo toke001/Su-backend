@@ -11,6 +11,7 @@ namespace WebServer.Reposotory
         private readonly DbSet<CityForm> _dbSetForm;
         private readonly DbSet<CityDocument> _dbSetDoc;        
         private readonly DbSet<Ref_Kato> _dbSetKato;
+        private readonly DbSet<Account> _dbSetAccount;
 
         public CityFormsRepository(WaterDbContext context)
         {
@@ -18,6 +19,7 @@ namespace WebServer.Reposotory
             _dbSetForm = _context.Set<CityForm>();
             _dbSetDoc = _context.Set<CityDocument>();            
             _dbSetKato = _context.Set<Ref_Kato>();
+            _dbSetAccount = _context.Set<Account>();
         }
 
         public async Task<object> GetCityDocument(string katoKod)
@@ -29,13 +31,57 @@ namespace WebServer.Reposotory
             return await _dbSetDoc.Where(x => x.KodNaselPunk == katoKod).ToListAsync();
         }
 
-        public async Task<CityDocument> AddCityDocument(CityDocument cityDoument)
+        public async Task<List<CityDocument>> GetCityDocumentByParams(string? kodOblast, string? kodRaion, int? year)
         {
-            if (await _dbSetDoc.AnyAsync(x => x.Year == cityDoument.Year && x.KodNaselPunk == cityDoument.KodNaselPunk))
+            var query = _dbSetDoc.AsQueryable();
+            if (!string.IsNullOrEmpty(kodOblast))
+            {
+                query = query.Where(x => x.KodOblast == kodOblast);
+            }
+            if (!string.IsNullOrEmpty(kodRaion))
+            {
+                query = query.Where(x => x.KodRaiona == kodRaion);
+            }
+            if (year.HasValue)
+            {
+                query = query.Where(x => x.Year == year);
+            }
+            var result = await query.ToListAsync();
+            return result;
+        }
+
+        public async Task<object> GetCityFormsByDocId(Guid idDoc)
+        {
+            if (!_dbSetDoc.Any(x => x.Id == idDoc)) throw new Exception("NotFound");
+            return await _dbSetForm.Where(x => x.DocumentId == idDoc).ToListAsync();
+        }
+
+        public async Task<CityDocument> AddCityDocument(CityDocument cityDocument)
+        {
+            var loginKatoCode = await _dbSetAccount.Where(x => x.Login == cityDocument.Login).Select(x => x.KatoCode).FirstOrDefaultAsync();
+            var loginKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code == loginKatoCode);
+            var loginOblast = await FindParentRecordAsync(loginKato?.Id ?? 0, 0);
+
+            var cityDocumentKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code.ToString() == cityDocument.KodNaselPunk);
+            var cityDocumentOblast = await FindParentRecordAsync(cityDocumentKato?.Id ?? 0, 0);
+
+            if (loginOblast?.Id != cityDocumentOblast?.Id) throw new Exception("Можно создавать документ только в рамках своей области!");
+
+            if (await _dbSetDoc.AnyAsync(x => x.Year == cityDocument.Year && x.KodNaselPunk == cityDocument.KodNaselPunk))
                 throw new Exception("За указанный год и насленный пункт уже имеется отчет!");
-            await _dbSetDoc.AddAsync(cityDoument);
+            await _dbSetDoc.AddAsync(cityDocument);
             await _context.SaveChangesAsync();
-            return cityDoument;
+            return cityDocument;
+        }
+
+        public async Task<Ref_Kato?> FindParentRecordAsync(int parentId, int katoLevel)
+        {
+            var currentRecord = await _dbSetKato.Where(x => x.Id == parentId).FirstOrDefaultAsync();
+            if (currentRecord != null && currentRecord.KatoLevel != katoLevel && currentRecord.ParentId != 0)
+            {
+                return await FindParentRecordAsync(currentRecord.ParentId, katoLevel);
+            }
+            return currentRecord;
         }
 
         public async Task<object> GetCityFormsByKodYear(string kodNaselPunk, int year)

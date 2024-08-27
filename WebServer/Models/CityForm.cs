@@ -9,6 +9,8 @@ namespace WebServer.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
+        public Guid DocumentId { get; set; }
+        public virtual CityDocument? Document { get; set; }
         /// <summary>
         /// Общее количество		
         /// городов в области (единиц)
