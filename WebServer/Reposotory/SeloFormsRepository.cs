@@ -12,7 +12,6 @@ namespace WebServer.Reposotory
         private readonly DbSet<SeloDocument> _dbSetDoc;
         private readonly DbSet<Account> _dbSetAccount;
         private readonly DbSet<Ref_Kato> _dbSetKato;
-        //private readonly DbSet<ResponseCode> _dbSetResponse;
 
         public SeloFormsRepository(WaterDbContext context)
         {
@@ -20,10 +19,7 @@ namespace WebServer.Reposotory
             _dbSetForm = _context.Set<SeloForm>();
             _dbSetDoc = _context.Set<SeloDocument>();
             _dbSetAccount = _context.Set<Account>();
-            //_dbSetTarif = _context.Set<SeloTariff>();
-            //_dbSetNetwork = _context.Set<SeloNetworkLength>();
             _dbSetKato = _context.Set<Ref_Kato>();
-            //_dbSetResponse = _context.Set<ResponseCode>();
         }
 
         public async Task<object> GetSeloDocument(string katoKod)
@@ -68,7 +64,7 @@ namespace WebServer.Reposotory
             var seloDocumentKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code.ToString() == seloDoument.KodNaselPunk);
             var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato?.Id ?? 0, 0);
 
-            if (loginOblast.Id != seloDocumentOblast.Id) throw new Exception("Можно создавать документ только в рамках своей области!");
+            if (loginOblast?.Id != seloDocumentOblast?.Id) throw new Exception("Можно создавать документ только в рамках своей области!");
 
             if (await _dbSetDoc.AnyAsync(x => x.Year == seloDoument.Year && x.KodNaselPunk == seloDoument.KodNaselPunk))
                 throw new Exception("За указанный год и насленный пункт уже имеется отчет!");
@@ -112,7 +108,7 @@ namespace WebServer.Reposotory
             var seloDocumentKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code.ToString() == seloDocument.KodNaselPunk);
             var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato.Id, 0);
 
-            if (loginOblast.Id != seloDocumentOblast.Id) throw new Exception("Можно создавать форму только в рамках своей области!");                       
+            if (loginOblast?.Id != seloDocumentOblast?.Id) throw new Exception("Можно создавать форму только в рамках своей области!");                       
             
             if (seloForms.Count == 0) throw new Exception("Формы пустые");
             
@@ -121,24 +117,21 @@ namespace WebServer.Reposotory
             return seloForms;
         }
 
-        public async Task<SeloForm> GetSeloFormById(Guid id)
-        {
-            return await _dbSetForm.FindAsync(id);
-        }
+        public async Task<SeloForm> GetSeloFormById(Guid id) => await _dbSetForm.FindAsync(id);
 
         public async Task<SeloForm> UpdateSeloForm(string login, SeloForm seloForm)
         {
             var loginKatoCode = await _dbSetAccount.Where(x => x.Login == login).Select(x => x.KatoCode).FirstOrDefaultAsync();
             var loginKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code == loginKatoCode);
-            var loginOblast = await FindParentRecordAsync(loginKato.Id, 0);
+            var loginOblast = await FindParentRecordAsync(loginKato?.Id ?? 0, 0);
 
             var idDoc = seloForm.DocumentId;
             var seloDocument = await _dbSetDoc.FindAsync(idDoc);
             if (seloDocument == null) throw new Exception("Документа с таким Id не существует");
             var seloDocumentKato = await _dbSetKato.FirstOrDefaultAsync(x => x.Code.ToString() == seloDocument.KodNaselPunk);
-            var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato.Id, 0);
+            var seloDocumentOblast = await FindParentRecordAsync(seloDocumentKato?.Id ?? 0, 0);
 
-            if (loginOblast.Id != seloDocumentOblast.Id) throw new Exception("Можно создавать форму только в рамках своей области!");
+            if (loginOblast?.Id != seloDocumentOblast?.Id) throw new Exception("Можно создавать форму только в рамках своей области!");
 
             _dbSetForm.Update(seloForm);
             await _context.SaveChangesAsync();
