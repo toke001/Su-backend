@@ -143,7 +143,7 @@ namespace WebServer.Controllers
         /// <summary>
         /// Добавление формы 
         /// </summary>
-        /// <param name="idDoc"></param>
+        /// <param name="login"></param>
         /// <param name="seloFormDto"></param>
         /// <returns></returns>
         [HttpPost("AddSeloForms")]

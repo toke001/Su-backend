@@ -90,8 +90,9 @@ namespace WebServer.Reposotory
             var isReportable = await _dbSetKato.Where(x => x.Code.ToString() == kodNaselPunk).Select(x => x.IsReportable).FirstOrDefaultAsync();
             if (!isReportable) return "NotReporting";
 
-            return await _dbSetDoc.Where(x=>x.KodNaselPunk==kodNaselPunk&&x.Year==year)
-                .Select(x=>x.CityForm).FirstOrDefaultAsync();
+            var docId = await _dbSetDoc.Where(x => x.KodNaselPunk == kodNaselPunk && x.Year == year)
+                .Select(x => x.Id).FirstOrDefaultAsync();
+            return await _dbSetForm.Where(x => x.DocumentId == docId).ToListAsync();
         }
 
         public async Task<CityForm> AddCityForms(Guid idDoc, CityForm cityForms)

@@ -104,7 +104,7 @@ namespace WebServer.Controllers
         /// Получение Формы по коду КАТО и году
         /// </summary>
         /// <param name="kodNaselPunk"></param>
-        /// <param name="year"></param>
+        /// <param name="year"></param> 
         /// <returns></returns>
         [HttpGet("GetCityFormsByKodYear")]
         public async Task<ActionResult> GetCityFormsByKodYear(string kodNaselPunk, int year)
@@ -128,12 +128,12 @@ namespace WebServer.Controllers
         /// <returns></returns>
         [HttpPost("AddCityForms")]
         [Authorize]
-        public async Task<ActionResult> AddCityForms(Guid idDoc, CityFormDto cityFormsDto)
+        public async Task<ActionResult> AddCityForms(string login, List<CityFormDto> cityFormsDto)
         {
             try
             {
-                var entity = _mapper.Map<CityForm>(cityFormsDto);
-                return Ok(await _repo.AddCityForms(idDoc, entity));
+                var entity = _mapper.Map<List<CityForm>>(cityFormsDto);
+                return Ok(await _repo.AddCityForms(login, entity));
                 //return CreatedAtAction(nameof(GetById), new { id = entity.Id }, dto);
             }
             catch (Exception ex)
